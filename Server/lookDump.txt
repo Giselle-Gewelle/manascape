@@ -1,0 +1,15 @@
+int[] look = getAppearance().getLook();
+look[0] = 1;
+look[1] = 5;
+look[2] = 5;
+look[3] = 6;
+look[4] = 2;
+look[5] = 1;
+look[6] = 47;
+look[7] = 56;
+look[8] = 63;
+look[9] = 67;
+look[10] = 71;
+look[11] = 80;
+look[12] = -1;
+getAppearance().setLook(look);

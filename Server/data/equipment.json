@@ -1,0 +1,3214 @@
+[
+		{
+			"id": 802,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 803,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 805,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 808,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 809,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 810,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 811,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 814,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 815,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 816,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 817,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 827,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 828,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 829,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 830,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 833,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 834,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 835,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 836,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 859,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 861,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 865,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 866,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 867,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 868,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 869,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 872,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 873,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 874,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 875,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 876,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1065,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1071,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1073,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1077,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1079,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1085,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1089,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1091,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1093,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1097,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1099,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1107,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1109,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1111,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1113,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1121,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1123,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1125,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1127,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1131,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1133,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1135,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1143,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1145,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1147,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1149,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1151,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1159,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1161,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1163,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1165,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1169,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 1179,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1181,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1183,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1185,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1187,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1195,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1197,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1199,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1201,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 1209,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1211,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1213,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1215,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1217,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1225,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1227,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1229,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1231,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1233,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1243,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1245,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1247,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1249,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1257,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1259,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1261,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1263,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1283,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1287,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1289,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1297,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1301,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1303,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1305,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1313,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1315,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1317,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1319,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1327,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1329,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1331,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1333,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1355,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1357,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1359,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1361,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1367,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1369,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1371,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1373,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1377,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1393,
+			"levelreq": {
+				"level": 30,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 1426,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1428,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1430,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1432,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 1434,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 2412,
+			"levelreq": {
+				"level": 60,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 2413,
+			"levelreq": {
+				"level": 60,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 2414,
+			"levelreq": {
+				"level": 60,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 2415,
+			"levelreq": {
+				"level": 60,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 2416,
+			"levelreq": {
+				"level": 60,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 2417,
+			"levelreq": {
+				"level": 60,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 2487,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2489,
+			"levelreq": {
+				"level": 60,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2491,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2493,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2495,
+			"levelreq": {
+				"level": 60,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2497,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2499,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2501,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 60,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2503,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2577,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2581,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 2583,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2585,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2587,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2589,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2591,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2593,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2595,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2597,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2599,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2601,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2603,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2605,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2607,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2609,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2611,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2613,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2615,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2617,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2619,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2621,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2623,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2625,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2627,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2629,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2653,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2655,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2657,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2659,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2661,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2663,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2665,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2669,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2671,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2673,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 2675,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3053,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3093,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 3094,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 3122,
+			"levelreq": {
+				"level": 50,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 3140,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3173,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3174,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3175,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3176,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3196,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3198,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3200,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3202,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3204,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 3472,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3473,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3474,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3475,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3476,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3477,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3478,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3480,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3481,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3483,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3485,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3486,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3488,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3633,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 3749,
+			"levelreq": {
+				"level": 45,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3751,
+			"levelreq": {
+				"level": 45,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3753,
+			"levelreq": {
+				"level": 45,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 3755,
+			"levelreq": {
+				"level": 45,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4087,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4089,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4091,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4093,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4095,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4097,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4099,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4101,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4103,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4105,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4107,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4109,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4111,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4113,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4115,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4117,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4123,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4125,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4127,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4129,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4131,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4151,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4153,
+			"levelreq": {
+				"level": 50,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4170,
+			"levelreq": {
+				"level": 50,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4212,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4214,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4224,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4585,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4587,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4675,
+			"levelreq": {
+				"level": 50,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4708,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4710,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4712,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4714,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4716,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4718,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4720,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4722,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4724,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4726,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4728,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4730,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4732,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4734,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4736,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4738,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4745,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4747,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4749,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4751,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4753,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4755,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4757,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4759,
+			"levelreq": {
+				"level": 70,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 4862,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4863,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4864,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4865,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 4886,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4887,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4888,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4889,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4934,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4935,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4936,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4937,
+			"levelreq": {
+				"level": 70,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 4958,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4959,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4960,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4961,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 70,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 4982,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4983,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4984,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 4985,
+			"levelreq": {
+				"level": 70,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 5574,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 5575,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 5576,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 5630,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5631,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5632,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5633,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5634,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5636,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5637,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5638,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5639,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5640,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5641,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5644,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5645,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5646,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5647,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5650,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5651,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5652,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5653,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5656,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5657,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5658,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5659,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5660,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5663,
+			"levelreq": {
+				"level": 5,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5664,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5665,
+			"levelreq": {
+				"level": 10,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5666,
+			"levelreq": {
+				"level": 30,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5667,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 5680,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 5698,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 5730,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6522,
+			"levelreq": {
+				"level": 60,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 6523,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6524,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6525,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6526,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6527,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6528,
+			"levelreq": {
+				"level": 60,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 6615,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6617,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6621,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6623,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6625,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6627,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6631,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6633,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6724,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 6739,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6889,
+			"levelreq": {
+				"level": 60,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 6894,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6895,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6897,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 6914,
+			"levelreq": {
+				"level": 60,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 6916,
+			"levelreq": {
+				"level": 25,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 6918,
+			"levelreq": {
+				"level": 25,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 6920,
+			"levelreq": {
+				"level": 25,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 6922,
+			"levelreq": {
+				"level": 25,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 6924,
+			"levelreq": {
+				"level": 25,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 50,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 7158,
+			"levelreq": {
+				"level": 60,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 7332,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7334,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7336,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7338,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7340,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7342,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7344,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7346,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7348,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7350,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7352,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7354,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7356,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7358,
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7360,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7362,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7363,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7364,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7365,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7366,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7367,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7368,
+			"levelreq": {
+				"level": 20,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7370,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7372,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7374,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7376,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7378,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7380,
+			"levelreq": {
+				"level": 40,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7382,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7384,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 7398,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 7399,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 7400,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 7459,
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7460,
+			"levelreq": {
+				"level": 42,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7461,
+			"levelreq": {
+				"level": 42,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 7462,
+			"levelreq": {
+				"level": 42,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 8846,
+			"levelreq": {
+				"level": 5,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 5,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 8847,
+			"levelreq": {
+				"level": 10,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 8848,
+			"levelreq": {
+				"level": 20,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 20,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 8849,
+			"levelreq": {
+				"level": 30,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 30,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 8850,
+			"levelreq": {
+				"level": 40,
+				"skill": "ATTACK"
+			},
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 9175,
+			"levelreq": {
+				"level": 16,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9177,
+			"levelreq": {
+				"level": 26,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9179,
+			"levelreq": {
+				"level": 31,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9181,
+			"levelreq": {
+				"level": 36,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9183,
+			"levelreq": {
+				"level": 46,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9185,
+			"levelreq": {
+				"level": 61,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9747,
+			"levelreq": {
+				"level": 99,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 9748,
+			"levelreq": {
+				"level": 99,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 9749,
+			"levelreq": {
+				"level": 99,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 9750,
+			"levelreq": {
+				"level": 99,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 9751,
+			"levelreq": {
+				"level": 99,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 9752,
+			"levelreq": {
+				"level": 99,
+				"skill": "STRENGTH"
+			}
+		},
+		{
+			"id": 9753,
+			"levelreq": {
+				"level": 99,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 9754,
+			"levelreq": {
+				"level": 99,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 9755,
+			"levelreq": {
+				"level": 99,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 9756,
+			"levelreq": {
+				"level": 99,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9757,
+			"levelreq": {
+				"level": 99,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9758,
+			"levelreq": {
+				"level": 99,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 9759,
+			"levelreq": {
+				"level": 99,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 9760,
+			"levelreq": {
+				"level": 99,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 9761,
+			"levelreq": {
+				"level": 99,
+				"skill": "PRAYER"
+			}
+		},
+		{
+			"id": 9762,
+			"levelreq": {
+				"level": 99,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 9763,
+			"levelreq": {
+				"level": 99,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 9764,
+			"levelreq": {
+				"level": 99,
+				"skill": "MAGIC"
+			}
+		},
+		{
+			"id": 9768,
+			"levelreq": {
+				"level": 99,
+				"skill": "HITPOINTS"
+			}
+		},
+		{
+			"id": 9769,
+			"levelreq": {
+				"level": 99,
+				"skill": "HITPOINTS"
+			}
+		},
+		{
+			"id": 9770,
+			"levelreq": {
+				"level": 99,
+				"skill": "HITPOINTS"
+			}
+		},
+		{
+			"id": 10499,
+			"levelreq": {
+				"level": 50,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 10551,
+			"levelreq": {
+				"level": 40,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 10828,
+			"levelreq": {
+				"level": 55,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 11235,
+			"levelreq": {
+				"level": 60,
+				"skill": "RANGED"
+			}
+		},
+		{
+			"id": 11694,
+			"levelreq": {
+				"level": 75,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 11696,
+			"levelreq": {
+				"level": 75,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 11698,
+			"levelreq": {
+				"level": 75,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 11700,
+			"levelreq": {
+				"level": 75,
+				"skill": "ATTACK"
+			}
+		},
+		{
+			"id": 11724,
+			"levelreq": {
+				"level": 65,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 11726,
+			"levelreq": {
+				"level": 65,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 11728,
+			"levelreq": {
+				"level": 65,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 11732,
+			"levelreq": {
+				"level": 60,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6629,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		},
+		{
+			"id": 6619,
+			"levelreq": {
+				"level": 10,
+				"skill": "DEFENCE"
+			}
+		}
+]

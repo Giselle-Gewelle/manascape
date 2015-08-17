@@ -1,0 +1,389 @@
+[
+	{
+		"desc": "Lumbridge - Hans",
+		"npcId": 24,
+		"face": 6,
+		"spawn": [
+			3221, 3224
+		],
+		"min": [
+			3219, 3222
+		],
+		"max": [
+			3224, 3227
+		]
+	},
+	{
+		"desc": "Lumbridge - Man",
+		"npcId": 1,
+		"spawn": [
+			3234, 3219
+		],
+		"min": [
+			3231, 3216
+		],
+		"max": [
+			3238, 3223
+		]
+	},
+	{
+		"desc": "Lumbridge - Clipping Test Man",
+		"npcId": 2,
+		"spawn": [
+			3217, 3218
+		], 
+		"min": [
+			3210, 3211
+		],
+		"max": [
+			3225, 3226
+		]
+	},
+	    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 309,
+        "spawn": [
+            3104, 3425
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 309,
+        "spawn": [
+            3110, 3433
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            3085, 3231
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            3085, 3230
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            3239, 3241
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            3238, 3252
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            3247, 3163
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            3246, 3156
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": true
+        "npcId": 312,
+        "spawn": [
+            2923, 3179
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": true
+        "npcId": 312,
+        "spawn": [
+            2925, 3181
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": true
+        "npcId": 312,
+        "spawn": [
+            2924, 3181
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": true
+        "npcId": 316,
+        "spawn": [
+            2926, 3180
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2602, 3422
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2605, 3420
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2602, 3419
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2598, 3423
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2601, 3423
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2605, 3425
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2602, 3426
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2604, 3417
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2602, 3414
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2610, 3416
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2607, 3410
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2604, 3422
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2603, 3423
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2598, 3419
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2608, 3413
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2606, 3416
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2612, 3412
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2612, 3414
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2602, 3412
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2603, 3417
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            2855, 2976
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            2859, 2975
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            2863, 2975
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            2863, 2973
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 328,
+        "spawn": [
+            2856, 2974
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            2836, 3431
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 312,
+        "spawn": [
+            2838, 3431
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 322,
+        "spawn": [
+            2844, 3429
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            2986, 3176
+        ]
+    },
+    {
+        "desc": "A fishing spot.",
+        "canWalk": false
+        "npcId": 316,
+        "spawn": [
+            2996, 3158
+        ]
+    },
+	
+	{
+		"desc": "Lumbridge Guide",
+		"canWalk": false,
+		"npcId": 2244,
+		"spawn": [
+			3231, 3234
+		]
+	}
+	
+
+]

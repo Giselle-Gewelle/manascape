@@ -1,0 +1,173 @@
+[
+	{
+		"id": 0,
+		"options": 3
+	},
+	{
+		"id": 4151,
+		"name": "Abyssal whip",
+		"interface": 12290,
+		"speed": 4,
+		"sound": 2720,
+		"special": true,
+		"anims": {
+			"walk": 1660,
+			"run": 1661,
+			"defend": 1659
+		},
+		"attackAnims": {
+			"attack1": 1658
+		},
+		"options": 3,
+		"combatStyles": [
+			"ACCURATE", "CONTROLLED", "DEFENSIVE"
+		],
+		"attackTypes": [
+			"SLASH", "SLASH", "SLASH"
+		]
+	},
+	{
+		"id": 1205,
+		"name": "Bronze dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1277,
+		"name": "Bronze sword",
+		"predefined": "SWORD"
+	},
+	{
+		"id": 1291,
+		"name": "Bronze longsword",
+		"predefined": "LONGSWORD"
+	},
+	{
+		"id": 1375,
+		"name": "Bronze battleaxe",
+		"predefined": "BATTLEAXE"
+	},
+	{
+		"id": 1351,
+		"name": "Bronze axe",
+		"predefined": "AXE"
+	},
+	{
+		"id": 1265,
+		"name": "Bronze pickaxe",
+		"predefined": "PICKAXE"
+	},
+	{
+		"id": 1321,
+		"name": "Bronze scimitar",
+		"predefined": "SCIMITAR"
+	},
+	{
+		"id": 3190,
+		"name": "Bronze halberd",
+		"predefined": "HALBERD"
+	},
+	
+	{
+		"id": 1203,
+		"name": "Iron dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1205,
+		"name": "Bronze dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1207,
+		"name": "Steel dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1209,
+		"name": "Mithril dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1211,
+		"name": "Adamant dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1213,
+		"name": "Rune dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1215,
+		"name": "Dragon dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 1217,
+		"name": "Black dagger",
+		"predefined": "DAGGER"
+	},
+	
+	{
+		"id": 6609,
+		"name": "White 2h sword",
+		"predefined": "TWOHANDEDSWORD"
+	},
+	
+	{
+		"id": 1297,
+		"name": "Black longsword",
+		"predefined": "LONGSWORD"
+	},
+	
+	{
+		"id": 6591,
+		"name": "White dagger",
+		"predefined": "DAGGER"
+	},
+	{
+		"id": 6601,
+		"name": "White mace",
+		"predefined": "MACE"
+	},
+	{
+		"id": 6587,
+		"name": "White claws",
+		"predefined": "CLAWS"
+	},
+	{
+		"id": 6605,
+		"name": "White sword",
+		"predefined": "SWORD"
+	},
+	{
+		"id": 6607,
+		"name": "White longsword",
+		"predefined": "LONGSWORD"
+	},
+	{
+		"id": 6611,
+		"name": "White scimitar",
+		"predefined": "SCIMITAR"
+	},
+	{
+		"id": 6613,
+		"name": "White warhammer",
+		"predefined": "WARHAMMER"
+	},
+	{
+		"id": 6589,
+		"name": "White battleaxe",
+		"predefined": "BATTLEAXE"
+	},
+	{
+		"id": 6609,
+		"name": "White 2h sword",
+		"predefined": "TWOHANDEDSWORD"
+	},
+	{
+		"id": 6599,
+		"name": "White halberd",
+		"predefined": "HALBERD"
+	}
+]

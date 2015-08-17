@@ -1,0 +1,346 @@
+if(itemId == 7956) {
+	itemDef.name = "Proselyte helm";
+	itemDef.description = new String("A proselyte Temple Knight's helm.").getBytes();
+	itemDef.inventoryModel = 2813;
+	itemDef.modelMale1 = 218;
+	itemDef.modelFemale1 = 394;
+	itemDef.modelMaleChat = 56;
+	itemDef.modelFemaleChat = 116;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[2];
+	itemDef.recolorNew = new int[2];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 926;
+	itemDef.recolorNew[1] = 461770;
+	itemDef.rotationY = 152;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 800;
+	itemDef.worldRotationX = 160;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 6;
+} else if(itemId == 7957) {
+	itemDef.name = "Proselyte platemail";
+	itemDef.description = new String("A proselyte Temple Knight's Armour.").getBytes();
+	itemDef.inventoryModel = 2378;
+	itemDef.modelMale1 = 3379;
+	itemDef.modelMale2 = 164;
+	itemDef.modelFemale1 = 3383;
+	itemDef.modelFemale2 = 344;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 24;
+	itemDef.recolorNew[0] = 461770;
+	itemDef.recolorOriginal[1] = 61;
+	itemDef.recolorNew[1] = 99;
+	itemDef.recolorOriginal[2] = 41;
+	itemDef.recolorNew[2] = 82;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1250;
+	itemDef.worldRotationX = 488;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 0;
+} else if(itemId == 7958) {
+	itemDef.name = "Proselyte platelegs";
+	itemDef.description = new String("A proselyte Temple Knight's leg armour.").getBytes();
+	itemDef.inventoryModel = 2582;
+	itemDef.modelMale1 = 268;
+	itemDef.modelFemale1 = 432;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 41;
+	itemDef.recolorNew[1] = 82;
+	itemDef.recolorOriginal[2] = 57;
+	itemDef.recolorNew[2] = 461770;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1740;
+	itemDef.worldRotationX = 444;
+	itemDef.translateX = 0;
+	itemDef.translateYZ = -8;
+} else if(itemId == 7959) {
+	itemDef.name = "Acolyte helm";
+	itemDef.description = new String("An acolyte Temple Knight's helm.").getBytes();
+	itemDef.inventoryModel = 2813;
+	itemDef.modelMale1 = 218;
+	itemDef.modelFemale1 = 394;
+	itemDef.modelMaleChat = 56;
+	itemDef.modelFemaleChat = 116;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[2];
+	itemDef.recolorNew = new int[2];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 926;
+	itemDef.recolorNew[1] = 479770;
+	itemDef.rotationY = 152;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 800;
+	itemDef.worldRotationX = 160;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 6;
+} else if(itemId == 7960) {
+	itemDef.name = "Acolyte platemail";
+	itemDef.description = new String("An acolyte Temple Knight's Armour.").getBytes();
+	itemDef.inventoryModel = 2378;
+	itemDef.modelMale1 = 3379;
+	itemDef.modelMale2 = 164;
+	itemDef.modelFemale1 = 3383;
+	itemDef.modelFemale2 = 344;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 24;
+	itemDef.recolorNew[0] = 479770;
+	itemDef.recolorOriginal[1] = 61;
+	itemDef.recolorNew[1] = 99;
+	itemDef.recolorOriginal[2] = 41;
+	itemDef.recolorNew[2] = 82;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1250;
+	itemDef.worldRotationX = 488;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 0;
+} else if(itemId == 7961) {
+	itemDef.name = "Acolyte platelegs";
+	itemDef.description = new String("An acoltye Temple Knight's leg armour.").getBytes();
+	itemDef.inventoryModel = 2582;
+	itemDef.modelMale1 = 268;
+	itemDef.modelFemale1 = 432;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 41;
+	itemDef.recolorNew[1] = 82;
+	itemDef.recolorOriginal[2] = 57;
+	itemDef.recolorNew[2] = 479770;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1740;
+	itemDef.worldRotationX = 444;
+	itemDef.translateX = 0;
+	itemDef.translateYZ = -8;
+} else if(itemId == 7962) {
+	itemDef.name = "Partisan helm";
+	itemDef.description = new String("A partisan Temple Knight's helm.").getBytes();
+	itemDef.inventoryModel = 2813;
+	itemDef.modelMale1 = 218;
+	itemDef.modelFemale1 = 394;
+	itemDef.modelMaleChat = 56;
+	itemDef.modelFemaleChat = 116;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[2];
+	itemDef.recolorNew = new int[2];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 926;
+	itemDef.recolorNew[1] = 302770;
+	itemDef.rotationY = 152;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 800;
+	itemDef.worldRotationX = 160;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 6;
+} else if(itemId == 7963) {
+	itemDef.name = "Partisan platemail";
+	itemDef.description = new String("A partisan Temple Knight's Armour.").getBytes();
+	itemDef.inventoryModel = 2378;
+	itemDef.modelMale1 = 3379;
+	itemDef.modelMale2 = 164;
+	itemDef.modelFemale1 = 3383;
+	itemDef.modelFemale2 = 344;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 24;
+	itemDef.recolorNew[0] = 302770;
+	itemDef.recolorOriginal[1] = 61;
+	itemDef.recolorNew[1] = 99;
+	itemDef.recolorOriginal[2] = 41;
+	itemDef.recolorNew[2] = 82;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1250;
+	itemDef.worldRotationX = 488;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 0;
+} else if(itemId == 7964) {
+	itemDef.name = "Partisan platelegs";
+	itemDef.description = new String("A partisan Temple Knight's leg armour.").getBytes();
+	itemDef.inventoryModel = 2582;
+	itemDef.modelMale1 = 268;
+	itemDef.modelFemale1 = 432;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 41;
+	itemDef.recolorNew[1] = 82;
+	itemDef.recolorOriginal[2] = 57;
+	itemDef.recolorNew[2] = 302770;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1740;
+	itemDef.worldRotationX = 444;
+	itemDef.translateX = 0;
+	itemDef.translateYZ = -8;
+} else if(itemId == 7965) {
+	itemDef.name = "Commander helm";
+	itemDef.description = new String("A Temple Knight commander's helm.").getBytes();
+	itemDef.inventoryModel = 2813;
+	itemDef.modelMale1 = 218;
+	itemDef.modelFemale1 = 394;
+	itemDef.modelMaleChat = 56;
+	itemDef.modelFemaleChat = 116;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[2];
+	itemDef.recolorNew = new int[2];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 926;
+	itemDef.recolorNew[1] = 20;
+	itemDef.rotationY = 152;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 800;
+	itemDef.worldRotationX = 160;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 6;
+} else if(itemId == 7966) {
+	itemDef.name = "Commander platemail";
+	itemDef.description = new String("A Temple Knight commander's Armour.").getBytes();
+	itemDef.inventoryModel = 2378;
+	itemDef.modelMale1 = 3379;
+	itemDef.modelMale2 = 164;
+	itemDef.modelFemale1 = 3383;
+	itemDef.modelFemale2 = 344;
+	itemDef.modelMale3 = 3330;
+	itemDef.modelFemale3 = 3330;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[4];
+	itemDef.recolorNew = new int[4];
+	itemDef.recolorOriginal[0] = 24;
+	itemDef.recolorNew[0] = 20;
+	itemDef.recolorOriginal[1] = 61;
+	itemDef.recolorNew[1] = 99;
+	itemDef.recolorOriginal[2] = 41;
+	itemDef.recolorNew[2] = 82;
+	itemDef.recolorOriginal[3] = 11187;
+	itemDef.recolorNew[3] = 20;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1250;
+	itemDef.worldRotationX = 488;
+	itemDef.translateX = -1;
+	itemDef.translateYZ = 0;
+} else if(itemId == 7967) {
+	itemDef.name = "Commander platelegs";
+	itemDef.description = new String("A Temple Knight commander's leg armour.").getBytes();
+	itemDef.inventoryModel = 2582;
+	itemDef.modelMale1 = 268;
+	itemDef.modelFemale1 = 432;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[3];
+	itemDef.recolorNew = new int[3];
+	itemDef.recolorOriginal[0] = 61;
+	itemDef.recolorNew[0] = 99;
+	itemDef.recolorOriginal[1] = 41;
+	itemDef.recolorNew[1] = 82;
+	itemDef.recolorOriginal[2] = 57;
+	itemDef.recolorNew[2] = 20;
+	itemDef.rotationY = 0;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 1740;
+	itemDef.worldRotationX = 444;
+	itemDef.translateX = 0;
+	itemDef.translateYZ = -8;
+} else if(itemId == 7968) {
+	itemDef.unNotedItemId = 7956;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7969) {
+	itemDef.unNotedItemId = 7957;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7970) {
+	itemDef.unNotedItemId = 7958;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7971) {
+	itemDef.unNotedItemId = 7959;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7972) {
+	itemDef.unNotedItemId = 7960;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7973) {
+	itemDef.unNotedItemId = 7961;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7974) {
+	itemDef.unNotedItemId = 7962;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7975) {
+	itemDef.unNotedItemId = 7963;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7976) {
+	itemDef.unNotedItemId = 7964;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7977) {
+	itemDef.unNotedItemId = 7965;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7978) {
+	itemDef.unNotedItemId = 7966;
+	itemDef.parentNoteId = 799;
+} else if(itemId == 7979) {
+	itemDef.unNotedItemId = 7967;
+	itemDef.parentNoteId = 799;
+}
+
+
+
+
+	
+if(itemId == 7980) {
+	itemDef.name = "Demon claws";
+	itemDef.description = new String("A set of claws torn from a demon.").getBytes();
+	itemDef.inventoryModel = 3781;
+	itemDef.modelMale1 = 3780;
+	itemDef.modelFemale1 = 3780;
+	itemDef.actions = new String[5];
+	itemDef.actions[1] = "Wear";
+	itemDef.recolorOriginal = new int[4];
+	itemDef.recolorNew = new int[4];
+	itemDef.recolorOriginal[0] = 24;
+	itemDef.recolorNew[0] = 925;
+	itemDef.recolorOriginal[1] = 33;
+	itemDef.recolorNew[1] = 927;
+	itemDef.recolorOriginal[2] = 41;
+	itemDef.recolorNew[2] = 930;
+	itemDef.recolorOriginal[3] = 49;
+	itemDef.recolorNew[3] = 0;
+	itemDef.rotationY = 1340;
+	itemDef.rotationZ = 0;
+	itemDef.zoom = 630;
+	itemDef.worldRotationX = 268;
+	itemDef.translateX = -7;
+	itemDef.translateYZ = -13;
+} else if(itemId == 7981) {
+	itemDef.unNotedItemId = 7980;
+	itemDef.parentNoteId = 799;
+}
