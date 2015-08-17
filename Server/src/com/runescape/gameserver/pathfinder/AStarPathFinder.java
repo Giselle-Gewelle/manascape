@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.runescape.gameserver.world.Location;
 import com.runescape.gameserver.world.World;
+import com.runescape.gameserver.world.entity.mob.Mob;
 import com.runescape.gameserver.world.entity.mob.npc.NPC;
 import com.runescape.gameserver.world.region.Region;
 
@@ -169,6 +170,11 @@ public class AStarPathFinder implements PathFinder {
 	private Set<Node> open = new HashSet<Node>();
 	private boolean noClip = false;
 	private boolean isNpc;
+	private Mob mob;
+	
+	public AStarPathFinder(Mob mob) {
+		this.mob = mob;
+	}
 	
 	public AStarPathFinder(boolean isNpc) {
 		this.isNpc = isNpc;
@@ -288,6 +294,28 @@ public class AStarPathFinder implements PathFinder {
 		return p;
 	}
 	
+	private boolean tileOccupied(int x, int y) {
+		if(mob == null || !(mob instanceof NPC)) {
+			return false;
+		}
+		
+		Location loc = Location.create(x, y);
+		NPC npc = World.getInstance().getRegionManager().getNpcAtLocation(loc);
+		if(npc == null) {
+			return false;
+		}
+		
+		if(npc.equals(mob)) {
+			return false;
+		}
+		
+		if(npc.getLocation().equals(mob.getLocation())) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	@Override
 	public Path findPath(Location location, int radius, TileMap map, int srcX, int srcY, int dstX, int dstY) {
 		if(dstX < 0 || dstY < 0 || dstX >= map.getWidth() || dstY >= map.getHeight()) {
@@ -321,8 +349,10 @@ public class AStarPathFinder implements PathFinder {
 			if(noClip || (x > 0 && map.getTile(x - 1, y).isEasternTraversalPermitted() && map.getTile(x, y).isWesternTraversalPermitted())) {
 				if(noClip || (y < (map.getHeight() - 1) && map.getTile(x, y + 1).isSouthernTraversalPermitted() && map.getTile(x, y).isNorthernTraversalPermitted())) {
 					if(map.getTile(x - 1, y + 1).isEasternTraversalPermitted() && map.getTile(x - 1, y + 1).isSouthernTraversalPermitted()) {
-						Node n = nodes[x-1][y+1];
-						examineNode(n);
+						if(!tileOccupied(x - 1, y + 1)) {
+							Node n = nodes[x-1][y+1];
+							examineNode(n);
+						}
 					}
 				}
 			}
@@ -330,8 +360,10 @@ public class AStarPathFinder implements PathFinder {
 			if(noClip || (x < (map.getWidth() - 1) && map.getTile(x + 1, y).isWesternTraversalPermitted() && map.getTile(x, y).isEasternTraversalPermitted())) {
 				if(noClip || (y < (map.getHeight() - 1) && map.getTile(x, y + 1).isSouthernTraversalPermitted() && map.getTile(x, y).isNorthernTraversalPermitted())) {
 					if(map.getTile(x + 1, y + 1).isWesternTraversalPermitted() && map.getTile(x + 1, y + 1).isSouthernTraversalPermitted()) {
-						Node n = nodes[x+1][y+1];
-						examineNode(n);
+						if(!tileOccupied(x + 1, y + 1)) {
+							Node n = nodes[x+1][y+1];
+							examineNode(n);
+						}
 					}
 				}
 			}
@@ -339,8 +371,10 @@ public class AStarPathFinder implements PathFinder {
 			if(noClip || (y > 0 && map.getTile(x, y - 1).isNorthernTraversalPermitted() && map.getTile(x, y).isSouthernTraversalPermitted())) {
 				if(noClip || (x > 0 && map.getTile(x - 1, y).isEasternTraversalPermitted() && map.getTile(x, y).isWesternTraversalPermitted())) {
 					if(map.getTile(x - 1, y - 1).isEasternTraversalPermitted() && map.getTile(x - 1, y - 1).isNorthernTraversalPermitted()) {
-						Node n = nodes[x-1][y-1];
-						examineNode(n);
+						if(!tileOccupied(x - 1, y - 1)) {
+							Node n = nodes[x-1][y-1];
+							examineNode(n);
+						}
 					}
 				}
 			}
@@ -348,30 +382,40 @@ public class AStarPathFinder implements PathFinder {
 			if(noClip || (y > 0 && map.getTile(x, y - 1).isNorthernTraversalPermitted() && map.getTile(x, y).isSouthernTraversalPermitted())) {
 				if(noClip || (x < (map.getWidth() - 1) && map.getTile(x + 1, y).isWesternTraversalPermitted() && map.getTile(x, y).isEasternTraversalPermitted())) {
 					if(map.getTile(x + 1, y - 1).isWesternTraversalPermitted() && map.getTile(x + 1, y - 1).isNorthernTraversalPermitted()) {
-						Node n = nodes[x+1][y-1];
-						examineNode(n);
+						if(!tileOccupied(x + 1, y - 1)) {
+							Node n = nodes[x+1][y-1];
+							examineNode(n);
+						}
 					}
 				}
 			}
 			// west
 			if(noClip || (x > 0 && map.getTile(x - 1, y).isEasternTraversalPermitted() && map.getTile(x, y).isWesternTraversalPermitted())) {
-				Node n = nodes[x-1][y];
-				examineNode(n);
+				if(!tileOccupied(x - 1, y)) {
+					Node n = nodes[x-1][y];
+					examineNode(n);
+				}
 			}
 			// east
 			if(noClip || (x < (map.getWidth() - 1) && map.getTile(x + 1, y).isWesternTraversalPermitted() && map.getTile(x, y).isEasternTraversalPermitted())) {
-				Node n = nodes[x+1][y];
-				examineNode(n);
+				if(!tileOccupied(x + 1, y)) {
+					Node n = nodes[x+1][y];
+					examineNode(n);
+				}
 			}
 			// south
 			if(noClip || (y > 0 && map.getTile(x, y - 1).isNorthernTraversalPermitted() && map.getTile(x, y).isSouthernTraversalPermitted())) {
-				Node n = nodes[x][y-1];
-				examineNode(n);
+				if(!tileOccupied(x, y - 1)) {
+					Node n = nodes[x][y-1];
+					examineNode(n);
+				}
 			}
 			// north
 			if(noClip || (y < (map.getHeight() - 1) && map.getTile(x, y + 1).isSouthernTraversalPermitted() && map.getTile(x, y).isNorthernTraversalPermitted())) {
-				Node n = nodes[x][y+1];
-				examineNode(n);
+				if(!tileOccupied(x, y + 1)) {
+					Node n = nodes[x][y+1];
+					examineNode(n);
+				}
 			}
 		}
 		
@@ -383,6 +427,7 @@ public class AStarPathFinder implements PathFinder {
 		Node n = nodes[dstX][dstY];
 		while(n != nodes[srcX][srcY]) {
 			p.addPoint(new PFPoint(n.getX() + location.getX() - radius, n.getY() + location.getY() - radius));
+			
 			n = n.getParent();
 		}
 		p.addPoint(new PFPoint(srcX + location.getX() - radius, srcY + location.getY() - radius));

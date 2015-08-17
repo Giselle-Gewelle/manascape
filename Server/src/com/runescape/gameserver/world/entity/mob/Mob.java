@@ -28,7 +28,8 @@ import com.runescape.gameserver.world.region.Region;
 
 public abstract class Mob {
 	
-	public static final Location DEFAULT_LOCATION = Location.create(3222, 3222, 0);
+	//public static final Location DEFAULT_LOCATION = Location.create(3222, 3222, 0);
+	public static final Location DEFAULT_LOCATION = Location.create(3167, 3231, 0);
 	
 	private int index;
 	

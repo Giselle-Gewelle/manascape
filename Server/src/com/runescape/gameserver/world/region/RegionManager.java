@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.runescape.gameserver.world.Location;
+import com.runescape.gameserver.world.World;
 import com.runescape.gameserver.world.entity.mob.Mob;
 import com.runescape.gameserver.world.entity.mob.npc.NPC;
 import com.runescape.gameserver.world.entity.mob.player.Player;
@@ -168,6 +169,18 @@ public class RegionManager {
 		return getRegion(location.getX() / REGION_SIZE, location.getY() / REGION_SIZE);
 	}
 
+	public NPC getNpcAtLocation(Location location) {
+		Region stepRegion = World.getInstance().getRegionManager().getRegionByLocation(location);
+		Collection<NPC> npcs = stepRegion.getNpcs();
+		for(NPC npc : npcs) {
+			if(npc.getLocation().equals(location)) {
+				return npc;
+			}
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * Gets a region by its x and y coordinates.
 	 * @param x The x coordinate.

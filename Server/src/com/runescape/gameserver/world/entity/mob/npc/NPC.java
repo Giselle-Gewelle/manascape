@@ -153,7 +153,8 @@ public class NPC extends Mob {
 		}
 		
 		int randId = random.nextInt(index + 1);
-		aggroAction = new AttackAction(this, aggros.get(randId));
+		NPC aggro = aggros.get(randId);
+		aggroAction = new AttackAction(this, aggro);
 		getActionQueue().addAction(aggroAction);
 	}
 	

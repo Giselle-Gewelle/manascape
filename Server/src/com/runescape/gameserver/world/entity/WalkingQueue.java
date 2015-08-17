@@ -1,5 +1,6 @@
 package com.runescape.gameserver.world.entity;
 
+import java.util.Collection;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -12,11 +13,14 @@ import com.runescape.gameserver.pathfinder.PathFinder;
 import com.runescape.gameserver.pathfinder.TileMap;
 import com.runescape.gameserver.pathfinder.TileMapBuilder;
 import com.runescape.gameserver.util.DirectionUtils;
+import com.runescape.gameserver.world.Location;
+import com.runescape.gameserver.world.World;
 import com.runescape.gameserver.world.entity.mob.Mob;
 import com.runescape.gameserver.world.entity.mob.MobCooldowns.CooldownFlags;
 import com.runescape.gameserver.world.entity.mob.npc.NPC;
 import com.runescape.gameserver.world.entity.mob.player.InterfaceConfigs;
 import com.runescape.gameserver.world.entity.mob.player.Player;
+import com.runescape.gameserver.world.region.Region;
 
 /**
  * <p>A <code>WalkingQueue</code> stores steps the client needs to walk and
@@ -77,7 +81,7 @@ public class WalkingQueue {
 	/**
 	 * The entity.
 	 */
-	private Mob entity;
+	private Mob mob;
 	
 	/**
 	 * The queue of waypoints.
@@ -100,7 +104,7 @@ public class WalkingQueue {
 	 * @param entity The entity whose walking queue this is. 
 	 */
 	public WalkingQueue(Mob entity) {
-		this.entity = entity;
+		this.mob = entity;
 	}
 	
 	/**
@@ -143,11 +147,11 @@ public class WalkingQueue {
 		if(runQueue) {
 			return true;
 		}
-		if(entity instanceof Player) {
-			if(((Player) entity).getSettings().getBool("running")) {
+		if(mob instanceof Player) {
+			if(((Player) mob).getSettings().getBool("running")) {
 				return true;
 			}
-		} else if(entity instanceof NPC) {
+		} else if(mob instanceof NPC) {
 			if(runToggled) {
 				return true;
 			}
@@ -161,7 +165,7 @@ public class WalkingQueue {
 	public void reset() {
 		runQueue = false;
 		waypoints.clear();
-		waypoints.add(new Point(entity.getLocation().getX(), entity.getLocation().getY(), -1));
+		waypoints.add(new Point(mob.getLocation().getX(), mob.getLocation().getY(), -1));
 	}
 	
 	/**
@@ -319,7 +323,7 @@ public class WalkingQueue {
 		/*
 		 * Store the teleporting flag.
 		 */
-		boolean teleporting = entity.hasTeleportTarget();
+		boolean teleporting = mob.hasTeleportTarget();
 		
 		/*
 		 * The points which we are walking to.
@@ -340,17 +344,17 @@ public class WalkingQueue {
 			 * Set the 'teleporting' flag which indicates the player is
 			 * teleporting.
 			 */
-			entity.setTeleporting(true);
+			mob.setTeleporting(true);
 			
 			/*
 			 * Sets the player's new location to be their target.
 			 */
-			entity.setLocation(entity.getTeleportTarget());
+			mob.setLocation(mob.getTeleportTarget());
 			
 			/*
 			 * Resets the teleport target.
 			 */
-			entity.resetTeleportTarget();
+			mob.resetTeleportTarget();
 		} else {
 			/*
 			 * If the player isn't teleporting, they are walking (or standing
@@ -361,16 +365,16 @@ public class WalkingQueue {
 			/*
 			 * Technically we should check for running here.
 			 */
-			 if(entity instanceof Player) {
-			        if(((Player) entity).getRunEnergy() < 100) {
-			            ((Player) entity).setRunEnergy(((Player) entity).getRunEnergy() + 0.25);
+			 if(mob instanceof Player) {
+			        if(((Player) mob).getRunEnergy() < 100) {
+			            ((Player) mob).setRunEnergy(((Player) mob).getRunEnergy() + 0.25);
 			        }
 			    }
 			 
 			if(isRunning()) {
 			    boolean canRun = false;
-			    if(entity instanceof Player) {
-			        canRun = ((Player) entity).getRunEnergy() > 0;
+			    if(mob instanceof Player) {
+			        canRun = ((Player) mob).getRunEnergy() > 0;
 			    } else {
 			    	canRun = true;
 			    }
@@ -381,8 +385,8 @@ public class WalkingQueue {
 			}
 			 
 			if(runPoint != null) {
-			    if(entity instanceof Player) {
-			    	Player player = (Player) entity;
+			    if(mob instanceof Player) {
+			    	Player player = (Player) mob;
 			        player.setRunEnergy(player.getRunEnergy() - 0.88);
 			        if(player.getRunEnergy() <= 0) {
 			        	player.getSettings().setBool("running", false);
@@ -396,7 +400,7 @@ public class WalkingQueue {
 			 */
 			int walkDir = walkPoint == null ? -1 : walkPoint.dir;
 			int runDir = runPoint == null ? -1 : runPoint.dir;
-			entity.getSprites().setSprites(walkDir, runDir);
+			mob.getSprites().setSprites(walkDir, runDir);
 		}
 		
 		/*
@@ -404,8 +408,8 @@ public class WalkingQueue {
 		 * changed, set the appropriate flag so the new map region packet
 		 * is sent.
 		 */
-		int diffX = entity.getLocation().getX() - entity.getLastKnownRegion().getRegionX() * 8;
-		int diffY = entity.getLocation().getY() - entity.getLastKnownRegion().getRegionY() * 8;
+		int diffX = mob.getLocation().getX() - mob.getLastKnownRegion().getRegionX() * 8;
+		int diffY = mob.getLocation().getY() - mob.getLastKnownRegion().getRegionY() * 8;
 		boolean changed = false;
 		if(diffX < 16) {
 			changed = true;
@@ -422,7 +426,7 @@ public class WalkingQueue {
 			 * Set the map region changing flag so the new map region packet is
 			 * sent upon the next update.
 			 */
-			entity.setMapRegionChanging(true);
+			mob.setMapRegionChanging(true);
 		}
 		
 	}
@@ -451,8 +455,8 @@ public class WalkingQueue {
 			 */
 			int diffX = Constants.DIRECTION_DELTA_X[p.dir];
 			int diffY = Constants.DIRECTION_DELTA_Y[p.dir];
-			entity.setLocation(entity.getLocation().transform(diffX, diffY, 0));
-			entity.getMobCooldowns().flag(CooldownFlags.WALKING, (run ? 1200 : 600));
+			mob.setLocation(mob.getLocation().transform(diffX, diffY, 0));
+			mob.getMobCooldowns().flag(CooldownFlags.WALKING, (run ? 1200 : 600));
 			/*
 			 * And return the direction.
 			 */
@@ -471,36 +475,64 @@ public class WalkingQueue {
 	}
 	
 	public void walkTo(int xPos, int yPos, int radius, boolean dumb) {
-		int x = xPos - entity.getLocation().getX() + radius;
-		int y = yPos - entity.getLocation().getY() + radius;
+		int x = xPos - mob.getLocation().getX() + radius;
+		int y = yPos - mob.getLocation().getY() + radius;
 								
-		TileMapBuilder bldr = new TileMapBuilder(entity.getLocation(), radius);
+		TileMapBuilder bldr = new TileMapBuilder(mob.getLocation(), radius);
 		TileMap map = bldr.build();
 		
 		PathFinder pf = null;
 		if(!dumb) {
-			pf = new AStarPathFinder(entity instanceof NPC);
+			pf = new AStarPathFinder(mob);
 			if(noClip) {
 				((AStarPathFinder) pf).setNoClip(true);
 			}
 		} else {
 			pf = new DumbPathFinder();
 		}
-		Path p = pf.findPath(entity.getLocation(), radius, map, radius, radius, x, y);
+		Path p = pf.findPath(mob.getLocation(), radius, map, radius, radius, x, y);
 		
 		if(p == null) {
 			return;
 		}
 								
 		reset();
-		if(entity instanceof Player) {
-			setRunningQueue(((Player) entity).getSettings().getBool("running"));
+		if(mob instanceof Player) {
+			setRunningQueue(((Player) mob).getSettings().getBool("running"));
 		} else {
 			// TODO check if npc can/is running
 			setRunningQueue(isRunning());
 		}
 		addStep(p.getPoints().getFirst().getX(), p.getPoints().getFirst().getY());
 		for(PFPoint p2 : p.getPoints()) {
+			if(mob instanceof NPC) {
+				boolean npcOnTile = false;
+				
+				Location loc = Location.create(p2.getX(), p2.getY(), mob.getLocation().getHeight());
+				Region stepRegion = World.getInstance().getRegionManager().getRegionByLocation(loc);
+				Collection<NPC> npcs = stepRegion.getNpcs();
+				for(NPC npc : npcs) {
+					if(npc.equals(mob)) {
+						continue;
+					}
+					
+					if(npc.getLocation().equals(mob.getLocation())) {
+						continue;
+					}
+					
+					if(npc.getLocation().equals(loc)) {
+						npcOnTile = true;
+						break;
+					}
+				}
+				
+				/*
+				 * Another NPC is standing where we want to go, stop!
+				 */
+				if(npcOnTile) {
+					break;
+				}
+			}
 			addStep(p2.getX(), p2.getY());
 		}
 		finish();

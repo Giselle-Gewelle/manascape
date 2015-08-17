@@ -49,7 +49,6 @@ public class NPCTickTask implements Task {
 					if(!npc.getMobCooldowns().get(CooldownFlags.WALKING) && !npc.isDead() && !npc.isDestroyed()) {
 						/*
 						 * Make sure that players are in the regions nearby, otherwise we shouldn't bother moving the NPC.
-						 * Hoping this will save some memory!
 						 */
 						if(World.getInstance().getRegionManager().getPlayersInSurroundingRegions(npc).size() > 0) {
 							/*
