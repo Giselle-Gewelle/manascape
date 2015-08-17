@@ -1,5 +1,6 @@
 package com.runescape;
 
+import com.runescape.cache.Class32_Sub1;
 import com.runescape.io.ByteBuffer;
 
 public class Class8 {

@@ -1,6 +1,7 @@
 package com.runescape;
 
 import com.runescape.cache.CacheArchive;
+import com.runescape.cache.Class32_Sub1;
 import com.runescape.io.ByteBuffer;
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html

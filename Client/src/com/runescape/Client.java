@@ -11,6 +11,9 @@ import java.util.zip.CRC32;
 
 import com.runescape.app.GameApplet;
 import com.runescape.cache.CacheArchive;
+import com.runescape.cache.MainCacheFile;
+import com.runescape.cache.Class32_Sub1;
+import com.runescape.cache.Class50_Sub1_Sub3;
 import com.runescape.entity.Mob;
 import com.runescape.entity.NPC;
 import com.runescape.entity.Player;
@@ -24,7 +27,7 @@ import com.runescape.sign.Signlink;
 public class Client extends GameApplet {
 
 	public static final int 
-		RV_REVISION = 1,
+		MS_REVISION = 1,
 		RS_REVISION = 377,
 		MAP_OFFSET_X = 34,
 		MAP_ORB_SIZE = 27;
@@ -176,7 +179,7 @@ public class Client extends GameApplet {
 
 	public static void main(String args[]) {
 		try {
-			System.out.println("RS2 user client - release #" + RS_REVISION + "-" + RV_REVISION);
+			System.out.println("RS2 user client - release #" + RS_REVISION + "-" + MS_REVISION);
 			if(args.length != 5) {
 				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 				return;
@@ -1320,28 +1323,28 @@ public class Client extends GameApplet {
 		} while(true);
 	}
 
-	public DataInputStream method31(String s) throws IOException {
+	public DataInputStream getJagGrabStream(String s) throws IOException {
 		/*
 		 * if(!aBoolean900) if(signlink.mainapp != null) return
 		 * signlink.openurl(s); else return new DataInputStream((new
 		 * URL(getCodeBase(), s)).openStream());
 		 */
-		if(aSocket1224 != null) {
+		if(jagGrabSocket != null) {
 			try {
-				aSocket1224.close();
+				jagGrabSocket.close();
 			} catch(Exception _ex) {
 			}
-			aSocket1224 = null;
+			jagGrabSocket = null;
 		}
-		aSocket1224 = method32(43595);
-		aSocket1224.setSoTimeout(10000);
-		java.io.InputStream inputstream = aSocket1224.getInputStream();
-		OutputStream outputstream = aSocket1224.getOutputStream();
+		jagGrabSocket = openSocket(43595);
+		jagGrabSocket.setSoTimeout(10000);
+		java.io.InputStream inputstream = jagGrabSocket.getInputStream();
+		OutputStream outputstream = jagGrabSocket.getOutputStream();
 		outputstream.write(("JAGGRAB /" + s + "\n\n").getBytes());
 		return new DataInputStream(inputstream);
 	}
 
-	public Socket method32(int i) throws IOException {
+	public Socket openSocket(int i) throws IOException {
 		if(Signlink.mainapp != null)
 			return Signlink.opensocket(i);
 		else
@@ -3836,48 +3839,52 @@ public class Client extends GameApplet {
 		return false;
 	}
 
-	public CacheArchive method61(int i, int j, String s, int k, int l, String s1) {
-		byte abyte0[] = null;
+	public CacheArchive fetchCacheArchive(int crcValue, String archiveName, int k, int l, String displayName) {
+		byte cacheFileData[] = null;
 		int i1 = 5;
+		
 		try {
-			if(aClass23Array1228[0] != null)
-				abyte0 = aClass23Array1228[0].method292(aByte898, l);
-		} catch(Exception _ex) {
+			if(mainCacheFiles[0] != null) {
+				cacheFileData = mainCacheFiles[0].decompressFile(l);
+			}
+		} catch(Exception e) {}
+		
+		if(cacheFileData != null) {
+			 crc32.reset();
+			 crc32.update(cacheFileData);
+			 int j1 = (int) crc32.getValue();
+			 if(j1 != crcValue) {
+				 cacheFileData = null; 
+			 }
 		}
-		if(abyte0 != null) {
-			/*
-			 * aCRC32_1088.reset(); aCRC32_1088.update(abyte0); int j1 =
-			 * (int)aCRC32_1088.getValue(); if(j1 != j) abyte0 = null;
-			 */
+		
+		if(cacheFileData != null) {
+			CacheArchive cacheArchive = new CacheArchive(cacheFileData);
+			return cacheArchive;
 		}
-		if(abyte0 != null) {
-			CacheArchive class2 = new CacheArchive(abyte0);
-			return class2;
-		}
+		
 		int k1 = 0;
-		if(i != 14076)
-			anInt1281 = -343;
-		while(abyte0 == null) {
+		while(cacheFileData == null) {
 			String s2 = "Unknown error";
-			drawLoadingBar(k, "Requesting " + s1);
+			drawLoadingBar(k, "Requesting " + displayName);
 			try {
 				int l1 = 0;
-				DataInputStream datainputstream = method31(s + j);
-				byte abyte1[] = new byte[6];
-				datainputstream.readFully(abyte1, 0, 6);
-				ByteBuffer byteStream = new ByteBuffer(abyte1);
-				byteStream.position = 3;
-				int j2 = byteStream.getTriByte() + 6;
+				DataInputStream jagGrabStream = getJagGrabStream(archiveName + crcValue);
+				byte jagGrabData[] = new byte[6];
+				jagGrabStream.readFully(jagGrabData, 0, 6);
+				ByteBuffer jagGrabBuffer = new ByteBuffer(jagGrabData);
+				jagGrabBuffer.position = 3;
+				int j2 = jagGrabBuffer.getTriByte() + 6;
 				int k2 = 6;
-				abyte0 = new byte[j2];
+				cacheFileData = new byte[j2];
 				for(int l2 = 0; l2 < 6; l2++)
-					abyte0[l2] = abyte1[l2];
+					cacheFileData[l2] = jagGrabData[l2];
 
 				while(k2 < j2) {
 					int i3 = j2 - k2;
 					if(i3 > 1000)
 						i3 = 1000;
-					int k3 = datainputstream.read(abyte0, k2, i3);
+					int k3 = jagGrabStream.read(cacheFileData, k2, i3);
 					if(k3 < 0) {
 						s2 = "Length error: " + k2 + "/" + j2;
 						throw new IOException("EOF");
@@ -3885,44 +3892,48 @@ public class Client extends GameApplet {
 					k2 += k3;
 					int l3 = (k2 * 100) / j2;
 					if(l3 != l1)
-						drawLoadingBar(k, "Loading " + s1 + " - " + l3 + "%");
+						drawLoadingBar(k, "Loading " + displayName + " - " + l3 + "%");
 					l1 = l3;
 				}
-				datainputstream.close();
+				jagGrabStream.close();
 				try {
-					if(aClass23Array1228[0] != null)
-						aClass23Array1228[0].method293(abyte0.length, true, abyte0, l);
+					if(mainCacheFiles[0] != null)
+						mainCacheFiles[0].method293(cacheFileData.length, true, cacheFileData, l);
 				} catch(Exception _ex) {
-					aClass23Array1228[0] = null;
+					mainCacheFiles[0] = null;
 				}
-				if(abyte0 != null) {
-					/*
-					 * aCRC32_1088.reset(); aCRC32_1088.update(abyte0); int j3 =
-					 * (int)aCRC32_1088.getValue(); if(j3 != j) { abyte0 = null;
-					 * k1++; s2 = "Checksum error: " + j3; }
-					 */
+				
+				if(cacheFileData != null) {
+					 crc32.reset(); 
+					 crc32.update(cacheFileData); 
+					 int j3 = (int)crc32.getValue(); 
+					 if(j3 != crcValue) { 
+						 cacheFileData = null;
+						 k1++; 
+						 s2 = "Checksum error: " + j3; 
+					 }
 				}
 			} catch(IOException ioexception) {
 				if(s2.equals("Unknown error"))
 					s2 = "Connection error";
-				abyte0 = null;
+				cacheFileData = null;
 			} catch(NullPointerException _ex) {
 				s2 = "Null error";
-				abyte0 = null;
+				cacheFileData = null;
 				if(!Signlink.reporterror)
 					return null;
 			} catch(ArrayIndexOutOfBoundsException _ex) {
 				s2 = "Bounds error";
-				abyte0 = null;
+				cacheFileData = null;
 				if(!Signlink.reporterror)
 					return null;
 			} catch(Exception _ex) {
 				s2 = "Unexpected error";
-				abyte0 = null;
+				cacheFileData = null;
 				if(!Signlink.reporterror)
 					return null;
 			}
-			if(abyte0 == null) {
+			if(cacheFileData == null) {
 				for(int i2 = i1; i2 > 0; i2--) {
 					if(k1 >= 3) {
 						drawLoadingBar(k, "Game updated - please reload page");
@@ -3930,10 +3941,10 @@ public class Client extends GameApplet {
 					} else {
 						drawLoadingBar(k, s2 + " - Retrying in " + i2);
 					}
+					
 					try {
 						Thread.sleep(1000L);
-					} catch(Exception _ex) {
-					}
+					} catch(Exception e) {}
 				}
 
 				i1 *= 2;
@@ -3942,8 +3953,8 @@ public class Client extends GameApplet {
 				aBoolean900 = !aBoolean900;
 			}
 		}
-		CacheArchive class2_1 = new CacheArchive(abyte0);
-		return class2_1;
+		CacheArchive cacheArchive = new CacheArchive(cacheFileData);
+		return cacheArchive;
 	}
 
 	public void method10(byte byte0) {
@@ -4260,24 +4271,24 @@ public class Client extends GameApplet {
 
 		if(Signlink.cache_dat != null) {
 			for(int i = 0; i < 5; i++) {
-				aClass23Array1228[i] = new Class23(i + 1, 0x927c0, Signlink.cache_dat, Signlink.cache_idx[i], 4);
+				mainCacheFiles[i] = new MainCacheFile(i + 1, Signlink.cache_dat, Signlink.cache_idx[i]);
 			}
 		}
 		try {
-			method86(false);
-			aClass2_888 = method61(14076, anIntArray837[1], "title", 25, 1, "title screen");
+			fetchCRCValues();
+			aClass2_888 = fetchCacheArchive(expectedCRCs[1], "title", 25, 1, "title screen");
 			smallFont = new GameFont(false, aClass2_888, -914, "p11_full");
 			normalFont = new GameFont(false, aClass2_888, -914, "p12_full");
 			boldFont = new GameFont(false, aClass2_888, -914, "b12_full");
 			questFont = new GameFont(true, aClass2_888, -914, "q8_full");
 			method139(aBoolean1207);
 			method52(false);
-			CacheArchive class2 = method61(14076, anIntArray837[2], "config", 30, 2, "config");
-			CacheArchive interfaceArchive = method61(14076, anIntArray837[3], "interface", 35, 3, "interface");
-			CacheArchive mediaArchive = method61(14076, anIntArray837[4], "media", 40, 4, "2d graphics");
-			CacheArchive class2_3 = method61(14076, anIntArray837[6], "textures", 45, 6, "textures");
-			CacheArchive class2_4 = method61(14076, anIntArray837[7], "wordenc", 50, 7, "chat system");
-			CacheArchive class2_5 = method61(14076, anIntArray837[8], "sounds", 55, 8, "sound effects");
+			CacheArchive class2 = fetchCacheArchive(expectedCRCs[2], "config", 30, 2, "config");
+			CacheArchive interfaceArchive = fetchCacheArchive(expectedCRCs[3], "interface", 35, 3, "interface");
+			CacheArchive mediaArchive = fetchCacheArchive(expectedCRCs[4], "media", 40, 4, "2d graphics");
+			CacheArchive class2_3 = fetchCacheArchive(expectedCRCs[6], "textures", 45, 6, "textures");
+			CacheArchive class2_4 = fetchCacheArchive(expectedCRCs[7], "wordenc", 50, 7, "chat system");
+			CacheArchive class2_5 = fetchCacheArchive(expectedCRCs[8], "sounds", 55, 8, "sound effects");
 			aByteArrayArrayArray1125 = new byte[4][104][104];
 			anIntArrayArrayArray891 = new int[4][105][105];
 			aClass22_1164 = new Class22(anIntArrayArrayArray891, 104, 4, 104, (byte) 5);
@@ -4285,10 +4296,10 @@ public class Client extends GameApplet {
 				aClass46Array1260[j] = new Class46(104, 0, 104);
 
 			minimapImage = new RgbImage(512, 512);
-			CacheArchive class2_6 = method61(14076, anIntArray837[5], "versionlist", 60, 5, "update list");
+			CacheArchive versionListArchive = fetchCacheArchive(expectedCRCs[5], "versionlist", 60, 5, "update list");
 			drawLoadingBar(60, "Connecting to update server");
 			aClass32_Sub1_1291 = new Class32_Sub1();
-			aClass32_Sub1_1291.method335(class2_6, this);
+			aClass32_Sub1_1291.method335(versionListArchive, this);
 			Class21.method235(aClass32_Sub1_1291.method343(553));
 			Model.method574(aClass32_Sub1_1291.method340(0, -31140), aClass32_Sub1_1291);
 			if(!aBoolean926) {
@@ -4345,7 +4356,7 @@ public class Client extends GameApplet {
 				} catch(Exception _ex) {
 				}
 			}
-			if(aClass23Array1228[0] != null) {
+			if(mainCacheFiles[0] != null) {
 				drawLoadingBar(75, "Requesting maps");
 				aClass32_Sub1_1291.method329(3, aClass32_Sub1_1291.method344(0, 47, 48, 0));
 				aClass32_Sub1_1291.method329(3, aClass32_Sub1_1291.method344(0, 47, 48, 1));
@@ -5572,7 +5583,7 @@ public class Client extends GameApplet {
 				aString958 = "Connecting to server...";
 				drawLoginScreen(true);
 			}
-			aClass17_1024 = new ClientSocket((byte) 2, method32(43594 + portOffset), this);
+			aClass17_1024 = new ClientSocket((byte) 2, openSocket(43594 + portOffset), this);
 			long l = NameUtils.nameToLong(username);
 			int i = (int) (l >> 16 & 31L);
 			byteStream2.position = 0;
@@ -5611,10 +5622,10 @@ public class Client extends GameApplet {
 				byteStream1.putByte(byteStream2.position + 36 + 1 + 1 + 2);
 				byteStream1.putByte(255);
 				byteStream1.putShort(RS_REVISION);
-				byteStream1.putShort(RV_REVISION);
+				byteStream1.putShort(MS_REVISION);
 				byteStream1.putByte(aBoolean926 ? 1 : 0);
 				for(int l1 = 0; l1 < 9; l1++)
-					byteStream1.putInt(anIntArray837[l1]);
+					byteStream1.putInt(expectedCRCs[l1]);
 
 				byteStream1.putBytes(byteStream2.payload, 0, byteStream2.position, 0);
 				byteStream2.encryption = new IsaacCipher(anInt1175, ai);
@@ -6395,33 +6406,64 @@ public class Client extends GameApplet {
 
 	}
 
-	public void method86(boolean flag) {
-		/*
-		 * int i = 5; anIntArray837[8] = 0; if(flag) { for(int j = 1; j > 0;
-		 * j++); } int k = 0;req while(anIntArray837[8] == 0) { String s =
-		 * "Unknown problem"; method13(20, true, "Connecting to web server");
-		 * try { DataInputStream datainputstream = method31("crc" +
-		 * (int)(Math.random() * 99999999D) + "-" + RS_REVISION); ByteStream
-		 * class50_sub1_sub2 = new ByteStream(true, new byte[40]);
-		 * datainputstream.readFully(class50_sub1_sub2.aByteArray1453, 0, 40);
-		 * datainputstream.close(); for(int i1 = 0; i1 < 9; i1++)
-		 * anIntArray837[i1] = class50_sub1_sub2.method526();
-		 * 
-		 * int j1 = class50_sub1_sub2.method526(); int k1 = 1234; for(int l1 =
-		 * 0; l1 < 9; l1++) k1 = (k1 << 1) + anIntArray837[l1];
-		 * 
-		 * if(j1 != k1) { s = "checksum problem"; anIntArray837[8] = 0; } }
-		 * catch(EOFException _ex) { s = "EOF problem"; anIntArray837[8] = 0; }
-		 * catch(IOException _ex) { s = "connection problem"; anIntArray837[8] =
-		 * 0; } catch(Exception _ex) { s = "logic problem"; anIntArray837[8] =
-		 * 0; if(!signlink.reporterror) return; } if(anIntArray837[8] == 0) {
-		 * k++; for(int l = i; l > 0; l--) { if(k >= 10) { method13(10, true,
-		 * "Game updated - please reload page"); l = 10; } else { method13(10,
-		 * true, s + " - Will retry in " + l + " secs."); } try {
-		 * Thread.sleep(1000L); } catch(Exception _ex) { } }
-		 * 
-		 * i *= 2; if(i > 60) i = 60; aBoolean900 = !aBoolean900; } }
-		 */
+	public void fetchCRCValues() {
+		int i = 5;
+		expectedCRCs[8] = 0;
+		int k = 0;
+		while(expectedCRCs[8] == 0) {
+			String s = "Unknown problem";
+			drawLoadingBar(20, "Connecting to web server");
+			try {
+				DataInputStream jagGrabStream = getJagGrabStream("crc" + (int) (Math.random() * 99999999D) + "-" + RS_REVISION);
+				
+				ByteBuffer jagGrabBuffer = new ByteBuffer(new byte[40]);
+				jagGrabStream.readFully(jagGrabBuffer.payload, 0, 40);
+				jagGrabStream.close();
+				for(int crcIndex = 0; crcIndex < 9; crcIndex++)
+					expectedCRCs[crcIndex] = jagGrabBuffer.getInt();
+
+				int j1 = jagGrabBuffer.getInt();
+				int k1 = 1234;
+				for(int l1 = 0; l1 < 9; l1++)
+					k1 = (k1 << 1) + expectedCRCs[l1];
+
+				if(j1 != k1) {
+					s = "checksum problem";
+					expectedCRCs[8] = 0;
+				}
+			} catch(EOFException _ex) {
+				s = "EOF problem";
+				expectedCRCs[8] = 0;
+			} catch(IOException _ex) {
+				s = "connection problem";
+				expectedCRCs[8] = 0;
+			} catch(Exception _ex) {
+				s = "logic problem";
+				expectedCRCs[8] = 0;
+				if(!Signlink.reporterror)
+					return;
+			}
+			if(expectedCRCs[8] == 0) {
+				k++;
+				for(int l = i; l > 0; l--) {
+					if(k >= 10) {
+						drawLoadingBar(10, "Game updated - please reload page");
+						l = 10;
+					} else {
+						drawLoadingBar(10, s + " - Will retry in " + l + " secs.");
+					}
+					try {
+						Thread.sleep(1000L);
+					} catch(Exception e) {}
+				}
+
+				i *= 2;
+				if(i > 60)
+					i = 60;
+				aBoolean900 = !aBoolean900;
+			}
+		}
+
 	}
 	
 	private int getLevelForExp(int exp) {
@@ -10654,7 +10696,7 @@ public class Client extends GameApplet {
 		if(loadingStage == 1) {
 			int i = method144(5);
 			if(i != 0 && System.currentTimeMillis() - aLong1229 > 0x57e40L) {
-				Signlink.reporterror(aString1092 + " glcfb " + aLong930 + "," + i + "," + aBoolean926 + "," + aClass23Array1228[0] + "," + aClass32_Sub1_1291.method333() + "," + anInt1091 + ","
+				Signlink.reporterror(aString1092 + " glcfb " + aLong930 + "," + i + "," + aBoolean926 + "," + mainCacheFiles[0] + "," + aClass32_Sub1_1291.method333() + "," + anInt1091 + ","
 						+ anInt889 + "," + anInt890);
 				aLong1229 = System.currentTimeMillis();
 			}
@@ -11147,7 +11189,7 @@ public class Client extends GameApplet {
 	}
 
 	public Client() {
-		anIntArray837 = new int[9];
+		expectedCRCs = new int[9];
 		aString839 = "";
 		playerExps = new int[SkillConstants.SKILL_COUNT];
 		aStringArray849 = new String[200];
@@ -11246,7 +11288,7 @@ public class Client extends GameApplet {
 		markPosY = new int[1000];
 		prayerHeadicons = new RgbImage[32];
 		anInt1080 = 0x4d4233;
-		aCRC32_1088 = new CRC32();
+		crc32 = new CRC32();
 		anInt1089 = -1;
 		anIntArray1090 = new int[50];
 		aString1092 = "Setsuna";
@@ -11294,7 +11336,7 @@ public class Client extends GameApplet {
 		aBoolean1211 = false;
 		aBoolean1212 = false;
 		flashingSidebarId = -1;
-		aClass23Array1228 = new Class23[5];
+		mainCacheFiles = new MainCacheFile[5];
 		anInt1231 = -1;
 		anInt1234 = 1;
 		anInt1236 = 326;
@@ -11347,7 +11389,7 @@ public class Client extends GameApplet {
 		playerRunning = false;
 	}
 
-	public int anIntArray837[];
+	public int expectedCRCs[];
 	public byte aByteArrayArray838[][];
 	public String aString839;
 	public static BigInteger aBigInteger840 = new BigInteger(
@@ -11601,7 +11643,7 @@ public class Client extends GameApplet {
 	public int anIntArray1085[];
 	public RgbImage multiwayOverlay;
 	public int anInt1087;
-	public CRC32 aCRC32_1088;
+	public CRC32 crc32;
 	public int anInt1089;
 	public int anIntArray1090[];
 	public int anInt1091;
@@ -11737,11 +11779,11 @@ public class Client extends GameApplet {
 	public int anInt1221;
 	public int anInt1222;
 	public int anInt1223;
-	public Socket aSocket1224;
+	public Socket jagGrabSocket;
 	public int anInt1225;
 	public int anInt1226;
 	public int anInt1227;
-	public Class23 aClass23Array1228[];
+	public MainCacheFile mainCacheFiles[];
 	public long aLong1229;
 	public static int anInt1230;
 	public int anInt1231;

@@ -1,5 +1,6 @@
 package com.runescape;
 
+import com.runescape.cache.Class32;
 import com.runescape.io.ByteBuffer;
 
 public class Model extends Class50_Sub1_Sub4 {

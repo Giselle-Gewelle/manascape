@@ -329,7 +329,7 @@ public class Signlink implements Runnable {
 			s = s.replace('@', '_');
 			s = s.replace('&', '_');
 			s = s.replace('#', '_');
-			DataInputStream datainputstream = openurl("reporterror" + Client.RV_REVISION + ".jsp?error=" + errorname + " " + s);
+			DataInputStream datainputstream = openurl("reporterror" + Client.MS_REVISION + ".jsp?error=" + errorname + " " + s);
 			datainputstream.readLine();
 			datainputstream.close();
 			return;
