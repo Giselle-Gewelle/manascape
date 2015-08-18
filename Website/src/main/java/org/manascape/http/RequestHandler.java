@@ -1,7 +1,6 @@
 package org.manascape.http;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,7 +46,6 @@ public final class RequestHandler {
 		
 		{
 			put("main title.ws", GenericPage.class);
-			
 		}
 		
 	};

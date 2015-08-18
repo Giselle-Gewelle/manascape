@@ -3,16 +3,16 @@ package org.manascape.db;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
-
 public final class DatabaseHandler {
-	
-	private static final Logger LOG = Logger.getLogger(DatabaseHandler.class);
 	
 	private final Connection connection;
 	
 	public DatabaseHandler() {
 		this.connection = MSDataSource.getConnection();
+	}
+	
+	public Call prepareCall(String statementName, int paramCount) throws SQLException {
+		return new Call(connection, statementName, paramCount);
 	}
 	
 	public void close() {

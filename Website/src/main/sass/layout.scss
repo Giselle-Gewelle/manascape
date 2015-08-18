@@ -1,2 +1,262 @@
 @charset "UTF-8";
 
+/*
+ * Copyright (c) ManaScape.org
+ */
+
+html, body, h1, h2, h3, h4, h5, h6, table, thead, tbody, tr, th, td, hr, img, strong {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background: #000000 url('../img/layout/bg/default.jpg') repeat-y center top;
+	padding: 20px 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 14px;
+	text-align: left;
+	
+	a, a:link, a:visited {
+		color: #90C040;
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	
+	strong {
+		font-weight: bold;
+	}
+	
+	thead {
+		td {
+			font-weight: bold;
+		}
+	}
+
+	#content {
+		width: 765px;
+		margin: 0 auto;
+		position: relative;
+		
+		.frame, #nav, .location {
+			border: 2px solid #382418;
+			background-color: #000000;
+			position: relative;
+			box-shadow: 0 0 0 2px #000000;
+		}
+		.frame {
+			padding: 5px;
+			z-index: 1001;
+			margin-top: 10px;
+		}
+		.location {
+			padding: 3px;
+			margin-top: 10px;
+			font-size: 12px;
+		}
+		
+		#nav {
+			height: 35px;
+			z-index: 1002;
+			font-weight: bold;
+			
+			div {
+				float: left;
+				height: 35px;
+				line-height: 35px;
+				width: 25%;
+				padding-left: 10px;
+			}
+			
+			ul, li {
+				display: inline;
+				margin: 0;
+				padding: 0;
+			}
+			ul {
+				float: right;
+				
+				li {
+					float: left;
+					position: relative;
+					
+					a {
+						padding: 0 10px;
+						line-height: 35px;
+						height: 35px;
+						border-left: 2px solid #382418;
+						display: inline-block;
+						transition: background-color 0.25s;
+					}
+					a:hover {
+						text-decoration: none;
+					}
+					
+					ul {
+						position: absolute;
+						top: 35px;
+						left: 0;
+						visibility: hidden;
+						
+						li {
+							a {
+								display: block;
+								height: 20px;
+								line-height: 20px;
+								font-size: 12px;
+								width: 150px;
+								background: linear-gradient(rgb(50, 50, 50), #000000);
+								border: 2px solid #382418;
+								border-top: none;
+								padding: 0 5px;
+								transition: none;
+							}
+							
+							a:hover {
+								background: rgb(35, 35, 35);
+							}
+						}
+						
+						li:first-child a {
+							border-top: 2px solid #382418;
+						}
+					}
+				}
+				
+				li:hover {
+					a {
+						background-color: rgb(35, 35, 35);
+					}
+					ul {
+						visibility: visible;
+					}
+				}
+			}
+		}
+		
+		h1, h2, h3, h4, h5, h6 {
+			font-weight: bold;
+			color: #382418;
+			display: block;
+		}
+		h1 {
+			font-size: 24px;
+			margin: 30px 0 0;
+			text-align: center;
+			height: 35px;
+			line-height: 35px;
+			width: 765px;
+			background: url('../img/layout/titleScroll.png') no-repeat 0 0;
+			font-family: "Palatino Linotype", Georgia, serif;
+			font-variant: small-caps;
+		}
+		h2 {
+			font-size: 20px;
+		}
+		h3 {
+			font-size: 18px;
+		}
+		h4 {
+			font-size: 16px;
+		}
+		h5 {
+			font-size: 15px;
+		}
+		h6 {
+			font-size: 14px;
+		}
+		
+		.scroll {
+			width: 765px;
+			margin: 10px auto 0;
+			
+			div {
+				background: url('../img/layout/scrollContent.png') repeat-y 0 0;
+				width: 725px;
+				margin: -10px auto;
+				color: #000000;
+				padding: 15px 10px;
+				position: relative;
+				z-index: 1000;
+				
+				div {
+					background: none;
+					width: auto;
+					margin: 0;
+					padding: 0;
+				}
+				
+				input[type="text"], input[type="password"], textarea, select {
+					border: 1px solid #7B4F17;
+					background-color: #D8CDA0;
+					color: #000000;
+					outline: none !important;
+					padding: 2px;
+				}
+				button, input[type="submit"], input[type="reset"] {
+					border: 2px solid #7B4F17;
+					background-color: #D8CDA0;
+					font-weight: bold;
+					outline: none !important;
+					cursor: pointer;
+					border-radius: 5px;
+					padding: 4px 10px;
+				}
+				
+				hr {
+					margin: 1em 0;
+					padding: 0;
+					height: 1px;
+					width: 100%;
+					background-color: #382418;
+				}
+				
+				.contentBox {
+					margin: 0 0 1em;
+					border: 1px solid #7B4F17;
+					
+					.header {
+						background-color: #C9AD7A;
+						padding: 5px;
+						font-weight: bold;
+						font-size: 15px;
+						border-bottom: 1px solid #7B4F17;
+					}
+					
+					.body {
+						background-color: #D8CDA0;
+						padding: 5px;
+					}
+				}
+				
+				a {
+					color: #7B4F17;
+					font-weight: bold;
+				}
+			}
+		}
+		.scroll::before, .scroll::after {
+			content: "";
+			display: block;
+			width: 765px;
+			height: 49px;
+			position: relative;
+			z-index: 1001;
+		}
+		.scroll::before {
+			background: url('../img/layout/scrollTop.png') no-repeat 0 0;
+		}
+		.scroll::after {
+			background: url('../img/layout/scrollBottom.png') no-repeat 0 0;
+		}
+	}
+	
+	#footer {
+		clear: both;
+		font-size: 12px;
+		text-align: center;
+		margin-top: 10px;
+	}
+}
