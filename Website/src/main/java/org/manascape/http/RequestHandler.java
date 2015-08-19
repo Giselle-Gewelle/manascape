@@ -2,10 +2,8 @@ package org.manascape.http;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -16,29 +14,12 @@ import org.apache.log4j.Logger;
 import org.manascape.Config;
 import org.manascape.controller.Controller;
 import org.manascape.controller.impl.GenericPage;
+import org.manascape.controller.impl.account.CreateAccount;
 import org.manascape.db.DatabaseHandler;
 
 public final class RequestHandler {
 	
 	private static final Logger LOG = Logger.getLogger(RequestHandler.class);
-	
-	public static final List<String> SECURE_MODS = new ArrayList<String>() {
-		
-		private static final long serialVersionUID = 7121714950285554587L;
-
-		{
-			add("create");
-			add("password_history");
-			add("password");
-			add("recovery_questions");
-			add("offenceappeal");
-			add("ticketing");
-			add("pmod");
-			add("fmod");
-			add("staff");
-		}
-		
-	};
 	
 	public static final Map<String, Class<? extends Controller>> CONTROLLER_MAP = new HashMap<String, Class<? extends Controller>>() {
 
@@ -46,6 +27,8 @@ public final class RequestHandler {
 		
 		{
 			put("main title.ws", GenericPage.class);
+			
+			put("create index.ws", CreateAccount.class);
 		}
 		
 	};

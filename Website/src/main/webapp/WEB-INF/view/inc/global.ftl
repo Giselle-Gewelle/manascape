@@ -21,3 +21,9 @@
 </#function>
 
 <#macro a mod dest secure=false><a href="${url(mod, dest, secure)}"><#nested /></a></#macro>
+
+<#macro location>
+	<div class="location">
+		<strong>Location:</strong> <@a mod="main" dest="title.ws">Home</@a> &gt; <#nested />
+	</div>
+</#macro>

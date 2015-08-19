@@ -13,6 +13,12 @@
 			</script>
 		</#if>
 		
+		<script type="text/javascript" src="${url('main', 'resources/js/lib/jquery-2.1.4.min.js?rt=${rsTime}')}"></script>
+		
+		<#if angular??>
+			<script type="text/javascript" src="${url('main', 'resources/js/lib/angular.min.js?rt=${rsTime}')}"></script>
+		</#if>
+		
 		<#if cssImports??>
 			<#list cssImports as cssImport>
 				<link rel="stylesheet" type="text/css" href="${url('main', 'resources/css/${cssImport}.css?rt=${rsTime}')}" />
@@ -27,12 +33,23 @@
 		
 		<link rel="icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
 		<link rel="shortcut icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#noJS").css("display", "none");
+				$("#content").css("display", "block");
+			});
+		</script>
 	</head>
 	
 	<body<#if angular??> ${angular}</#if>>
 		<#if prepend??>
 			<@prepend />
 		</#if>
+		
+		<div id="noJS">
+			JavaScript must be enabled to utilize many features of this website.
+		</div>
 		
 		<div id="content">
 			<div id="nav">
@@ -43,7 +60,11 @@
 				<ul>
 					<li><a href="">Home</a></li>
 					<li><a href="">Play</a></li>
-					<li><a href="">Account</a></li>
+					<li><a href="">Account</a>
+						<ul>
+							<li><@a mod="create" dest="index.ws">Create an Account</@a></li>
+						</ul>
+					</li>
 					<li><a href="">Community</a>
 						<ul>
 							<li><a href="">Forums</a></li>

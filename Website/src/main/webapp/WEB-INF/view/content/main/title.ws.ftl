@@ -23,4 +23,8 @@
 	</div>
 </div>
 
+<div class="location">
+	<strong>Location:</strong> Home
+</div>
+
 <#include "../../inc/footer.ftl" />

@@ -87,7 +87,7 @@ public abstract class Controller {
 	 * @return True if it is secure, false if not.
 	 */
 	public boolean isSecure() {
-		return false;
+		return true;
 	}
 	
 	/**
