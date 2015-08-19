@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+#progressBar {
+	font-size: 0;
+	width: 700px;
+	margin: 0 auto;
+	
+	span {
+		display: inline-block;
+		font-size: 13px;
+		width: 140px;
+		height: 25px;
+		line-height: 25px;
+		text-align: center;
+		background-color: #D8CDA0;
+		border: 1px solid #382418;
+		border-left: none;
+		box-sizing: border-box;
+	}
+	span:first-child {
+		border-left: 1px solid #382418;
+	}
+	span.active {
+		background-color: #7B4F17;
+		font-weight: bold;
+		color: #FFFFFF;
+	}
+	span.complete {
+		background-color: #C9AD7A;
+		color: #7B4F17;
+	}
+}
+
+#createContent {
+	margin: 20px auto 0;
+	width: 700px;
+	
+	label, span.label {
+		font-weight: bold;
+	}
+	label {
+		cursor: pointer;
+	}
+	input, select {
+		display: block;
+		width: 250px;
+		margin-top: 2px;
+	}
+	
+	.spacer {
+		height: 1em;
+	}
+}

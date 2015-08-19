@@ -24,6 +24,6 @@
 
 <#macro location>
 	<div class="location">
-		<strong>Location:</strong> <@a mod="main" dest="title.ws">Home</@a> &gt; <#nested />
+		<strong>Location:</strong> <span><@a mod="main" dest="title.ws">Home</@a> &gt; <#nested /></span>
 	</div>
 </#macro>
