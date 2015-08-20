@@ -15,6 +15,7 @@ import org.manascape.Config;
 import org.manascape.controller.Controller;
 import org.manascape.controller.impl.GenericPage;
 import org.manascape.controller.impl.account.CreateAccount;
+import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.db.DatabaseHandler;
 
 public final class RequestHandler {
@@ -31,6 +32,8 @@ public final class RequestHandler {
 			put("create index.ws", CreateAccount.class);
 			put("create checkusername.ws", CreateAccount.class);
 			put("create submit.ws", CreateAccount.class);
+			
+			put("account login.ws", Login.class);
 		}
 		
 	};

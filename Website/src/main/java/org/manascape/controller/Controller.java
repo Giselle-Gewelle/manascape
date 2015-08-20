@@ -68,6 +68,7 @@ public abstract class Controller {
 		request.setAttribute("currentMod", mod);
 		request.setAttribute("currentDest", dest);
 		request.setAttribute("currentQuery", queryString);
+		request.setAttribute("currentFullDest", dest + queryString);
 		
 		this.jsonData = null;
 	}

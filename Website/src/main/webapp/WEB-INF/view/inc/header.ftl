@@ -62,7 +62,7 @@
 				</div>
 				
 				<ul>
-					<li><a href="">Home</a></li>
+					<li><@a mod="main" dest="title.ws">Home</@a></li>
 					<li><a href="">Play</a></li>
 					<li><a href="">Account</a>
 						<ul>
@@ -77,6 +77,6 @@
 						</ul>
 					</li>
 					<li><a href="">Help</a></li>
-					<li><a href="">Login</a></li>
+					<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>
 				</ul>
 			</div>

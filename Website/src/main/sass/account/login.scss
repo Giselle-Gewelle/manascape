@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+#loginPage {
+	padding: 1em;
+	display: block;
+	width: 300px;
+	margin: 0 auto;
+	
+	label {
+		font-weight: bold;
+		cursor: pointer;
+		display: block;
+		font-size: 16px;
+		width: 300px;
+	}
+	
+	input {
+		display: block;
+		width: 300px;
+		padding: 5px;
+		margin-top: 2px;
+		letter-spacing: 1px;
+	}
+	button {
+		margin-top: 0.5em;
+	}
+	
+	.spacer {
+		height: 1em;
+	}
+}
