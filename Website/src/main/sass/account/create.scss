@@ -21,7 +21,7 @@
 		border-left: 1px solid #382418;
 	}
 	span.active {
-		background-color: #7B4F17;
+		background-color: #997A00;
 		font-weight: bold;
 		color: #FFFFFF;
 	}
@@ -37,17 +37,28 @@
 	
 	label, span.label {
 		font-weight: bold;
+		display: block;
+		margin-bottom: 2px;
 	}
 	label {
 		cursor: pointer;
 	}
-	input, select {
-		display: block;
+	label.inline {
+		display: inline;
+		margin: 0;
+	}
+	
+	input[type="text"], input[type="password"], select {
+		display: inline-block;
 		width: 250px;
-		margin-top: 2px;
 	}
 	
 	.spacer {
 		height: 1em;
+	}
+	
+	#passwordDetails {
+		margin: 0 0 1em;
+		padding: 0 0 0 1em;
 	}
 }

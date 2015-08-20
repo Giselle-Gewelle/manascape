@@ -19,6 +19,17 @@
 			<script type="text/javascript" src="${url('main', 'resources/js/lib/angular.min.js?rt=${rsTime}')}"></script>
 		</#if>
 		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#noJS").css("display", "none");
+				$("#content").css("display", "block");
+			});
+		</script>
+		
+		<#if header??>
+			<@header />
+		</#if>
+		
 		<#if cssImports??>
 			<#list cssImports as cssImport>
 				<link rel="stylesheet" type="text/css" href="${url('main', 'resources/css/${cssImport}.css?rt=${rsTime}')}" />
@@ -33,13 +44,6 @@
 		
 		<link rel="icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
 		<link rel="shortcut icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
-		
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#noJS").css("display", "none");
-				$("#content").css("display", "block");
-			});
-		</script>
 	</head>
 	
 	<body<#if angular??> ${angular}</#if>>

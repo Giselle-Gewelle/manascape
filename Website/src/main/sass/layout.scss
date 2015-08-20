@@ -208,6 +208,15 @@ body {
 					padding: 4px 10px;
 				}
 				
+				.error {
+					color: rgb(150, 0, 0);
+					font-weight: bold;
+				}
+				.success {
+					color: rgb(0, 100, 0);
+					font-weight: bold;
+				}
+				
 				hr {
 					margin: 1em 0;
 					padding: 0;

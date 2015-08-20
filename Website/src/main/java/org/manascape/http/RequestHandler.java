@@ -29,6 +29,8 @@ public final class RequestHandler {
 			put("main title.ws", GenericPage.class);
 			
 			put("create index.ws", CreateAccount.class);
+			put("create checkusername.ws", CreateAccount.class);
+			put("create submit.ws", CreateAccount.class);
 		}
 		
 	};

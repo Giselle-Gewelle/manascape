@@ -27,22 +27,40 @@ public final class Call {
 	}
 	
 	public Call setString(String paramName, String value) throws SQLException {
-		stmt.setString(paramName, value);
+		stmt.setString("in_" + paramName, value);
 		return this;
 	}
 	
 	public Call setInt(String paramName, int value) throws SQLException {
-		stmt.setInt(paramName, value);
+		stmt.setInt("in_" + paramName, value);
+		return this;
+	}
+	
+	public Call setBoolean(String paramName, boolean value) throws SQLException {
+		stmt.setBoolean("in_" + paramName, value);
 		return this;
 	}
 	
 	public Call registerOut(String paramName, int type) throws SQLException {
-		stmt.registerOutParameter(paramName, type);
+		stmt.registerOutParameter("out_" + paramName, type);
 		return this;
 	}
 	
-	public void execute() throws SQLException {
+	public Call execute() throws SQLException {
 		stmt.execute();
+		return this;
+	}
+	
+	public String getString(String paramName) throws SQLException {
+		return stmt.getString("out_" + paramName);
+	}
+	
+	public int getInt(String paramName) throws SQLException {
+		return stmt.getInt("out_" + paramName);
+	}
+	
+	public boolean getBoolean(String paramName) throws SQLException {
+		return stmt.getBoolean("out_" + paramName);
 	}
 	
 	public ResultSet getResults() throws SQLException {
