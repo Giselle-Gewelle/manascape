@@ -77,6 +77,10 @@
 						</ul>
 					</li>
 					<li><a href="">Help</a></li>
-					<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>
+					
+					<#if hideSessionButton??>
+					<#else>
+						<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>
+					</#if>
 				</ul>
 			</div>

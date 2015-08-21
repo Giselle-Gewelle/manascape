@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.manascape.Config;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.http.HttpRequestType;
 
@@ -87,24 +88,24 @@ public abstract class Controller {
 	 * Whether or not this page must be accessed through HTTPS (if SSL is enabled in the configuration file).
 	 * @return True if it is secure, false if not.
 	 */
-	public boolean isSecure() {
-		return true;
+	public boolean isHTTPS() {
+		return Config.isSslEnabled();
 	}
 	
 	/**
-	 * Whether or not to update/refresh a secure (HTTPS) login session.
+	 * Whether or not the page requires a secure login session (DB flag).
+	 * @return True if a secure flag is required, false if not.
+	 */
+	public boolean isSecure() {
+		return false;
+	}
+	
+	/**
+	 * Whether or not to update/refresh a secure login session.
 	 * @return True if the session should be refreshed, false if it should expire after the given time runs out.
 	 */
 	public boolean holdSecureSession() {
 		return true;
-	}
-	
-	/**
-	 * Gets the actual FTL (FreeMarker) page for this page.
-	 * @return Null if the default path is desired, or a string containing the desired endpoint file.
-	 */
-	public String getActualPage() {
-		return null;
 	}
 	
 	/**
@@ -113,6 +114,14 @@ public abstract class Controller {
 	 */
 	public boolean loginRequired() {
 		return false;
+	}
+	
+	/**
+	 * Gets the actual FTL (FreeMarker) page for this page.
+	 * @return Null if the default path is desired, or a string containing the desired endpoint file.
+	 */
+	public String getActualPage() {
+		return null;
 	}
 	
 	protected final HttpServletRequest getRequest() {

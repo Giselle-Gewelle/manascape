@@ -5,6 +5,38 @@
 		   xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
 		   targetNamespace="http://org.manascape">
 			   
+	<xs:complexType name="LoginRequestDTO">
+		<xs:sequence>
+			<xs:element name="userId"		type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="passwordHash"	type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="passwordSalt"	type="xs:string"	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
 	
+	<xs:complexType name="UserSessionDTO">
+		<xs:sequence>
+			<xs:element name="id"			type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="username"		type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="displayName"	type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="staff"	 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="fmod"		 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="pmod"		 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="currentIP"	type="xs:string"	minOccurs="1" maxOccurs="1" />
+			
+			<xs:element name="sessionId"	type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="sessionHash"	type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="secure"	 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="mod"			type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="dest"			type="xs:string"	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SessionCheckDTO">
+		<xs:sequence>
+			<xs:element name="sessionId"	type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="secure"	 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="endDate"		type="xs:string"	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
 
 </xs:schema>

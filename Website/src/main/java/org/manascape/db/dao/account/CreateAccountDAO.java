@@ -47,7 +47,7 @@ public final class CreateAccountDAO {
 			Call dbCall = db.prepareCall("user_creationFloodCheck", 4)
 				.setString("ip", ip)
 				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(threshold.getTime()))
-				.setInt("max", max)
+				.setInt("max", max + 1)
 				.registerOut("count", Types.SMALLINT)
 				.execute();
 			

@@ -3,8 +3,6 @@ package org.manascape.http;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -13,30 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.manascape.Config;
 import org.manascape.controller.Controller;
-import org.manascape.controller.impl.GenericPage;
-import org.manascape.controller.impl.account.CreateAccount;
-import org.manascape.controller.impl.account.sessions.Login;
+import org.manascape.controller.ControllerConstants;
 import org.manascape.db.DatabaseHandler;
 
 public final class RequestHandler {
 	
 	private static final Logger LOG = Logger.getLogger(RequestHandler.class);
-	
-	public static final Map<String, Class<? extends Controller>> CONTROLLER_MAP = new HashMap<String, Class<? extends Controller>>() {
-
-		private static final long serialVersionUID = -6523666098696536388L;
-		
-		{
-			put("main title.ws", GenericPage.class);
-			
-			put("create index.ws", CreateAccount.class);
-			put("create checkusername.ws", CreateAccount.class);
-			put("create submit.ws", CreateAccount.class);
-			
-			put("account login.ws", Login.class);
-		}
-		
-	};
 	
 	public static void sendError(HttpServletResponse response, int errorCode) {
 		try {
@@ -72,7 +52,7 @@ public final class RequestHandler {
 			dest = dest.substring(endIdx + 1, dest.length());
 		}
 		
-		if(!CONTROLLER_MAP.containsKey(mod + " " + dest)) {
+		if(!ControllerConstants.CONTROLLER_MAP.containsKey(mod + " " + dest)) {
 			LOG.info("Controller not found: " + mod + ":" + dest);
 			sendError(response, 404);
 			return;
@@ -82,7 +62,7 @@ public final class RequestHandler {
 
 		Controller controller = null;
 		try {
-			Class<? extends Controller> controllerClass = CONTROLLER_MAP.get(mod + " " + dest);
+			Class<? extends Controller> controllerClass = ControllerConstants.CONTROLLER_MAP.get(mod + " " + dest);
 			controller = controllerClass.newInstance();
 			
 			if(Config.isSslEnabled()) {

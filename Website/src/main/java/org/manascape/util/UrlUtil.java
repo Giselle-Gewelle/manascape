@@ -11,9 +11,15 @@ public final class UrlUtil {
 	
 	private static final Logger LOG = Logger.getLogger(UrlUtil.class);
 	
+	public static void sendHome(HttpServletResponse response) {
+		redirect(response, "main", "title.ws");
+	}
+	
 	public static void redirect(HttpServletResponse response, String mod, String dest) {
 		if(!mod.equals("main")) {
 			mod = "/m=" + mod;
+		} else {
+			mod = "";
 		}
 		
 		try {

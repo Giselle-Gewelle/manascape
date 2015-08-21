@@ -31,8 +31,164 @@ CREATE TABLE `user_accounts` (
 ) ENGINE=InnoDB;
 
 
+DROP TABLE IF EXISTS `user_sessions`;
+CREATE TABLE `user_sessions` (
+	`id`			BIGINT(20)		UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
+	`userId`		INT(10)			UNSIGNED NOT NULL, 
+	`ip`			VARCHAR(128)	NOT NULL, 
+	`hash`			CHAR(128)		NOT NULL, 
+	`startDate`		DATETIME		NOT NULL, 
+	`endDate`		DATETIME		NOT NULL, 
+	`secure`		BIT				NOT NULL DEFAULT 1,
+	
+	`startMod`		VARCHAR(30)		NOT NULL, 
+	`currentMod`	VARCHAR(30)		NOT NULL, 
+	`startDest`		VARCHAR(128)	NOT NULL, 
+	`currentDest`	VARCHAR(128)	NOT NULL, 
+	
+	PRIMARY KEY (`id`), 
+	FOREIGN KEY (`userId`) REFERENCES `user_accounts` (`id`)
+) ENGINE=InnoDB;
+
+
+DROP TABLE IF EXISTS `user_loginAttempts`;
+CREATE TABLE `user_loginAttempts` (
+	`username`		VARCHAR(12)		NOT NULL, 
+	`date`			DATETIME		NOT NULL, 
+	`ip`			VARCHAR(128)	NOT NULL, 
+	
+	PRIMARY KEY (`username`, `date`)
+) ENGINE=InnoDB;
+
+
 
 DELIMITER $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- Login Sessions
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `user_killLoginSession` $$ 
+CREATE PROCEDURE `user_killLoginSession` (
+	IN `in_id`		BIGINT(20),
+	IN `in_date`	DATETIME
+) 
+BEGIN 
+	UPDATE `user_sessions` 
+	SET `endDate` = `in_date` 
+	WHERE `id` = `in_sessionId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_findLoginSession` $$ 
+CREATE PROCEDURE `user_findLoginSession` (
+	IN `in_hash`		CHAR(128),
+	IN `in_ip`			VARCHAR(128),
+	IN `in_timeRange`	DATETIME
+) 
+BEGIN 
+	SELECT `id`, `secure`, `endDate` 
+	FROM `user_sessions` 
+	WHERE `hash` = `in_hash` 
+		AND `ip` = `in_ip` 
+		AND `endDate` > `in_timeRange` 
+	ORDER BY `endDate` DESC 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_loginFloodCheck` $$
+CREATE PROCEDURE `user_loginFloodCheck` (
+	IN `in_ip`		VARCHAR(128),
+	IN `in_date`	DATETIME, 
+	IN `in_max`		SMALLINT(5) UNSIGNED,
+	OUT `out_count`	SMALLINT(5) UNSIGNED
+) 
+BEGIN 
+	SELECT COUNT(`id`) INTO `out_count` 
+	FROM `user_loginAttempts` 
+	WHERE `ip` = `in_ip` 
+		AND `date` >= `in_date` 
+	ORDER BY `date` DESC 
+	LIMIT `in_max`;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_submitLoginSession` $$ 
+CREATE PROCEDURE `user_submitLoginSession` (
+	IN `in_userId`		INT(10),
+	IN `in_ip`			VARCHAR(128),
+	IN `in_sessionHash`	CHAR(128),
+	IN `in_date`		DATETIME, 
+	IN `in_endDate`		DATETIME, 
+	IN `in_mod`			VARCHAR(30),
+	IN `in_dest`		VARCHAR(128),
+	IN `in_secure`		BIT
+) 
+BEGIN 
+	INSERT INTO `user_sessions` (
+		`userId`, `ip`, `hash`, `secure`, `startDate`, `endDate`, `startMod`, `currentMod`, `startDest`, `currentDest`
+	) VALUES (
+		`in_userId`, `in_ip`, `in_sessionHash`, `in_secure`, `in_date`, `in_endDate`, `in_mod`, `in_mod`, `in_dest`, `in_dest`
+	);
+	
+	UPDATE `user_accounts` 
+	SET `lastLoginDate` = `in_date`, 
+		`currentIP` = `in_ip` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_getInfoForLogin` $$
+CREATE PROCEDURE `user_getInfoForLogin` (
+	IN `in_username`	VARCHAR(12),
+	IN `in_date`		DATETIME, 
+	IN `in_ip`			VARCHAR(128)
+)
+BEGIN
+	INSERT INTO `user_loginAttempts` (
+		`username`, `date`, `ip`
+	) VALUES (
+		`in_username`, `in_date`, `in_ip`
+	);
+	
+	SELECT `id`, `passwordHash`, `passwordSalt` 
+	FROM `user_accounts` 
+	WHERE `username` = `in_username` 
+	LIMIT 1;
+END $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- Account Creation
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `user_creationFloodCheck` $$
+CREATE PROCEDURE `user_creationFloodCheck` (
+	IN `in_ip`		VARCHAR(128),
+	IN `in_date`	DATETIME, 
+	IN `in_max`		SMALLINT(5) UNSIGNED,
+	OUT `out_count`	SMALLINT(5) UNSIGNED
+) 
+BEGIN 
+	SELECT COUNT(`id`) INTO `out_count` 
+	FROM `user_accounts` 
+	WHERE `creationIP` = `in_ip` 
+		AND `creationDate` >= `in_date` 
+	ORDER BY `creationDate` DESC 
+	LIMIT `in_max`;
+END $$
 
 
 DROP PROCEDURE IF EXISTS `user_createAccount` $$
@@ -54,23 +210,6 @@ BEGIN
 	);
 	
 	SELECT ROW_COUNT() INTO `out_returnCode`;
-END $$
-
-
-DROP PROCEDURE IF EXISTS `user_creationFloodCheck` $$
-CREATE PROCEDURE `user_creationFloodCheck` (
-	IN `in_ip`		VARCHAR(128),
-	IN `in_date`	DATETIME, 
-	IN `in_max`		SMALLINT(5) UNSIGNED,
-	OUT `out_count`	SMALLINT(5) UNSIGNED
-) 
-BEGIN 
-	SELECT COUNT(`id`) INTO `out_count` 
-	FROM `user_accounts` 
-	WHERE `creationIP` = `in_ip` 
-		AND `creationDate` >= `in_date` 
-	ORDER BY `creationDate` DESC 
-	LIMIT `in_max`;
 END $$
 
 
