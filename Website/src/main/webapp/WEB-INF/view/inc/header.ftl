@@ -24,6 +24,17 @@
 				$("#noJS").css("display", "none");
 				$("#content").css("display", "block");
 			});
+			
+			function openLoginDialog() {
+				$("#dialogOverlay").css("display", "block");
+				$("#loginDialog").css("display", "block");
+				$("#loginPageUsername").focus();
+			}
+			
+			function closeLoginDialog() {
+				$("#loginDialog").css("display", "none");
+				$("#dialogOverlay").css("display", "none");
+			}
 		</script>
 		
 		<#if header??>
@@ -47,6 +58,43 @@
 	</head>
 	
 	<body<#if angular??> ${angular}</#if>>
+		<div id="dialogOverlay"></div>
+		
+		<#if !(hideSessionButton??)>
+			<div id="loginDialog" class="dialog">
+				<div class="header">
+					<div class="close" onclick="closeLoginDialog()"></div>
+					
+					<h2>Secure Login</h2>
+				</div>
+				
+				<div class="content">
+					<form method="POST" action="${url('account', 'login.ws')}" autocomplete="off" novalidate>
+						<input type="hidden" name="mod" value="${currentMod}" />
+						<input type="hidden" name="dest" value="${currentFullDest?html}" />
+						
+						<div class="section">
+							<label for="loginPageUsername">Username:</label>
+							<input type="text" id="loginPageUsername" name="loginPageUsername" maxlength="12" />
+						</div>
+						
+						<div class="section">
+							<label for="loginPagePassword">Password:</label>
+							<input type="password" id="loginPagePassword" name="loginPagePassword" maxlength="20" />
+						</div>
+						
+						<button name="loginDialogSubmit">Submit Secure Login</button>
+						
+						<div class="box">
+							<h3>Don't have an account?</h3>
+							
+							<p class="start end">Don't have a ${gameName} account yet? <@a mod="create" dest="index.ws">Click here</@a> to visit our account creation page and get started!</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</#if>
+		
 		<#if prepend??>
 			<@prepend />
 		</#if>
@@ -76,19 +124,32 @@
 						</ul>
 					</li>
 					<li><a href="">Community</a>
-						<ul>
+						<#--<ul>
 							<li><a href="">Forums</a></li>
 							<li><a href="">Hiscores</a></li>
 							<li><a href="">Polls</a></li>
-						</ul>
+						</ul>-->
 					</li>
 					<li><a href="">Help</a></li>
 					
+					<#if loginSession.loggedIn>
+						<#if loginSession.user.staff>
+							<li><a href="">Staff</a>
+								<ul>
+									<li><a href="">Post News Article</a></li>
+									<li><a href="">User List</a></li>
+									<li><a href="">Ticket Queue</a></li>
+								</ul>
+							</li>
+						</#if>
+					</#if>
+					
 					<#if !(hideSessionButton??)>
 						<#if loginSession.loggedIn>
-							<li><@a mod="account" dest="logout.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Logout</@a></li>
+							<li><a class="logout" href="${url('account', 'logout.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}')}">Logout</a></li>
 						<#else>
-							<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>
+							<#--<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>-->
+							<li><span class="login" onclick="openLoginDialog()">Login</span></li>
 						</#if>
 					</#if>
 				</ul>

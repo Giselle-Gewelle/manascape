@@ -32,10 +32,155 @@ body {
 	p.start {
 		margin-top: 3px;
 	}
+	p.end {
+		margin-bottom: 0;
+	}
 	
 	thead {
 		td {
 			font-weight: bold;
+		}
+	}
+	
+	#dialogOverlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+		opacity: 0.6;
+		z-index: 2000;
+		display: none;
+	}
+	.dialog {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2001;
+		box-shadow: 0 0 20px #000000;
+		background: url('../img/layout/dialog/content.png') repeat-y;
+		width: 400px;
+		padding: 7px;
+		display: none;
+		
+		.header {
+			height: 44px;
+			padding: 0 10px;
+			background: url('../img/layout/dialog/header.png') repeat-y;
+			border-bottom: 1px solid #382418;
+			
+			h2 {
+				font-size: 20px;
+				color: #FFFFFF;
+				text-shadow: 1px 1px #000000;
+				font-family: "Palatino Linotype", Georgia, serif;
+				font-weight: bold;
+				padding-top: 8px;
+			}
+			
+			.close {
+				float: right;
+				height: 24px;
+				width: 24px;
+				background: transparent url('../img/layout/dialog/close.png') no-repeat 0 0;
+				cursor: pointer;
+				margin-top: 10px;
+			}
+			.close:hover {
+				background-position: 0 -24px;
+			}
+		}
+		
+		.content {
+			padding: 10px;
+			color: #000000;
+		}
+	}
+	.dialog::before, .dialog::after {
+		content: "";
+		display: block;
+		width: 414px;
+		height: 7px;
+		position: absolute;
+		left: 0;
+	}
+	.dialog::before {
+		background: url('../img/layout/dialog/top.png') no-repeat;
+		top: 0;
+	}
+	.dialog::after {
+		background: url('../img/layout/dialog/bottom.png') no-repeat;
+		bottom: 0;
+	}
+	#loginDialog {
+		.content {
+			padding: 20px 10px;
+		}
+		
+		.section {
+			margin: 0 auto 10px;
+			font-size: 0;
+			width: 356px;
+			
+			label {
+				display: inline-block;
+				width: 100px;
+				cursor: pointer;
+				font-size: 16px !important;
+				font-weight: bold;
+				color: #000000;
+			}
+			input {
+				font-size: 14px !important;
+				font-weight: bold;
+				letter-spacing: 2px;
+				width: 244px;
+				height: 22px;
+				line-height: 22px;
+				outline: none !important;
+				padding: 0 5px;
+				display: inline-block;
+				border: 1px solid #7B4F17;
+				background-color: #FFFFFF;
+				color: #000000;
+			}
+		}
+		
+		button {
+			height: 35px;
+			width: 355px;
+			margin: 15px auto;
+			display: block;
+			background: transparent url('../img/layout/dialog/loginButton.png') no-repeat;
+			font-size: 16px;
+			font-weight: bold;
+			cursor: pointer;
+			color: #FFFFFF;
+			padding: 0;
+			border: none;
+			border-collapse: collapse;
+		}
+		button:hover {
+			background-position: 0 -35px;
+		}
+		
+		.box {
+			margin-top: 10px;
+			width: 355px;
+			box-sizing: border-box;
+			background: transparent url('../img/layout/brownBg.png') repeat 0px 0px;
+			color: #FFFFFF;
+			padding: 5px;
+			margin: 0px auto;
+			border: 3px outset #382418;
+			font-size: 12px;
+			
+			h3 {
+				font-size: 14px;
+				display: block;
+			}
 		}
 	}
 
@@ -75,6 +220,7 @@ body {
 			height: 35px;
 			z-index: 1002;
 			font-weight: bold;
+			background: linear-gradient(rgb(35, 35, 35), #000000);
 			
 			div {
 				float: left;
@@ -96,15 +242,23 @@ body {
 					float: left;
 					position: relative;
 					
-					a {
+					a, span {
 						padding: 0 10px;
 						line-height: 35px;
 						height: 35px;
 						border-left: 2px solid #382418;
 						display: inline-block;
-						transition: background-color 0.25s;
+						transition: background 0.25s;
+						color: #FFFFFF;
+						cursor: pointer;
 					}
-					a:hover {
+					.login {
+						color: #90C040;
+					}
+					.logout {
+						color: rgb(200, 100, 100);
+					}
+					a:hover, span:hover {
 						text-decoration: none;
 					}
 					
@@ -119,9 +273,9 @@ body {
 								display: block;
 								height: 20px;
 								line-height: 20px;
-								font-size: 12px;
+								font-size: 11px;
 								width: 150px;
-								background: linear-gradient(rgb(50, 50, 50), #000000);
+								background-color: #000000 !important;
 								border: 2px solid #382418;
 								border-top: none;
 								padding: 0 5px;
@@ -129,7 +283,7 @@ body {
 							}
 							
 							a:hover {
-								background: rgb(35, 35, 35);
+								background: rgb(35, 35, 35) !important;
 							}
 						}
 						
@@ -140,8 +294,8 @@ body {
 				}
 				
 				li:hover {
-					a {
-						background-color: rgb(35, 35, 35);
+					a, span {
+						background-color: rgb(45, 45, 45);
 					}
 					ul {
 						visibility: visible;

@@ -19,7 +19,7 @@
 					] />
 					
 					<p><strong>${errorMessages[errorCode]}</strong></p>
-					<p><@a mod="account" dest="login.ws?mod=${toMod}&amp;dest=${toDest?html}">Click here to go back and try again.</@a>
+					<p><@a mod="account" dest="login.ws?mod=${toMod}&amp;dest=${toDest?html}">Click here to try again.</@a>
 				</#if>
 			</div>
 		<#else>
