@@ -5,11 +5,20 @@ public final class Password {
 	private String hash;
 	private String salt;
 	
+	/**
+	 * Generates a new password hash and salt for the given password string.
+	 * @param password The user's plain-text password.
+	 */
 	public Password(String password) {
 		this.salt = Hashing.generateSalt();
 		this.hash = generateHash(password);
 	}
 	
+	/**
+	 * Represents an already existing password hash + salt combination.
+	 * @param hash The password hash.
+	 * @param salt The password salt.
+	 */
 	public Password(String hash, String salt) {
 		this.hash = hash;
 		this.salt = salt;
@@ -28,7 +37,7 @@ public final class Password {
 	}
 	
 	private String generateHash(String password) {
-		return Hashing.sha512(salt + password);
+		return Hashing.sha512(Hashing.shuffle(salt) + password);
 	}
 	
 }

@@ -223,7 +223,7 @@ DROP PROCEDURE IF EXISTS `user_createAccount` $$
 CREATE PROCEDURE `user_createAccount` (
 	IN `in_username`		VARCHAR(12),
 	IN `in_passwordHash`	CHAR(128),
-	IN `in_passwordSalt`	VARCHAR(50),
+	IN `in_passwordSalt`	CHAR(128),
 	IN `in_dob`				DATE,
 	IN `in_countryCode`		TINYINT(3) UNSIGNED, 
 	IN `in_date`			DATETIME, 
