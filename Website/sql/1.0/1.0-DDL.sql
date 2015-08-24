@@ -61,8 +61,45 @@ CREATE TABLE `user_loginAttempts` (
 ) ENGINE=InnoDB;
 
 
+DROP TABLE IF EXISTS `media_news`;
+CREATE TABLE `media_news` (
+	`id`			MEDIUMINT(8)	UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
+	`authorId`		INT(10)			UNSIGNED NOT NULL, 
+	`title`			VARCHAR(50)		NOT NULL, 
+	`date`			DATETIME		NOT NULL, 
+	`category`		TINYINT(1)		UNSIGNED NOT NULL, 
+	`description`	VARCHAR(1024)	NOT NULL, 
+	`body`			TEXT			NOT NULL, 
+	`deleted`		BIT				NOT NULL DEFAULT 0,
+	
+	PRIMARY KEY (`id`), 
+	FOREIGN KEY (`authorId`) REFERENCES `user_accounts` (`id`)
+) ENGINE=InnoDB;
+
+
 
 DELIMITER $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- News Articles
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `media_getNewsFeed` $$
+CREATE PROCEDURE `media_getNewsFeed` (
+	IN `in_limit`	TINYINT(2) UNSIGNED
+) 
+BEGIN
+	SELECT `id`, `title`, `date`, `description` 
+	FROM `media_news` 
+	WHERE `deleted` = 0 
+	ORDER BY `date` DESC 
+	LIMIT `in_limit`;
+END $$
 
 
 

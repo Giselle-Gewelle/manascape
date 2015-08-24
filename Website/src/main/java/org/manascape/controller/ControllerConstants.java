@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.manascape.controller.impl.GenericPage;
 import org.manascape.controller.impl.account.CreateAccount;
 import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.controller.impl.account.sessions.Logout;
+import org.manascape.controller.impl.main.Title;
 
 public final class ControllerConstants {
 	
@@ -29,7 +29,7 @@ public final class ControllerConstants {
 		private static final long serialVersionUID = -6523666098696536388L;
 		
 		{
-			put("main title.ws", GenericPage.class);
+			put("main title.ws", Title.class);
 			
 			put("create index.ws", CreateAccount.class);
 			put("create checkusername.ws", CreateAccount.class);

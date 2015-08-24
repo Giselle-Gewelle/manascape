@@ -46,53 +46,29 @@
 				<div id="newsFeed">
 					<div id="latestNews"></div>
 					
-					<div class="article">
-						<div class="header">
-							<div class="floatRight">
-								24-Aug-2015
+					<#if newsFeed??>
+						<#list newsFeed as article>
+							<div class="article">
+								<div class="header">
+									<div class="floatRight">${article.date}</div>
+									
+									<div>${article.title}</div>
+								</div>
+								
+								<div class="body">${article.description}</div>
+								
+								<div class="more">
+									<@a mod="news" dest="article.ws?id=${article.id}">Read full article...</@a></li>
+								</div>
 							</div>
-							
-							<div>
-								Test Title 3
-							</div>
-						</div>
+						</#list>
 						
-						<div class="body">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt lorem justo, ac auctor massa feugiat non. 
-							Pellentesque vehicula pharetra felis, non tincidunt ipsum bibendum eget. Curabitur sit amet quam magna. 
-							Quisque varius, enim varius convallis dictum, tellus nisi rutrum est, eget vestibulum ipsum lectus in sem. 
-							Vestibulum posuere consectetur nibh tempus blandit. Pellentesque vulputate eleifend turpis.
+						<div id="newsArchive">
+							<@a mod="news" dest="archive.ws">Browse the News Archives</@a>
 						</div>
-						
-						<div class="more">
-							<@a mod="news" dest="article.ws?id=">Read full article...</@a></li>
-						</div>
-					</div>
-					
-					<div class="article">
-						<div class="header">
-							<div class="floatRight">
-								24-Aug-2015
-							</div>
-							
-							<div>
-								Test Title 2
-							</div>
-						</div>
-						
-						<div class="body">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt lorem justo, ac auctor massa feugiat non. 
-							Pellentesque vehicula pharetra felis, non tincidunt ipsum bibendum eget. Curabitur sit amet quam magna. 
-						</div>
-						
-						<div class="more">
-							<@a mod="news" dest="article.ws?id=">Read full article...</@a></li>
-						</div>
-					</div>
-					
-					<div id="newsArchive">
-						<@a mod="news" dest="archive.ws">Browse the News Archives</@a>
-					</div>
+					<#else>
+						<p>An error has occurred while attempting to load the news feed, please reload the page.</p>
+					</#if>
 				</div>
 			</div>
 		</div>
