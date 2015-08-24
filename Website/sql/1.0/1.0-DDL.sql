@@ -13,7 +13,7 @@ CREATE TABLE `user_accounts` (
 	`id`			INT(10)			UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
 	`username`		VARCHAR(12)		NOT NULL UNIQUE, 
 	`passwordHash`	CHAR(128)		NOT NULL, 
-	`passwordSalt`	CHAR(50)		NOT NULL, 
+	`passwordSalt`	CHAR(128)		NOT NULL, 
 	`dob`			DATE			NOT NULL, 
 	`countryCode`	TINYINT(3)		UNSIGNED NOT NULL, 
 	
@@ -73,15 +73,60 @@ DELIMITER $$
 -- -------------------------------------------------------------------------------------------
 
 
+DROP PROCEDURE IF EXISTS `user_loginFloodCheck` $$
+CREATE PROCEDURE `user_loginFloodCheck` (
+	IN `in_ip`		VARCHAR(128),
+	IN `in_date`	DATETIME, 
+	IN `in_max`		SMALLINT(5) UNSIGNED,
+	OUT `out_count`	SMALLINT(5) UNSIGNED
+) 
+BEGIN 
+	SELECT COUNT(`date`) INTO `out_count` 
+	FROM `user_loginAttempts` 
+	WHERE `ip` = `in_ip` 
+		AND `date` >= `in_date` 
+	ORDER BY `date` DESC 
+	LIMIT `in_max`;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_getLoginSessionDetails` $$ 
+CREATE PROCEDURE `user_getLoginSessionDetails` (
+	`in_sessionId`	BIGINT(20) UNSIGNED, 
+	`in_secure`		BIT,
+	`in_newMod`		VARCHAR(30),
+	`in_newDest`	VARCHAR(50),
+	`in_newHash`	CHAR(128),
+	`in_endDate`	DATETIME
+) 
+BEGIN 
+	UPDATE `user_sessions` 
+	SET `hash` = `in_newHash`, 
+		`secure` = `in_secure`, 
+		`currentMod` = `in_newMod`, 
+		`currentDest` = `in_newDest`, 
+		`endDate` = `in_endDate` 
+	WHERE `id` = `in_sessionId` 
+	LIMIT 1;
+	
+	SELECT `a`.`id`, `a`.`username`, `a`.`staff`, `a`.`fmod`, `a`.`pmod`, `a`.`currentIP`
+	FROM `user_sessions` AS `s` 
+		JOIN `user_accounts` AS `a` 
+			ON `s`.`userId` = `a`.`id` 
+	WHERE `s`.`id` = `in_sessionId` 
+	LIMIT 1;
+END $$
+
+
 DROP PROCEDURE IF EXISTS `user_killLoginSession` $$ 
 CREATE PROCEDURE `user_killLoginSession` (
-	IN `in_id`		BIGINT(20),
+	IN `in_id`		BIGINT(20) UNSIGNED,
 	IN `in_date`	DATETIME
 ) 
 BEGIN 
 	UPDATE `user_sessions` 
 	SET `endDate` = `in_date` 
-	WHERE `id` = `in_sessionId` 
+	WHERE `id` = `in_id` 
 	LIMIT 1;
 END $$
 
@@ -103,26 +148,9 @@ BEGIN
 END $$
 
 
-DROP PROCEDURE IF EXISTS `user_loginFloodCheck` $$
-CREATE PROCEDURE `user_loginFloodCheck` (
-	IN `in_ip`		VARCHAR(128),
-	IN `in_date`	DATETIME, 
-	IN `in_max`		SMALLINT(5) UNSIGNED,
-	OUT `out_count`	SMALLINT(5) UNSIGNED
-) 
-BEGIN 
-	SELECT COUNT(`id`) INTO `out_count` 
-	FROM `user_loginAttempts` 
-	WHERE `ip` = `in_ip` 
-		AND `date` >= `in_date` 
-	ORDER BY `date` DESC 
-	LIMIT `in_max`;
-END $$
-
-
 DROP PROCEDURE IF EXISTS `user_submitLoginSession` $$ 
 CREATE PROCEDURE `user_submitLoginSession` (
-	IN `in_userId`		INT(10),
+	IN `in_userId`		INT(10) UNSIGNED,
 	IN `in_ip`			VARCHAR(128),
 	IN `in_sessionHash`	CHAR(128),
 	IN `in_date`		DATETIME, 

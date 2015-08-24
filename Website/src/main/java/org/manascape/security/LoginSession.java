@@ -2,6 +2,8 @@ package org.manascape.security;
 
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.manascape.controller.Controller;
 import org.manascape.controller.impl.account.sessions.Login;
@@ -18,17 +20,21 @@ public final class LoginSession {
 	private UserSessionDTO user;
 	private boolean loggedIn;
 	
-	public LoginSession(DatabaseHandler db, Controller viewController, String hash) {
+	public LoginSession(DatabaseHandler db, Controller viewController, HttpServletRequest request) {
 		this.user = null;
 		this.loggedIn = false;
+		
+		String hash = (String) request.getSession().getAttribute("sessionHash");
 		
 		if(hash == null || hash.length() != 128) {
 			return;
 		}
 		
+		hash = Hashing.order(hash);
+		
 		int idleTime = Login.IDLE_TIME;
 		if(viewController.isSecure()) {
-			// For pages like password changing, recovery question changing, etc...
+			// For pages like password changing, account recovery, etc...
 			
 			idleTime = Login.SECURE_IDLE_TIME;
 		}
@@ -59,8 +65,10 @@ public final class LoginSession {
 			endDate = DateUtil.SQL_DATETIME_FORMAT.format(newEndCal.getTime());
 		}
 		
-		//this.user = LoginSessionDAO.getLoginSessionDetails(dbConnection, sessionCheck.getSessionId(), viewController.isSecure(), viewController.getMod(), viewController.getDest(), endDate);
+		String newHash = Hashing.generateSessionHash();
+		this.user = dao.getSession(sessionCheck.getSessionId(), newHash, viewController.isSecure(), viewController.getMod(), viewController.getDest(), endDate);
 		if(this.user != null) {
+			request.getSession().setAttribute("sessionHash", Hashing.shuffle(newHash));
 			this.loggedIn = true;
 		}
 	}

@@ -57,9 +57,15 @@
 		
 		<div id="content">
 			<div id="nav">
-				<div>
-					Not Logged In
-				</div>
+				<#if loginSession.loggedIn>
+					<div>
+						Logged in as <span class="orange">${loginSession.user.displayName}</span>
+					</div>
+				<#else>
+					<div>
+						Not Logged In
+					</div>
+				</#if>
 				
 				<ul>
 					<li><@a mod="main" dest="title.ws">Home</@a></li>
@@ -78,9 +84,12 @@
 					</li>
 					<li><a href="">Help</a></li>
 					
-					<#if hideSessionButton??>
-					<#else>
-						<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>
+					<#if !(hideSessionButton??)>
+						<#if loginSession.loggedIn>
+							<li><@a mod="account" dest="logout.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Logout</@a></li>
+						<#else>
+							<li><@a mod="account" dest="login.ws?mod=${currentMod}&amp;dest=${currentFullDest?html}">Login</@a></li>
+						</#if>
 					</#if>
 				</ul>
 			</div>

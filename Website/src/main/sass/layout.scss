@@ -29,6 +29,10 @@ body {
 		font-weight: bold;
 	}
 	
+	p.start {
+		margin-top: 3px;
+	}
+	
 	thead {
 		td {
 			font-weight: bold;
@@ -148,7 +152,6 @@ body {
 		
 		h1, h2, h3, h4, h5, h6 {
 			font-weight: bold;
-			color: #382418;
 			display: block;
 		}
 		h1 {
@@ -161,6 +164,7 @@ body {
 			background: url('../img/layout/titleScroll.png') no-repeat 0 0;
 			font-family: "Palatino Linotype", Georgia, serif;
 			font-variant: small-caps;
+			color: #382418;
 		}
 		h2 {
 			font-size: 20px;
@@ -190,6 +194,10 @@ body {
 				padding: 15px 10px;
 				position: relative;
 				z-index: 1000;
+				
+				h2, h3, h4, h5, h6 {
+					color: #382418;
+				}
 				
 				input[type="text"], input[type="password"], textarea, select {
 					border: 1px solid #7B4F17;
@@ -275,6 +283,12 @@ body {
 
 .center {
 	text-align: center;
+}
+.red {
+	color: #FF0000;
+}
+.orange {
+	color: #FFBB22;
 }
 
 #noJS {

@@ -130,28 +130,28 @@ public final class CreateAccount extends Controller {
 		String ip = getRequestIP();
 		
 		Calendar cal1 = Calendar.getInstance();
-		cal1.add(Calendar.MINUTE, 5);
+		cal1.add(Calendar.MINUTE, -5);
 		int max1 = 3;
 		if(mainDao.floodCheck(ip, cal1, max1)) {
 			return false;
 		}
 		
 		Calendar cal2 = Calendar.getInstance();
-		cal2.add(Calendar.MINUTE, 30);
+		cal2.add(Calendar.MINUTE, -30);
 		int max2 = 5;
 		if(mainDao.floodCheck(ip, cal2, max2)) {
 			return false;
 		}
 		
 		Calendar cal3 = Calendar.getInstance();
-		cal3.add(Calendar.MINUTE, 120);
+		cal3.add(Calendar.MINUTE, -120);
 		int max3 = 10;
 		if(mainDao.floodCheck(ip, cal3, max3)) {
 			return false;
 		}
 		
 		Calendar cal4 = Calendar.getInstance();
-		cal4.add(Calendar.MINUTE, 1440);
+		cal4.add(Calendar.MINUTE, -1440);
 		int max4 = 15;
 		if(mainDao.floodCheck(ip, cal4, max4)) {
 			return false;

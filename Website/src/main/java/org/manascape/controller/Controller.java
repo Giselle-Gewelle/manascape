@@ -3,15 +3,14 @@ package org.manascape.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.manascape.Config;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.http.HttpRequestType;
+import org.manascape.security.LoginSession;
+import org.manascape.util.UrlUtil;
 
 public abstract class Controller {
-
-	private static final Logger LOG = Logger.getLogger(Controller.class);
 	
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -24,7 +23,7 @@ public abstract class Controller {
 	
 	private JSONObject jsonData;
 	
-	//private LoginSession loginSession;
+	private LoginSession loginSession;
 	
 	private boolean redirecting;
 	
@@ -50,22 +49,14 @@ public abstract class Controller {
 		/*
 		 * Check for an active login session.
 		 */
-		/*this.loginSession = new LoginSession(dbConnection, this, (String) request.getSession().getAttribute("sessionHash"));
-		if(this.loginSession.isLoggedIn()) {
-			request.getSession().setAttribute("sessionHash", this.loginSession.getUser().getSessionHash());
-		} else {
-			if(this.loginRequired()) {
-				this.redirecting = true;
-				
-				try {
-					response.sendRedirect(URLUtil.getUrl("main1", "loginform.ws?mod=" + mod + "&dest=" + dest + queryString, true));
-				} catch(IOException e) {
-					LOG.error("IOException occurred while attempting to redirect user to the loginform.", e);
-				}
-			}
+		this.loginSession = new LoginSession(db, this, request);
+		if(!this.loginSession.isLoggedIn() && this.loginRequired()) {
+			this.redirecting = true;
+			UrlUtil.redirect(getResponse(), "main", "login.ws?mod=" + mod + "&dest=" + dest + queryString);
+			return;
 		}
 		
-		request.setAttribute("loginSession", loginSession);*/
+		request.setAttribute("loginSession", loginSession);
 		request.setAttribute("currentMod", mod);
 		request.setAttribute("currentDest", dest);
 		request.setAttribute("currentQuery", queryString);
@@ -156,9 +147,9 @@ public abstract class Controller {
 		return dest;
 	}
 	
-	//public final LoginSession getLoginSession() {
-	//	return loginSession;
-	//}
+	public final LoginSession getLoginSession() {
+		return loginSession;
+	}
 	
 	public final boolean isRedirecting() {
 		return redirecting;

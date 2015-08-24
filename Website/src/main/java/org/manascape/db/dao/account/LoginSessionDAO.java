@@ -2,14 +2,19 @@ package org.manascape.db.dao.account;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.manascape.controller.impl.account.sessions.Login;
+import org.manascape.db.Call;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.dto.LoginRequestDTO;
 import org.manascape.dto.SessionCheckDTO;
+import org.manascape.dto.UserSessionDTO;
 import org.manascape.util.DateUtil;
+import org.manascape.util.StringUtil;
 
 public final class LoginSessionDAO {
 	
@@ -21,11 +26,54 @@ public final class LoginSessionDAO {
 		this.db = db;
 	}
 	
+	public boolean floodCheck(String ip, Calendar threshold, int max) {
+		try {
+			Call dbCall = db.prepareCall("user_loginFloodCheck", 4)
+				.setString("ip", ip)
+				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(threshold.getTime()))
+				.setInt("max", max + 1)
+				.registerOut("count", Types.SMALLINT)
+				.execute();
+			
+			return (dbCall.getInt("count") > max);
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to fetch the number of recent login attempts for the ip [" + ip + "].", e);
+			return true;
+		}
+	}
+	
+	public UserSessionDTO getSession(int sessionId, String newHash, boolean secure, String mod, String dest, String endDate) {
+		try {
+			ResultSet result = db.prepareCall("user_getLoginSessionDetails", 6)
+				.setInt("sessionId", sessionId)
+				.setBoolean("secure", secure)
+				.setString("newMod", mod)
+				.setString("newDest", dest)
+				.setString("newHash", newHash)
+				.setString("endDate", endDate)
+				.getResults();
+			
+			if(result == null || !result.next()) {
+				return null;
+			}
+			
+			String username = result.getString("username");
+			return new UserSessionDTO(result.getInt("id"), username, StringUtil.formatUsername(username), result.getBoolean("staff"), result.getBoolean("fmod"), result.getBoolean("pmod"), 
+					result.getString("currentIP"), sessionId, newHash, secure, mod, dest);
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to fetch the user login session [" + sessionId + "].", e);
+			return null;
+		}
+	}
+	
 	public void killSession(int id) {
 		try {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MINUTE, -Login.IDLE_TIME);
+			
 			db.prepareCall("user_killLoginSession", 2)
 				.setInt("id", id)
-				.setString("endDate", DateUtil.SQL_DATETIME_FORMAT.format(new Date()))
+				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(cal.getTime()))
 				.execute();
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to kill the login session [" + id + "].", e);

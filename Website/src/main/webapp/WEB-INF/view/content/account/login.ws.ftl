@@ -15,7 +15,7 @@
 					<#assign errorMessages = [
 						"You must input a valid username.",
 						"The username or password you have entered were incorrect.",
-						"An unknown error has occurred."
+						"You have submitted too many login attempts recently, please wait a little while before submitting another one."
 					] />
 					
 					<p><strong>${errorMessages[errorCode]}</strong></p>
@@ -23,6 +23,14 @@
 				</#if>
 			</div>
 		<#else>
+			<div id="info">
+				<h2>Don't have an account?</h2>
+				<p class="start"><@a mod="create" dest="index.ws">Click here</@a> to create an account for ${gameName} and start your greatest journey!</p>
+				
+				<h2>Forgot your password?</h2>
+				<p class="start"><@a mod="password" dest="support.ws">Click here</@a> to submit a password support request to our Customer Support staff.</p>
+			</div>
+			
 			<form id="loginPage" method="POST" action="${url('account', 'login.ws')}" autocomplete="off">
 				<input type="hidden" name="mod" value="${toMod}" />
 				<input type="hidden" name="dest" value="${toDest?html}" />

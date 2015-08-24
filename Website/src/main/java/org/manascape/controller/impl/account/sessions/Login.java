@@ -63,7 +63,9 @@ public final class Login extends Controller {
 		
 		LoginSessionDAO dao = new LoginSessionDAO(getDb());
 		
-		// TODO flood check here
+		if(!floodCheck(dao)) {
+			return 2;
+		}
 		
 		LoginRequestDTO userInfo = dao.getUserInfo(username, getRequestIP());
 		if(userInfo == null) {
@@ -85,11 +87,38 @@ public final class Login extends Controller {
 		endCal.add(Calendar.MINUTE, secure ? SECURE_IDLE_TIME : IDLE_TIME);
 		
 		dao.submitLoginSession(userInfo.getUserId(), getRequestIP(), sessionHash, startCal, endCal, toMod, toDest, secure);
-		request.getSession().setAttribute("sessionHash", sessionHash);
+		request.getSession().setAttribute("sessionHash", Hashing.shuffle(sessionHash));
 		setRedirecting(true);
 		UrlUtil.redirect(getResponse(), toMod, toDest + toQuery);
 		
 		return -1;
+	}
+	
+	private boolean floodCheck(LoginSessionDAO dao) {
+		String ip = getRequestIP();
+		
+		Calendar cal1 = Calendar.getInstance();
+		cal1.add(Calendar.MINUTE, -5);
+		int max1 = 3;
+		if(dao.floodCheck(ip, cal1, max1)) {
+			return false;
+		}
+		
+		Calendar cal2 = Calendar.getInstance();
+		cal2.add(Calendar.MINUTE, -10);
+		int max2 = 5;
+		if(dao.floodCheck(ip, cal2, max2)) {
+			return false;
+		}
+		
+		Calendar cal3 = Calendar.getInstance();
+		cal3.add(Calendar.MINUTE, -15);
+		int max3 = 10;
+		if(dao.floodCheck(ip, cal3, max3)) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	private boolean validInput(String input, String regex) {

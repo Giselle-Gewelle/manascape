@@ -70,7 +70,7 @@
 				
 				<p>Usernames can be a maximum of 12 characters long and may contain letters, numbers, and spaces.</p>
 				<p>It should not contain your real name, birth date, or other personally identifiable information, to better protect your identity.</p>
-				<p>It should not be offensive or break our <@a mod="main" dest="legal/terms.ws">Terms of Use</@a>.</p>
+				<p>It should not be seriously offensive or break our <@a mod="main" dest="legal/terms.ws">Terms of Use</@a>.</p>
 				<p>The Username you choose here is used as your Character name in the game. When playing ${gameName}, first letters in usernames are capitalized. 
 					For example, the username <b>cm punk</b> would appear as <b>Cm Punk</b>.</p>
 					

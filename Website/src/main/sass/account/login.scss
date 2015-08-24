@@ -1,10 +1,8 @@
 @charset "UTF-8";
 
 #loginPage {
-	padding: 1em;
 	display: block;
 	width: 300px;
-	margin: 0 auto;
 	
 	label {
 		font-weight: bold;
@@ -12,6 +10,7 @@
 		display: block;
 		font-size: 16px;
 		width: 300px;
+		color: #382418;
 	}
 	
 	input {
@@ -27,5 +26,14 @@
 	
 	.spacer {
 		height: 1em;
+	}
+}
+
+#info {
+	float: right;
+	width: 50%;
+	
+	h2 {
+		font-size: 16px !important;
 	}
 }

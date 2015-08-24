@@ -8,6 +8,7 @@ import java.util.Map;
 import org.manascape.controller.impl.GenericPage;
 import org.manascape.controller.impl.account.CreateAccount;
 import org.manascape.controller.impl.account.sessions.Login;
+import org.manascape.controller.impl.account.sessions.Logout;
 
 public final class ControllerConstants {
 	
@@ -35,6 +36,7 @@ public final class ControllerConstants {
 			put("create submit.ws", CreateAccount.class);
 			
 			put("account login.ws", Login.class);
+			put("account logout.ws", Logout.class);
 		}
 		
 	};
