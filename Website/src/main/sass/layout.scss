@@ -192,9 +192,9 @@ body {
 		
 		.frame, #nav, .location {
 			border: 2px solid #382418;
+			box-shadow: 0 0 0 2px #000000;
 			background-color: #000000;
 			position: relative;
-			box-shadow: 0 0 0 2px #000000;
 		}
 		.frame {
 			padding: 5px;
@@ -352,6 +352,10 @@ body {
 				h2, h3, h4, h5, h6 {
 					color: #382418;
 				}
+				h2.large {
+					font-size: 24px;
+					font-family: "Palatino Linotype", Georgia, serif;
+				}
 				
 				input[type="text"], input[type="password"], textarea, select {
 					border: 1px solid #7B4F17;
@@ -425,13 +429,12 @@ body {
 		.scroll::after {
 			background: url('../img/layout/scrollBottom.png') no-repeat 0 0;
 		}
-	}
 	
-	#footer {
-		clear: both;
-		font-size: 11px;
-		text-align: center;
-		margin-top: 15px;
+		#footer {
+			font-size: 11px;
+			margin: 25px auto 0;
+			padding: 4px;
+		}
 	}
 }
 
@@ -443,6 +446,15 @@ body {
 }
 .orange {
 	color: #FFBB22;
+}
+.clear {
+	clear: both;
+}
+.floatRight {
+	float: right;
+}
+.right {
+	text-align: right;
 }
 
 #noJS {
