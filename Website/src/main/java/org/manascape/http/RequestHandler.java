@@ -129,7 +129,7 @@ public final class RequestHandler {
 					
 					String page = dest + ".ftl";
 					if(controller.getActualPage() != null) {
-						page = controller.getActualPage();
+						page = controller.getActualPage() + ".ftl";
 					}
 					
 					char s = '/';

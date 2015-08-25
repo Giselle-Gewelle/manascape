@@ -10,6 +10,7 @@ import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.controller.impl.account.sessions.Logout;
 import org.manascape.controller.impl.main.Title;
 import org.manascape.controller.impl.media.News;
+import org.manascape.controller.impl.staff.impl.StaffNews;
 
 public final class ControllerConstants {
 	
@@ -18,6 +19,7 @@ public final class ControllerConstants {
 		private static final long serialVersionUID = 1620735289983287126L;
 
 		{
+			add("staff");
 			add("password");
 			add("recovery");
 			add("offense");
@@ -41,6 +43,10 @@ public final class ControllerConstants {
 			
 			put("news article.ws", News.class);
 			put("news archive.ws", News.class);
+			
+			put("staff newspost.ws", StaffNews.class);
+			put("staff newsedit.ws", StaffNews.class);
+			put("staff newsdelete.ws", StaffNews.class);
 		}
 		
 	};

@@ -52,7 +52,7 @@ public abstract class Controller {
 		this.loginSession = new LoginSession(db, this, request);
 		if(!this.loginSession.isLoggedIn() && this.loginRequired()) {
 			this.redirecting = true;
-			UrlUtil.redirect(getResponse(), "main", "login.ws?mod=" + mod + "&dest=" + dest + queryString);
+			UrlUtil.redirect(getResponse(), "account", "login.ws?mod=" + mod + "&dest=" + dest + queryString);
 			return;
 		}
 		

@@ -53,6 +53,10 @@
 			</#list>
 		</#if>
 		
+		<#if style??>
+			<@style />
+		</#if>
+		
 		<link rel="icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
 		<link rel="shortcut icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
 	</head>
@@ -134,11 +138,10 @@
 					
 					<#if loginSession.loggedIn>
 						<#if loginSession.user.staff>
-							<li><a href="">Staff</a>
+							<li><@a mod="staff" dest="center.ws">Staff</@a>
 								<ul>
-									<li><a href="">Post News Article</a></li>
-									<li><a href="">User List</a></li>
-									<li><a href="">Ticket Queue</a></li>
+									<li><@a mod="staff" dest="newspost.ws">Post News Article</@a></li>
+									<li><@a mod="staff" dest="userlist.ws">User List</@a></li>
 								</ul>
 							</li>
 						</#if>
