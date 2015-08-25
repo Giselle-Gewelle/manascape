@@ -14,6 +14,10 @@
 	<#return string?replace("\n", "<br />") />
 </#function>
 
+<#function doubleBreaksToParagraphs string>
+	<#return string?replace("\n\n", "</p><p>") />
+</#function>
+
 <#macro a mod dest><a href="${url(mod, dest)}"><#nested /></a></#macro>
 
 <#macro location>

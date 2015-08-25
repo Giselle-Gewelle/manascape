@@ -9,6 +9,7 @@ import org.manascape.controller.impl.account.CreateAccount;
 import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.controller.impl.account.sessions.Logout;
 import org.manascape.controller.impl.main.Title;
+import org.manascape.controller.impl.media.News;
 
 public final class ControllerConstants {
 	
@@ -37,6 +38,9 @@ public final class ControllerConstants {
 			
 			put("account login.ws", Login.class);
 			put("account logout.ws", Logout.class);
+			
+			put("news article.ws", News.class);
+			put("news archive.ws", News.class);
 		}
 		
 	};

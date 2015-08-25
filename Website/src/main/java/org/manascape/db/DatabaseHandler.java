@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 public final class DatabaseHandler {
 	
+	public static final int 
+		MAX_VALUE_MEDIUMINT = 16777215;
+	
 	private final Connection connection;
 	
 	public DatabaseHandler() {

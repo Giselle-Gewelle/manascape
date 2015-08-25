@@ -67,7 +67,7 @@ CREATE TABLE `media_news` (
 	`authorId`		INT(10)			UNSIGNED NOT NULL, 
 	`title`			VARCHAR(50)		NOT NULL, 
 	`date`			DATETIME		NOT NULL, 
-	`category`		TINYINT(1)		UNSIGNED NOT NULL, 
+	`category`		TINYINT(2)		UNSIGNED NOT NULL, 
 	`description`	VARCHAR(1024)	NOT NULL, 
 	`body`			TEXT			NOT NULL, 
 	`deleted`		BIT				NOT NULL DEFAULT 0,
@@ -87,6 +87,32 @@ DELIMITER $$
 -- News Articles
 --
 -- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `media_getNewsArchive` $$
+CREATE PROCEDURE `media_getNewsArchive` (
+	IN `in_category`	TINYINT(2)
+) 
+BEGIN 
+	SELECT `id`, `title`, `date`, `category` 
+	FROM `media_news` 
+	WHERE ((`in_category` = 0) OR (`in_category` = `category`)) 
+		AND `deleted` = 0 
+	ORDER BY `date` DESC;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_getNewsArticle` $$
+CREATE PROCEDURE `media_getNewsArticle` (
+	IN `in_id`	MEDIUMINT(8) UNSIGNED
+) 
+BEGIN 
+	SELECT `title`, `date`, `category`, `body` 
+	FROM `media_news` 
+	WHERE `id` = `in_id` 
+		AND `deleted` = 0 
+	LIMIT 1;
+END $$
 
 
 DROP PROCEDURE IF EXISTS `media_getNewsFeed` $$
