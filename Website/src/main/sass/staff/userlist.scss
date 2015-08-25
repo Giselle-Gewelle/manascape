@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+table {
+	border: 1px solid #7B4F17;
+	border-collapse: collapse;
+	width: 100%;
+	margin: 1em 0;
+	
+	thead td {
+		background-color: #C9AD7A;
+		font-weight: bold;
+		font-size: 14px;
+	}
+	
+	tbody td {
+		background-color: #D8CDA0;
+	}
+	
+	td {
+		vertical-align: bottom;
+		padding: 3px;
+		border-bottom: 1px solid #7B4F17;
+	}
+}
+
+form {
+	.inlineSection {
+		display: inline-block;
+		width: 150px;
+	}
+}
+
+#pageNav {
+	margin-top: 1em;
+}

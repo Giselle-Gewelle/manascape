@@ -18,6 +18,10 @@ public final class DatabaseHandler {
 		return new Call(connection, statementName, paramCount);
 	}
 	
+	public Statement prepareStmt(String sql) throws SQLException {
+		return new Statement(connection, sql);
+	}
+	
 	public void close() {
 		MSDataSource.closeConnection(connection);
 	}
