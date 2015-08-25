@@ -1,11 +1,18 @@
 @charset "UTF-8";
 
+#categoryList {
+	border-bottom: 1px solid #7B4F17;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
 #article {
 	.header {
 		border-bottom: 1px solid #7B4F17;
-		position: relative;
 		padding-bottom: 5px;
 		margin-bottom: 5px;
+		position: relative;
 		
 		strong {
 			position: absolute;
@@ -17,4 +24,33 @@
 	.body {
 		text-align: justify;
 	}
+}
+
+#archive {		
+	table {
+		border: 1px solid #7B4F17;
+		border-collapse: collapse;
+		width: 100%;
+		margin: 1em 0;
+		
+		thead td {
+			background-color: #C9AD7A;
+			font-weight: bold;
+			font-size: 14px;
+		}
+		
+		tbody td {
+			background-color: #D8CDA0;
+		}
+		
+		td {
+			vertical-align: bottom;
+			padding: 3px;
+			border-bottom: 1px solid #7B4F17;
+		}
+	}
+}
+
+#noNews {
+	margin-top: 2em;
 }

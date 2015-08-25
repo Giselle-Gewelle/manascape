@@ -13,7 +13,7 @@ import org.manascape.dto.NewsItemDTO;
 import org.manascape.util.DateUtil;
 
 /**
- * Data Access Object for the news system.
+ * Data Access Object for website news.
  * @author DTB
  */
 public final class NewsDAO {

@@ -1,14 +1,18 @@
 <#assign cssImports = [ "main/title" ] />
 <#include "../../inc/header.ftl" />
 
+<#macro nav mod dest icon>
+	<li style="list-style-image: url('${url("main", "resources/img/content/main/title/bullets/${icon}.png")}');"><a href="${url(mod, dest)}"><#nested /></a></li>
+</#macro>
+
 <div id="titlePage">
 	<div id="left">
 		<fieldset>
 			<legend>${gameName}</legend>
 			
 			<ul>
-				<li><@a mod="game" dest="worldlist.ws">Play ${gameName}</@a></li>
-				<li><@a mod="create" dest="index.ws">Create a Free Account</@a></li>
+				<@nav mod="create" dest="index.ws" icon="create">Create a Free Account</@nav>
+				<@nav mod="news" dest="archive.ws" icon="news">Latest News</@nav>
 			</ul>
 		</fieldset>
 		
@@ -16,7 +20,7 @@
 			<legend>Account Management</legend>
 			
 			<ul>
-				<li><@a mod="password" dest="changepass.ws">Change Your Password</@a></li>
+				<@nav mod="password" dest="changepass.ws" icon="changepass">Change Your Password</@nav>
 			</ul>
 		</fieldset>
 		
@@ -26,8 +30,8 @@
 			<div>Random Poll?! YOU decide!</div>
 			
 			<ul>
-				<li><@a mod="poll" dest="latest.ws">Vote in this Poll</@a></li>
-				<li><@a mod="poll" dest="archive.ws">Poll Archives</@a></li>
+				<@nav mod="poll" dest="latest.ws" icon="pollvote">Vote in this Poll</@nav>
+				<@nav mod="poll" dest="archive.ws" icon="pollarchive">Poll Archives</@nav>
 			</ul>
 		</fieldset>
 		
@@ -35,7 +39,7 @@
 			<legend>Community</legend>
 			
 			<ul>
-				<li><@a mod="forum" dest="forums.ws">Official Forums</@a></li>
+				<@nav mod="forum" dest="forums.ws" icon="forums">Official Forums</@nav>
 			</ul>
 		</fieldset>
 	</div>

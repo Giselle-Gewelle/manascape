@@ -1,11 +1,13 @@
 package org.manascape.controller.impl.media;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.manascape.controller.Controller;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.db.dao.media.NewsDAO;
+import org.manascape.dto.NewsArchiveDTO;
 import org.manascape.dto.NewsItemDTO;
 import org.manascape.http.RequestHandler;
 
@@ -17,6 +19,7 @@ public final class News extends Controller {
 	
 	public enum NewsCategory {
 		
+		ALL_CATEGORIES(0, "All Categories"),
 		GAME(1, "Game"),
 		WEBSITE(2, "Website"),
 		CUSTOMER_SUPPORT(3, "Customer Support"),
@@ -37,6 +40,10 @@ public final class News extends Controller {
 		
 		public String getName() {
 			return name;
+		}
+		
+		public String getIcon() {
+			return name().toLowerCase();
 		}
 		
 		// String key, because Freemarker would be unhappy if it were an integer.
@@ -69,6 +76,23 @@ public final class News extends Controller {
 			case "article.ws":
 				prepareArticle();
 				break;
+			case "archive.ws":
+				prepareArchive();
+				break;
+		}
+	}
+	
+	private void prepareArchive() {
+		int category = RequestHandler.getIntParam(getRequest(), "cat");
+		if(category < 0 || NewsCategory.forId(category) == null) {
+			category = 0;
+		}
+		
+		getRequest().setAttribute("category", NewsCategory.forId(category));
+		
+		List<NewsArchiveDTO> newsArchive = dao.getNewsArchive(category);
+		if(newsArchive != null && newsArchive.size() > 0) {
+			getRequest().setAttribute("newsArchive", newsArchive);
 		}
 	}
 	
