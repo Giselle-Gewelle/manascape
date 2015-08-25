@@ -16,6 +16,7 @@ import org.manascape.dto.NewsFieldDTO;
 import org.manascape.dto.NewsItemDTO;
 import org.manascape.dto.UserSessionDTO;
 import org.manascape.util.DateUtil;
+import org.manascape.util.StringUtil;
 
 /**
  * Data Access Object for website news.
@@ -121,9 +122,11 @@ public final class NewsDAO {
 				return null;
 			}
 			
-			// TODO last editor
+			String lastEditor = result.getString("lastEditor");
+			Date lastEditDate = result.getTimestamp("lastEditDate");
 			return new NewsItemDTO(result.getInt("id"), result.getString("title"), DateUtil.LONG_NEWS_FORMAT.format(result.getTimestamp("date")), 
-					result.getInt("category"), result.getString("description"), result.getString("body"), null, null);
+					result.getInt("category"), result.getString("description"), result.getString("body"), 
+					lastEditor == null ? null : StringUtil.formatUsername(result.getString("lastEditor")), lastEditDate == null ? null : DateUtil.SHORT_DATETIME_FORMAT.format(lastEditDate));
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to fetch the news article with the id [" + id + "].", e);
 			return null;

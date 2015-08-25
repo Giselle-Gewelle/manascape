@@ -9,6 +9,7 @@ import org.manascape.dto.NewsFieldDTO;
 import org.manascape.dto.NewsItemDTO;
 import org.manascape.http.HttpRequestType;
 import org.manascape.http.RequestHandler;
+import org.manascape.util.UrlUtil;
 
 /**
  * Content controller all staff center "news" pages.
@@ -20,7 +21,7 @@ public final class StaffNews extends StaffPage {
 	private NewsErrorDTO errors;
 	
 	private NewsDAO dao;
-	private NewsItemDTO item;
+	private NewsItemDTO article;
 	
 	@Override
 	public void init() {
@@ -37,6 +38,36 @@ public final class StaffNews extends StaffPage {
 				prepareNewsArticle();
 				setFields();
 				break;
+			case "newsdelete.ws":
+				prepareNewsDelete();
+				break;
+		}
+	}
+	
+	private void prepareNewsDelete() {
+		int id = RequestHandler.getIntParam(getRequest(), "id");
+		if(id >= 1 && id <= DatabaseHandler.MAX_VALUE_MEDIUMINT) {
+			article = dao.getNewsArticle(id);
+			if(article != null) {
+				getRequest().setAttribute("article", article);
+			}
+		}
+		
+		if(article == null) {
+			return;
+		}
+		
+		String cancel = getRequest().getParameter("inputNo");
+		if(cancel != null) {
+			setRedirecting(true);
+			UrlUtil.redirect(getResponse(), "news", "article.ws?id=" + article.getId());
+			return;
+		}
+		
+		String submit = getRequest().getParameter("inputYes");
+		if(submit != null) {
+			dao.deleteNewsArticle(article.getId());
+			getRequest().setAttribute("deleted", true);
 		}
 	}
 	
@@ -48,13 +79,13 @@ public final class StaffNews extends StaffPage {
 		
 		int id = RequestHandler.getIntParam(getRequest(), "id");
 		if(id >= 1 && id <= DatabaseHandler.MAX_VALUE_MEDIUMINT) {
-			item = dao.getNewsArticle(id);
-			if(item != null) {
+			article = dao.getNewsArticle(id);
+			if(article != null) {
 				getRequest().setAttribute("update", id);
-				fields.setTitle(item.getTitle());
-				fields.setCategory(String.valueOf(item.getCategory()));
-				fields.setDescription(item.getDescription());
-				fields.setBody(item.getBody());
+				fields.setTitle(article.getTitle());
+				fields.setCategory(String.valueOf(article.getCategory()));
+				fields.setDescription(article.getDescription());
+				fields.setBody(article.getBody());
 			}
 		}
 		
@@ -77,11 +108,11 @@ public final class StaffNews extends StaffPage {
 			
 			if(returnType) {
 				int newArticleId = -1;
-				if(item == null) {
+				if(article == null) {
 					newArticleId = dao.postNewsArticle(fields);
 				} else {
-					dao.updateNewsArticle(item.getId(), fields);
-					newArticleId = item.getId();
+					dao.updateNewsArticle(article.getId(), fields);
+					newArticleId = article.getId();
 				}
 				
 				if(newArticleId < 1) {

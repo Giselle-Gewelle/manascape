@@ -171,7 +171,7 @@ CREATE PROCEDURE `media_getNewsArticle` (
 	IN `in_id`	MEDIUMINT(8) UNSIGNED
 ) 
 BEGIN 
-	SELECT `id`, `title`, `date`, `category`, `description`, `body` 
+	SELECT `id`, `title`, `date`, `category`, `description`, `body`, `lastEditor`, `lastEditDate` 
 	FROM `media_news` 
 	WHERE `id` = `in_id` 
 		AND `deleted` = 0 

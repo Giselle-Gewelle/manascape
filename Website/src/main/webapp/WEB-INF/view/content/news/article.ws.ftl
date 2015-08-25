@@ -24,6 +24,12 @@
 			
 			<#if loginSession.loggedIn>
 				<#if loginSession.user.staff>
+					<#if article.lastEditor??>
+						<hr />
+						
+						Last edited on <strong>${article.lastEditDate}</strong> by <strong>${article.lastEditor}</strong>
+					</#if>
+					
 					<hr />
 					
 					<@a mod="staff" dest="newsarticle.ws?id=${article.id}">Edit Article</@a> - <@a mod="staff" dest="newsdelete.ws?id=${article.id}">Delete Article</@a>

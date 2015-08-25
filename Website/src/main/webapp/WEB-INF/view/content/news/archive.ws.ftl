@@ -35,7 +35,7 @@
 					<tbody>
 						<#list newsArchive as article>
 							<tr>
-								<td><@a mod="news" dest="artchive.ws?cat=${article.category}"><img src="${url('main', 'resources/img/content/media/news/${categories[article.category?string].getIcon()}.png')}" alt="" /> ${categories[article.category?string].getName()}</@a></td>
+								<td><@a mod="news" dest="archive.ws?cat=${article.category}"><img src="${url('main', 'resources/img/content/media/news/${categories[article.category?string].getIcon()}.png')}" alt="" /> ${categories[article.category?string].getName()}</@a></td>
 								<td><@a mod="news" dest="article.ws?id=${article.id}">${article.title}</@a></td>
 								<td>${article.date}</td>
 							</tr>
