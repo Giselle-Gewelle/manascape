@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.dto.UserListDTO;
 import org.manascape.dto.UserListUserDTO;
+import org.manascape.dto.UserSessionDTO;
 import org.manascape.util.DateUtil;
 import org.manascape.util.StringUtil;
 
@@ -22,6 +23,19 @@ public final class UserListDAO {
 	
 	public UserListDAO(DatabaseHandler db) {
 		this.db = db;
+	}
+	
+	// TODO replace with UserDetailsDTO
+	public UserSessionDTO getUser(int userId) {
+		try {
+			db.prepareCall("staff_getUserDetails", 1);
+			
+			
+			return null;
+		} catch(SQLException e){
+			LOG.error("SQLException occurred while attempting to fetch the details for the user [" + userId + "].", e);
+			return null;
+		}
 	}
 	
 	public UserListDTO getUserList(int page, String usernameSearch, String ipSearch, int limit) {

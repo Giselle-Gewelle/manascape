@@ -123,20 +123,24 @@
 				
 				<ul>
 					<li><@a mod="main" dest="title.ws">Home</@a></li>
-					<li><a href="">Play</a></li>
+					
+					<#--<li><a href="">Play</a></li>-->
+					
 					<li><a href="">Account</a>
 						<ul>
 							<li><@a mod="create" dest="index.ws">Create an Account</@a></li>
 						</ul>
 					</li>
+					
 					<li><a href="">Community</a>
-						<#--<ul>
+						<ul>
 							<li><a href="">Forums</a></li>
-							<li><a href="">Hiscores</a></li>
-							<li><a href="">Polls</a></li>
-						</ul>-->
+							<#--<li><a href="">Hiscores</a></li>
+							<li><a href="">Polls</a></li>-->
+						</ul>
 					</li>
-					<li><a href="">Help</a></li>
+					
+					<#--<li><a href="">Help</a></li>-->
 					
 					<#if loginSession.loggedIn>
 						<#if loginSession.user.staff>

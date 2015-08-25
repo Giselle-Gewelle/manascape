@@ -93,7 +93,16 @@ DELIMITER $$
 -- -------------------------------------------------------------------------------------------
 
 
--- here
+DROP PROCEDURE IF EXISTS `staff_getUserDetails` $$
+CREATE PROCEDURE `staff_getUserDetails` (
+	IN `in_id`	INT(10) UNSIGNED
+) 
+BEGIN 
+	SELECT `id`, `username`, `creationDate`, `creationIP`, `currentIP`, `staff`, `fmod`, `pmod`, `supportDisabled` 
+	FROM `user_accounts`
+	WHERE `id` = `in_id`
+	LIMIT 1;
+END $$
 
 
 

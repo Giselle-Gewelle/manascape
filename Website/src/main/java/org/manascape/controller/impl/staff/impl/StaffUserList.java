@@ -30,7 +30,14 @@ public final class StaffUserList extends StaffPage {
 			case "userlist.ws":
 				prepareUserList();
 				break;
+			case "userdetails.ws":
+				prepareUserDetails();
+				break;
 		}
+	}
+	
+	private void prepareUserDetails() {
+		
 	}
 	
 	private void prepareUserList() {

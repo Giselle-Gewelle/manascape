@@ -49,6 +49,7 @@ public final class ControllerConstants {
 			put("staff newsdelete.ws", StaffNews.class);
 			
 			put("staff userlist.ws", StaffUserList.class);
+			put("staff userdetails.ws", StaffUserList.class);
 		}
 		
 	};
