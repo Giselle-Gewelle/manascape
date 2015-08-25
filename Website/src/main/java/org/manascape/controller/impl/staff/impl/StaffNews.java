@@ -1,12 +1,26 @@
 package org.manascape.controller.impl.staff.impl;
 
+import org.manascape.controller.impl.media.News.NewsCategory;
 import org.manascape.controller.impl.staff.StaffPage;
+import org.manascape.db.DatabaseHandler;
+import org.manascape.db.dao.media.NewsDAO;
+import org.manascape.dto.NewsErrorDTO;
+import org.manascape.dto.NewsFieldDTO;
+import org.manascape.dto.NewsItemDTO;
+import org.manascape.http.HttpRequestType;
+import org.manascape.http.RequestHandler;
 
 /**
  * Content controller all staff center "news" pages.
  * @author DTB
  */
 public final class StaffNews extends StaffPage {
+	
+	private NewsFieldDTO fields;
+	private NewsErrorDTO errors;
+	
+	private NewsDAO dao;
+	private NewsItemDTO item;
 	
 	@Override
 	public void init() {
@@ -16,12 +30,215 @@ public final class StaffNews extends StaffPage {
 			return;
 		}
 		
+		dao = new NewsDAO(getDb(), getLoginSession().getUser());
 		
+		switch(getDest()) {
+			case "newsarticle.ws":
+				prepareNewsArticle();
+				setFields();
+				break;
+		}
+	}
+	
+	private void prepareNewsArticle() {
+		getRequest().setAttribute("categories", NewsCategory.getCategories());
+		
+		fields = new NewsFieldDTO("", "", "", "");
+		errors = new NewsErrorDTO(null, false, null, null);
+		
+		int id = RequestHandler.getIntParam(getRequest(), "id");
+		if(id >= 1 && id <= DatabaseHandler.MAX_VALUE_MEDIUMINT) {
+			item = dao.getNewsArticle(id);
+			if(item != null) {
+				getRequest().setAttribute("update", id);
+				fields.setTitle(item.getTitle());
+				fields.setCategory(String.valueOf(item.getCategory()));
+				fields.setDescription(item.getDescription());
+				fields.setBody(item.getBody());
+			}
+		}
+		
+		if(getRequestType().equals(HttpRequestType.POST)) {
+			boolean returnType = true;
+			
+			if(!validateTitle()) {
+				returnType = false;
+			}
+			if(!validateCategory()) {
+				errors.setCategory(true);
+				returnType = false;
+			}
+			if(!validateDescription()) {
+				returnType = false;
+			}
+			if(!validateBody()) {
+				returnType = false;
+			}
+			
+			if(returnType) {
+				int newArticleId = -1;
+				if(item == null) {
+					newArticleId = dao.postNewsArticle(fields);
+				} else {
+					dao.updateNewsArticle(item.getId(), fields);
+					newArticleId = item.getId();
+				}
+				
+				if(newArticleId < 1) {
+					getRequest().setAttribute("postError", true);
+				} else {
+					getRequest().setAttribute("newArticleId", newArticleId);
+				}
+			}
+		}
+	}
+	
+	private boolean validateBody() {
+		String body = getRequest().getParameter("inputBody");
+		if(body == null) {
+			errors.setBody("Please input a valid article body:");
+			return false;
+		}
+		
+		body = body.trim();
+		if(body.length() < 1 || body.length() > 65535) {
+			errors.setBody("Article bodies must be between 1 and 65535 characters in length:");
+			return false;
+		}
+		
+		fields.setBody(body);
+		return true;
+	}
+	
+	private boolean validateDescription() {
+		String desc = getRequest().getParameter("inputDescription");
+		if(desc == null) {
+			errors.setDescription("Please input a valid description:");
+			return false;
+		}
+		
+		desc = desc.trim();
+		if(desc.length() < 1 || desc.length() > 1024) {
+			errors.setDescription("Descriptions must be between 1 and 1024 characters in length:");
+			return false;
+		}
+		
+		fields.setDescription(desc);
+		return true;
+	}
+	
+	private boolean validateCategory() {
+		String category = getRequest().getParameter("inputCategory");
+		if(category == null) {
+			return false;
+		}
+		
+		try {
+			int catInt = Integer.parseInt(category);
+			if(catInt < 1) {
+				return false;
+			}
+			if(NewsCategory.forId(catInt) == null) {
+				return false;
+			}
+		} catch(NumberFormatException e) {
+			return false;
+		}
+		
+		fields.setCategory(category);
+		return true;
+	}
+	
+	private boolean validateTitle() {
+		String title = getRequest().getParameter("inputTitle");
+		if(title == null) {
+			errors.setTitle("Please input a valid title:");
+			return false;
+		}
+		
+		title = title.trim();
+		if(title.length() < 1 || title.length() > 50) {
+			errors.setTitle("Titles must be between 1 and 50 characters in length:");
+			return false;
+		}
+		
+		fields.setTitle(title);
+		return true;
+	}
+	
+	private void setFields() {
+		getRequest().setAttribute("fieldValues", fields);
+		getRequest().setAttribute("errors", errors);
 	}
 	
 	@Override
 	public String getActualPage() {
 		return getDest().replace("news", "news/");
+	}
+	
+	
+	class NewsFields {
+		
+		protected String title;
+		protected String category;
+		protected String description;
+		protected String body;
+		
+		protected NewsFields() {
+			title = "";
+			category = "";
+			description = "";
+			body = "";
+		}
+		
+		public String getTitle() {
+			return title;
+		}
+		
+		public String getCategory() {
+			return category;
+		}
+		
+		public String getDescription() {
+			return description;
+		}
+		
+		public String getBody() {
+			return body;
+		}
+		
+	}
+	
+	class NewsErrors {
+		
+		protected String title;
+		protected boolean category;
+		protected String description;
+		protected String body;
+		
+		protected NewsErrors() {
+			title = null;
+			category = false;
+			description = null;
+			body = null;
+		}
+		
+		public String getTitle() {
+			return title;
+		}
+		
+		public boolean getCategory() {
+			return category;
+		}
+		
+		public String getDescription() {
+			return description;
+		}
+		
+		public String getBody() {
+			return body;
+		}
+		
 	}
 	
 }

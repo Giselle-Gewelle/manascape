@@ -357,6 +357,12 @@ body {
 					font-family: "Palatino Linotype", Georgia, serif;
 				}
 				
+				label, .label {
+					font-weight: bold;
+				}
+				label {
+					cursor: pointer;
+				}
 				input[type="text"], input[type="password"], textarea, select {
 					border: 1px solid #7B4F17;
 					background-color: #D8CDA0;
@@ -372,6 +378,10 @@ body {
 					cursor: pointer;
 					border-radius: 5px;
 					padding: 4px 10px;
+					transition: background-color 0.2s;
+				}
+				button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+					background-color: #C9AD7A;
 				}
 				
 				.error {
@@ -388,7 +398,7 @@ body {
 					padding: 0;
 					height: 1px;
 					width: 100%;
-					background-color: #382418;
+					background-color: #7B4F17;
 					border: none;
 					border-collapse: collapse;
 				}

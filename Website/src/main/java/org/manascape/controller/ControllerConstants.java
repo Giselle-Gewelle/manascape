@@ -44,8 +44,7 @@ public final class ControllerConstants {
 			put("news article.ws", News.class);
 			put("news archive.ws", News.class);
 			
-			put("staff newspost.ws", StaffNews.class);
-			put("staff newsedit.ws", StaffNews.class);
+			put("staff newsarticle.ws", StaffNews.class);
 			put("staff newsdelete.ws", StaffNews.class);
 		}
 		

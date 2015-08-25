@@ -21,6 +21,14 @@
 			<div class="body">
 				<p>${doubleBreaksToParagraphs(article.body)}</p>
 			</div>
+			
+			<#if loginSession.loggedIn>
+				<#if loginSession.user.staff>
+					<hr />
+					
+					<@a mod="staff" dest="newsarticle.ws?id=${article.id}">Edit Article</@a> - <@a mod="staff" dest="newsdelete.ws?id=${article.id}">Delete Article</@a>
+				</#if>
+			</#if>
 		</div>
 	</div>
 	

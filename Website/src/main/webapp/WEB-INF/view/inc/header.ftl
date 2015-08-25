@@ -54,7 +54,9 @@
 		</#if>
 		
 		<#if style??>
-			<@style />
+			<style type="text/css">
+				<@style />
+			</style>
 		</#if>
 		
 		<link rel="icon" type="image/x-icon" href="${url('main', 'favicon.ico')}" />
@@ -140,7 +142,7 @@
 						<#if loginSession.user.staff>
 							<li><@a mod="staff" dest="center.ws">Staff</@a>
 								<ul>
-									<li><@a mod="staff" dest="newspost.ws">Post News Article</@a></li>
+									<li><@a mod="staff" dest="newsarticle.ws">Post News Article</@a></li>
 									<li><@a mod="staff" dest="userlist.ws">User List</@a></li>
 								</ul>
 							</li>

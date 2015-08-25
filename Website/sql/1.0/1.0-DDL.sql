@@ -10,22 +10,24 @@ USE `manascape`;
 
 DROP TABLE IF EXISTS `user_accounts`;
 CREATE TABLE `user_accounts` (
-	`id`			INT(10)			UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
-	`username`		VARCHAR(12)		NOT NULL UNIQUE, 
-	`passwordHash`	CHAR(128)		NOT NULL, 
-	`passwordSalt`	CHAR(128)		NOT NULL, 
-	`dob`			DATE			NOT NULL, 
-	`countryCode`	TINYINT(3)		UNSIGNED NOT NULL, 
+	`id`				INT(10)			UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
+	`username`			VARCHAR(12)		NOT NULL UNIQUE, 
+	`passwordHash`		CHAR(128)		NOT NULL, 
+	`passwordSalt`		CHAR(128)		NOT NULL, 
+	`dob`				DATE			NOT NULL, 
+	`countryCode`		TINYINT(3)		UNSIGNED NOT NULL, 
 	
-	`creationDate`	DATETIME		NOT NULL, 
-	`creationIP`	VARCHAR(128)	NOT NULL,
+	`creationDate`		DATETIME		NOT NULL, 
+	`creationIP`		VARCHAR(128)	NOT NULL,
 	
-	`staff`			BIT				NOT NULL DEFAULT 0, 
-	`pmod`			BIT				NOT NULL DEFAULT 0, 
-	`fmod`			BIT				NOT NULL DEFAULT 0,
+	`staff`				BIT				NOT NULL DEFAULT 0, 
+	`pmod`				BIT				NOT NULL DEFAULT 0, 
+	`fmod`				BIT				NOT NULL DEFAULT 0,
 	
-	`lastLoginDate`	DATETIME		NULL, 
-	`currentIP`		VARCHAR(128)	NOT NULL, 
+	`lastLoginDate`		DATETIME		NULL, 
+	`currentIP`			VARCHAR(128)	NOT NULL, 
+	
+	`supportDisabled`	BIT			NOT NULL DEFAULT 0,
 	
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
@@ -71,6 +73,8 @@ CREATE TABLE `media_news` (
 	`description`	VARCHAR(1024)	NOT NULL, 
 	`body`			TEXT			NOT NULL, 
 	`deleted`		BIT				NOT NULL DEFAULT 0,
+	`lastEditor`	VARCHAR(12)		NULL, 
+	`lastEditDate`	DATETIME		NULL, 
 	
 	PRIMARY KEY (`id`), 
 	FOREIGN KEY (`authorId`) REFERENCES `user_accounts` (`id`)
@@ -87,6 +91,66 @@ DELIMITER $$
 -- News Articles
 --
 -- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `media_deleteNewsArticle` $$
+CREATE PROCEDURE `media_deleteNewsArticle` (
+	IN `in_articleId`	MEDIUMINT(8) UNSIGNED,
+	IN `in_username`	VARCHAR(12),
+	IN `in_date`		DATETIME
+) 
+BEGIN
+	UPDATE `media_news` 
+	SET `deleted` = 1, 
+		`lastEditor` = `in_username`, 
+		`lastEditDate` = `in_date`
+	WHERE `id` = `in_articleId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_updateNewsArticle` $$
+CREATE PROCEDURE `media_updateNewsArticle` (
+	IN `in_articleId`	MEDIUMINT(8) UNSIGNED,
+	IN `in_username`	VARCHAR(12),
+	IN `in_date`		DATETIME, 
+	IN `in_title`		VARCHAR(50),
+	IN `in_category`	TINYINT(2) UNSIGNED,
+	IN `in_description`	VARCHAR(1024),
+	IN `in_body`		TEXT
+) 
+BEGIN 
+	UPDATE `media_news` 
+	SET `title` = `in_title`, 
+		`category` = `in_category`, 
+		`description` = `in_description`, 
+		`body` = `in_body`, 
+		`lastEditor` = `in_username`, 
+		`lastEditDate` = `in_date`
+	WHERE `id` = `in_articleId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_postNewsArticle` $$
+CREATE PROCEDURE `media_postNewsArticle` (
+	IN `in_authorId`	INT(10) UNSIGNED, 
+	IN `in_title`		VARCHAR(50),
+	IN `in_date`		DATETIME, 
+	IN `in_category`	TINYINT(2) UNSIGNED,
+	IN `in_description`	VARCHAR(1024),
+	IN `in_body`		TEXT,
+	OUT `out_articleId`	MEDIUMINT(8) UNSIGNED
+) 
+BEGIN 
+	INSERT INTO `media_news` (
+		`authorId`, `title`, `date`, `category`, `description`, `body`
+	) VALUES (
+		`in_authorId`, `in_title`, `in_date`, `in_category`, `in_description`, `in_body`
+	);
+	
+	SET `out_articleId` = LAST_INSERT_ID();
+END $$
 
 
 DROP PROCEDURE IF EXISTS `media_getNewsArchive` $$
@@ -107,7 +171,7 @@ CREATE PROCEDURE `media_getNewsArticle` (
 	IN `in_id`	MEDIUMINT(8) UNSIGNED
 ) 
 BEGIN 
-	SELECT `title`, `date`, `category`, `body` 
+	SELECT `id`, `title`, `date`, `category`, `description`, `body` 
 	FROM `media_news` 
 	WHERE `id` = `in_id` 
 		AND `deleted` = 0 
@@ -172,7 +236,7 @@ BEGIN
 	WHERE `id` = `in_sessionId` 
 	LIMIT 1;
 	
-	SELECT `a`.`id`, `a`.`username`, `a`.`staff`, `a`.`fmod`, `a`.`pmod`, `a`.`currentIP`
+	SELECT `a`.`id`, `a`.`username`, `a`.`staff`, `a`.`fmod`, `a`.`pmod`, `a`.`currentIP`, `a`.`supportDisabled` 
 	FROM `user_sessions` AS `s` 
 		JOIN `user_accounts` AS `a` 
 			ON `s`.`userId` = `a`.`id` 

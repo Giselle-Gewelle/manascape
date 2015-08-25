@@ -11,11 +11,11 @@
 </#function>
 
 <#function replaceNewLines string>
-	<#return string?replace("\n", "<br />") />
+	<#return string?replace("\n", "<br />")?replace("\r", "<br />") />
 </#function>
 
 <#function doubleBreaksToParagraphs string>
-	<#return string?replace("\n\n", "</p><p>") />
+	<#return string?replace("\n\n", "</p><p>")?replace("\r\n", "</p><p>")?replace("\r\r", "</p><p>") />
 </#function>
 
 <#macro a mod dest><a href="${url(mod, dest)}"><#nested /></a></#macro>
