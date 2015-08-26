@@ -12,7 +12,7 @@
 			   
 	<xs:complexType name="LoginRequestDTO">
 		<xs:sequence>
-			<xs:element name="userId"		type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="userId"		type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="passwordHash"	type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="passwordSalt"	type="xs:string"	minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
@@ -20,7 +20,7 @@
 	
 	<xs:complexType name="UserSessionDTO">
 		<xs:sequence>
-			<xs:element name="id"				type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="id"				type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="username"			type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="displayName"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="staff"	 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
@@ -29,7 +29,7 @@
 			<xs:element name="currentIP"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="supportDisabled"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
 			
-			<xs:element name="sessionId"		type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="sessionId"		type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="sessionHash"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="secure"	 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="mod"				type="xs:string"	minOccurs="1" maxOccurs="1" />
@@ -39,7 +39,7 @@
 	
 	<xs:complexType name="SessionCheckDTO">
 		<xs:sequence>
-			<xs:element name="sessionId"	type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="sessionId"	type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="secure"	 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="endDate"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
@@ -106,7 +106,7 @@
 	
 	<xs:complexType name="UserListUserDTO">
 		<xs:sequence>
-			<xs:element name="id"				type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="id"				type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="username"			type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="displayName"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="creationDate"		type="xs:string"	minOccurs="1" maxOccurs="1" />
@@ -130,9 +130,11 @@
 	
 	<xs:complexType name="UserDetailsDTO">
 		<xs:sequence>
-			<xs:element name="id"				type="xs:int"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="id"				type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="username"			type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="displayName"		type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="dob"				type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="country"			type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="creationDate"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="creationIP"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="currentIP"		type="xs:string"	minOccurs="1" maxOccurs="1" />
@@ -140,6 +142,55 @@
 			<xs:element name="fmod"		 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="pmod"		 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="supportDisabled"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="LoginAttemptInfoDTO">
+		<xs:sequence>
+			<xs:element name="pageInfo"	type="PageInfoDTO"			minOccurs="1" maxOccurs="1" />
+			<xs:element name="entries"	type="LoginAttemptEntryDTO"	minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="LoginAttemptEntryDTO">
+		<xs:sequence>
+			<xs:element name="ip"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="date"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="successful"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="LoginSessionInfoDTO">
+		<xs:sequence>
+			<xs:element name="pageInfo"	type="PageInfoDTO"			minOccurs="1" maxOccurs="1" />
+			<xs:element name="entries"	type="LoginSessionEntryDTO"	minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="LoginSessionEntryDTO">
+		<xs:sequence>
+			<xs:element name="ip"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="startDate"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="endDate"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="secure"		type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="startMod"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="currentMod"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="startDest"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="currentDest"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="active"		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!--
+	Misc.
+	-->
+	
+	<xs:complexType name="PageInfoDTO">
+		<xs:sequence>
+			<xs:element name="currentPage"		type="xs:int"				minOccurs="1" maxOccurs="1" />
+			<xs:element name="pageCount"		type="xs:int"				minOccurs="1" maxOccurs="1" />
+			<xs:element name="fullEntryCount"	type="xs:long"				minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	

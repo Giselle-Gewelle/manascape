@@ -257,4 +257,8 @@ public final class CountryUtil {
 		return COUNTRY_MAP.containsKey(code);
 	}
 	
+	public static String get(int code) {
+		return COUNTRY_MAP.get(String.valueOf(code));
+	}
+	
 }

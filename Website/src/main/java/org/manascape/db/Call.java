@@ -31,6 +31,11 @@ public final class Call {
 		return this;
 	}
 	
+	public Call setLong(String paramName, long value) throws SQLException {
+		stmt.setLong("in_" + paramName, value);
+		return this;
+	}
+	
 	public Call setInt(String paramName, int value) throws SQLException {
 		stmt.setInt("in_" + paramName, value);
 		return this;
@@ -55,6 +60,10 @@ public final class Call {
 		return stmt.getString("out_" + paramName);
 	}
 	
+	public long getLong(String paramName) throws SQLException {
+		return stmt.getLong("out_" + paramName);
+	}
+	
 	public int getInt(String paramName) throws SQLException {
 		return stmt.getInt("out_" + paramName);
 	}
@@ -63,9 +72,14 @@ public final class Call {
 		return stmt.getBoolean("out_" + paramName);
 	}
 	
-	public ResultSet getResults() throws SQLException {
-		execute();
+	public ResultSet getResults(boolean execute) throws SQLException {
+		if(execute)
+			execute();
 		return stmt.getResultSet();
+	}
+	
+	public ResultSet getResults() throws SQLException {
+		return getResults(true);
 	}
 	
 }

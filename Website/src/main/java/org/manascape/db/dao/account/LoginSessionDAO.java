@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Calendar;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.manascape.controller.impl.account.sessions.Login;
@@ -42,10 +41,10 @@ public final class LoginSessionDAO {
 		}
 	}
 	
-	public UserSessionDTO getSession(int sessionId, String newHash, boolean secure, String mod, String dest, String endDate) {
+	public UserSessionDTO getSession(long sessionId, String newHash, boolean secure, String mod, String dest, String endDate) {
 		try {
 			ResultSet result = db.prepareCall("user_getLoginSessionDetails", 6)
-				.setInt("sessionId", sessionId)
+				.setLong("sessionId", sessionId)
 				.setBoolean("secure", secure)
 				.setString("newMod", mod)
 				.setString("newDest", dest)
@@ -58,7 +57,7 @@ public final class LoginSessionDAO {
 			}
 			
 			String username = result.getString("username");
-			return new UserSessionDTO(result.getInt("id"), username, StringUtil.formatUsername(username), result.getBoolean("staff"), result.getBoolean("fmod"), result.getBoolean("pmod"), 
+			return new UserSessionDTO(result.getLong("id"), username, StringUtil.formatUsername(username), result.getBoolean("staff"), result.getBoolean("fmod"), result.getBoolean("pmod"), 
 					result.getString("currentIP"), result.getBoolean("supportDisabled"), sessionId, newHash, secure, mod, dest);
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to fetch the user login session [" + sessionId + "].", e);
@@ -66,13 +65,13 @@ public final class LoginSessionDAO {
 		}
 	}
 	
-	public void killSession(int id) {
+	public void killSession(long id) {
 		try {
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.MINUTE, -Login.IDLE_TIME);
 			
 			db.prepareCall("user_killLoginSession", 2)
-				.setInt("id", id)
+				.setLong("id", id)
 				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(cal.getTime()))
 				.execute();
 		} catch(SQLException e) {
@@ -92,17 +91,17 @@ public final class LoginSessionDAO {
 				return null;
 			}
 			
-			return new SessionCheckDTO(result.getInt("id"), result.getBoolean("secure"), DateUtil.SQL_DATETIME_FORMAT.format(result.getTimestamp("endDate")));
+			return new SessionCheckDTO(result.getLong("id"), result.getBoolean("secure"), DateUtil.SQL_DATETIME_FORMAT.format(result.getTimestamp("endDate")));
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to find a user login session.", e);
 			return null;
 		}
 	}
 	
-	public void submitLoginSession(int userId, String ip, String hash, Calendar start, Calendar end, String mod, String dest, boolean secure) {
+	public void submitLoginSession(long userId, String ip, String hash, Calendar start, Calendar end, String mod, String dest, boolean secure) {
 		try {
 			db.prepareCall("user_submitLoginSession", 8)
-				.setInt("userId", userId)
+				.setLong("userId", userId)
 				.setString("ip", ip)
 				.setString("sessionHash", hash)
 				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(start.getTime()))
@@ -116,11 +115,11 @@ public final class LoginSessionDAO {
 		}
 	}
 	
-	public LoginRequestDTO getUserInfo(String username, String ip) {
+	public LoginRequestDTO getUserInfo(String username, Calendar cal, String ip) {
 		try {
 			ResultSet result = db.prepareCall("user_getInfoForLogin", 3)
 				.setString("username", username)
-				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(new Date()))
+				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(cal.getTime()))
 				.setString("ip", ip)
 				.getResults();
 			
@@ -128,7 +127,7 @@ public final class LoginSessionDAO {
 				return null;
 			}
 			
-			return new LoginRequestDTO(result.getInt("id"), result.getString("passwordHash"), result.getString("passwordSalt"));
+			return new LoginRequestDTO(result.getLong("id"), result.getString("passwordHash"), result.getString("passwordSalt"));
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to fetch login information for the user [" + username + "] by the IP [" + ip + "].", e);
 			return null;

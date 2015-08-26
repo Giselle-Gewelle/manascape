@@ -66,8 +66,11 @@ public final class Login extends Controller {
 		if(!floodCheck(dao)) {
 			return 2;
 		}
+
+		Calendar startCal = Calendar.getInstance();
+		startCal.setTimeInMillis(getRequestTime());
 		
-		LoginRequestDTO userInfo = dao.getUserInfo(username, getRequestIP());
+		LoginRequestDTO userInfo = dao.getUserInfo(username, startCal, getRequestIP());
 		if(userInfo == null) {
 			return 1;
 		}
@@ -80,8 +83,6 @@ public final class Login extends Controller {
 		boolean secure = ControllerConstants.SECURE_MOD_LIST.contains(toMod);
 		String sessionHash = Hashing.generateSessionHash();
 		
-		Calendar startCal = Calendar.getInstance();
-		startCal.setTimeInMillis(getRequestTime());
 		Calendar endCal = Calendar.getInstance();
 		endCal.setTimeInMillis(getRequestTime());
 		endCal.add(Calendar.MINUTE, secure ? SECURE_IDLE_TIME : IDLE_TIME);

@@ -7,6 +7,8 @@ public final class DatabaseHandler {
 	
 	public static final int 
 		MAX_VALUE_MEDIUMINT = 16777215;
+	public static final long 
+		MAX_VALUE_INT = 4294967295L;
 	
 	private final Connection connection;
 	

@@ -70,7 +70,7 @@ public final class NewsDAO {
 	public int postNewsArticle(NewsFieldDTO fields) {
 		try {
 			Call dbCall = db.prepareCall("media_postNewsArticle", 7)
-				.setInt("authorId", user.getId())
+				.setLong("authorId", user.getId())
 				.setString("title", fields.getTitle())
 				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(new Date()))
 				.setInt("category", Integer.parseInt(fields.getCategory()))
@@ -98,7 +98,7 @@ public final class NewsDAO {
 			
 			List<NewsArchiveDTO> newsArchive = new LinkedList<>();
 			while(results.next()) {
-				newsArchive.add(new NewsArchiveDTO(results.getInt("id"), results.getString("title"), DateUtil.SHORT_NEWS_FORMAT.format(results.getTimestamp("date")), results.getInt("category")));
+				newsArchive.add(new NewsArchiveDTO(results.getInt("id"), results.getString("title"), DateUtil.SHORT_DATE_FORMAT.format(results.getTimestamp("date")), results.getInt("category")));
 			}
 			
 			if(newsArchive.size() < 1) {
@@ -145,7 +145,7 @@ public final class NewsDAO {
 			
 			List<NewsFeedDTO> newsFeed = new LinkedList<>();
 			while(results.next()) {
-				newsFeed.add(new NewsFeedDTO(results.getInt("id"), results.getString("title"), DateUtil.SHORT_NEWS_FORMAT.format(results.getTimestamp("date")), results.getString("description")));
+				newsFeed.add(new NewsFeedDTO(results.getInt("id"), results.getString("title"), DateUtil.SHORT_DATE_FORMAT.format(results.getTimestamp("date")), results.getString("description")));
 			}
 			
 			if(newsFeed.size() < 1) {

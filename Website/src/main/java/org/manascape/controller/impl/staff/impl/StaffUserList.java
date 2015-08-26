@@ -1,10 +1,15 @@
 package org.manascape.controller.impl.staff.impl;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.manascape.controller.impl.staff.StaffPage;
+import org.manascape.db.DatabaseHandler;
 import org.manascape.db.dao.staff.UserListDAO;
+import org.manascape.dto.LoginAttemptEntryDTO;
+import org.manascape.dto.LoginSessionEntryDTO;
+import org.manascape.dto.UserDetailsDTO;
 import org.manascape.dto.UserListDTO;
 import org.manascape.http.RequestHandler;
 
@@ -37,7 +42,38 @@ public final class StaffUserList extends StaffPage {
 	}
 	
 	private void prepareUserDetails() {
+		long userId = RequestHandler.getLongParam(getRequest(), "id");
+		if(userId < 1 || userId > DatabaseHandler.MAX_VALUE_INT) {
+			return;
+		}
 		
+		UserDetailsDTO user = dao.getUser(userId);
+		if(user != null) {
+			getRequest().setAttribute("user", user);
+			
+			int failedLoginAttempts = 0;
+			List<LoginAttemptEntryDTO> loginAttempts = dao.getLoginAttempts(user.getUsername(), 1, 5).getEntries();
+			for(LoginAttemptEntryDTO entry : loginAttempts) {
+				if(!entry.isSuccessful()) {
+					failedLoginAttempts++;
+				}
+			}
+			
+			String currentlyLoggedIn = null;
+			List<LoginSessionEntryDTO> loginSessions = dao.getLoginSessions(user.getId(), 1, 5).getEntries();
+			for(LoginSessionEntryDTO entry : loginSessions) {
+				if(!entry.isActive()) {
+					continue;
+				}
+				
+				currentlyLoggedIn = entry.getIp();
+			}
+			
+			getRequest().setAttribute("failedLoginAttempts", failedLoginAttempts);
+			getRequest().setAttribute("currentlyLoggedIn", currentlyLoggedIn);
+			getRequest().setAttribute("loginAttempts", loginAttempts);
+			getRequest().setAttribute("loginSessions", loginSessions);
+		}
 	}
 	
 	private void prepareUserList() {

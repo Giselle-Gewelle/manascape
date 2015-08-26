@@ -88,9 +88,103 @@ DELIMITER $$
 
 -- -------------------------------------------------------------------------------------------
 --
+-- Utilities
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `getPageInfo` $$
+CREATE PROCEDURE `util_getPageInfo` (
+	IN `in_count`		BIGINT(20) UNSIGNED,
+	IN `in_page`	  	MEDIUMINT(8) UNSIGNED, 
+	IN `in_limit`	  	SMALLINT(5) UNSIGNED,
+	OUT `out_pageCount`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_realPage`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_start`		BIGINT(20) UNSIGNED
+) 
+BEGIN
+	SET `out_pageCount` = CEIL(`in_count` / `in_limit`);
+	
+	IF (`out_pageCount` = 0) THEN
+		SET `out_pageCount` = 1;
+	END IF;
+	
+	IF (`in_page` > `out_pageCount`) THEN 
+		SET `out_realPage` = `out_pageCount`;
+	ELSE 
+		SET `out_realPage` = `in_page`;
+	END IF;
+	
+	SET `out_start` = (`out_realPage` * `in_limit`) - `in_limit`;
+END $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
 -- Staff Center
 --
 -- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `staff_getUserLoginSessions` $$
+CREATE PROCEDURE `staff_getUserLoginSessions` (
+	IN `in_userId`		INT(10) UNSIGNED,
+	IN `in_page`	  	MEDIUMINT(8) UNSIGNED, 
+	IN `in_limit`	  	SMALLINT(5) UNSIGNED,
+	OUT `out_pageCount`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_realPage`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_count`		BIGINT(20) UNSIGNED
+) 
+BEGIN 
+	DECLARE `start`	BIGINT(20);
+	
+	SELECT COUNT(`id`) INTO `out_count` 
+	FROM `user_sessions` 
+	WHERE `userId` = `in_userId`;
+	
+	CALL `util_getPageInfo`(`out_count`, `in_page`, `in_limit`, `out_pageCount`, `out_realPage`, `start`);
+	
+	SELECT `ip`, `startDate`, `endDate`, `secure`, `startMod`, `currentMod`, `startDest`, `currentDest` 
+	FROM `user_sessions` 
+	WHERE `userId` = `in_userId` 
+	ORDER BY `endDate` DESC 
+	LIMIT `start`,`in_limit`;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `staff_getUserLoginAttempts` $$
+CREATE PROCEDURE `staff_getUserLoginAttempts` (
+	IN `in_username`  	VARCHAR(12),
+	IN `in_page`	  	MEDIUMINT(8) UNSIGNED, 
+	IN `in_limit`	  	SMALLINT(5) UNSIGNED,
+	OUT `out_pageCount`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_realPage`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_count`		BIGINT(20) UNSIGNED
+) 
+BEGIN 
+	DECLARE `start`	BIGINT(20);
+	
+	SELECT COUNT(`date`) INTO `out_count` 
+	FROM `user_loginAttempts` 
+	WHERE `username` = `in_username`;
+	
+	CALL `util_getPageInfo`(`out_count`, `in_page`, `in_limit`, `out_pageCount`, `out_realPage`, `start`);
+	
+	SELECT `a`.`date`, `a`.`ip`, (
+			SELECT COUNT(`s`.`id`) 
+			FROM `user_sessions` AS `s` 
+				JOIN `user_loginAttempts` AS `aa` 
+					ON `s`.`startDate` = `aa`.`date` 
+			WHERE `aa`.`username` = `in_username` 
+				AND `aa`.`date` = `a`.`date` 
+			LIMIT 1
+		) AS `successful` 
+	FROM `user_loginAttempts` AS `a` 
+	WHERE `a`.`username` = `in_username` 
+	ORDER BY `a`.`date` DESC
+	LIMIT `start`,`in_limit`;
+END $$
 
 
 DROP PROCEDURE IF EXISTS `staff_getUserDetails` $$
@@ -98,7 +192,7 @@ CREATE PROCEDURE `staff_getUserDetails` (
 	IN `in_id`	INT(10) UNSIGNED
 ) 
 BEGIN 
-	SELECT `id`, `username`, `creationDate`, `creationIP`, `currentIP`, `staff`, `fmod`, `pmod`, `supportDisabled` 
+	SELECT `id`, `username`, `dob`, `countryCode`, `creationDate`, `creationIP`, `currentIP`, `staff`, `fmod`, `pmod`, `supportDisabled` 
 	FROM `user_accounts`
 	WHERE `id` = `in_id`
 	LIMIT 1;

@@ -39,6 +39,19 @@ public final class RequestHandler {
 		}
 	}
 	
+	public static long getLongParam(HttpServletRequest request, String name) {
+		String s = request.getParameter(name);
+		if(s == null || s.length() < 1) {
+			return -1;
+		}
+		
+		try {
+			return Long.parseLong(s);
+		} catch(NumberFormatException e) {
+			return -1;
+		}
+	}
+	
 	static void submitViewRequest(HttpRequestType requestType, HttpServletRequest request, HttpServletResponse response) {
 		String uri = request.getRequestURI();
 		String requestIP = request.getRemoteAddr();

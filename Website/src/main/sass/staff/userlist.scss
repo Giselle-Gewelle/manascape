@@ -17,7 +17,7 @@ table {
 	}
 	
 	td {
-		vertical-align: bottom;
+		vertical-align: top;
 		padding: 3px;
 		border-bottom: 1px solid #7B4F17;
 	}
@@ -32,4 +32,22 @@ form {
 
 #pageNav {
 	margin-top: 1em;
+}
+
+#userDetails {
+	table {
+		margin: 0;
+	}
+	
+	h3 {
+		margin: 1em 0 5px;
+	}
+	
+	p.end {
+		margin-bottom: 3px;
+	}
+	
+	.alert {
+		margin-top: 18px;
+	}
 }
