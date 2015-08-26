@@ -50,6 +50,8 @@ public final class ControllerConstants {
 			
 			put("staff userlist.ws", StaffUserList.class);
 			put("staff userdetails.ws", StaffUserList.class);
+			put("staff userloginattempts.ws", StaffUserList.class);
+			put("staff userloginsessions.ws", StaffUserList.class);
 		}
 		
 	};

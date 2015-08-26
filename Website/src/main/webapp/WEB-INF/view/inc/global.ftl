@@ -25,3 +25,5 @@
 		<strong>Location:</strong> <span><@a mod="main" dest="title.ws">Home</@a> &gt; <#nested /></span>
 	</div>
 </#macro>
+
+<#macro img src alt=""><img src="${url('main', 'resources/img/${src}')}" alt="${alt}" /></#macro>

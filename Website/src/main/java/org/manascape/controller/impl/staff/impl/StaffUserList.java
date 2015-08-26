@@ -8,7 +8,9 @@ import org.manascape.controller.impl.staff.StaffPage;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.db.dao.staff.UserListDAO;
 import org.manascape.dto.LoginAttemptEntryDTO;
+import org.manascape.dto.LoginAttemptInfoDTO;
 import org.manascape.dto.LoginSessionEntryDTO;
+import org.manascape.dto.LoginSessionInfoDTO;
 import org.manascape.dto.UserDetailsDTO;
 import org.manascape.dto.UserListDTO;
 import org.manascape.http.RequestHandler;
@@ -38,7 +40,57 @@ public final class StaffUserList extends StaffPage {
 			case "userdetails.ws":
 				prepareUserDetails();
 				break;
+			case "userloginattempts.ws":
+				prepareUserLoginAttempts();
+				break;
+			case "userloginsessions.ws":
+				prepareUserLoginSessions();
+				break;
 		}
+	}
+	
+	private void prepareUserLoginSessions() {
+		long userId = RequestHandler.getLongParam(getRequest(), "id");
+		if(userId < 1 || userId > DatabaseHandler.MAX_VALUE_INT) {
+			return;
+		}
+		
+		UserDetailsDTO user = dao.getUser(userId);
+		if(user == null) {
+			return;
+		}
+		
+		getRequest().setAttribute("user", user);
+		
+		int page = RequestHandler.getIntParam(getRequest(), "page");
+		if(page < 1 || page > Integer.MAX_VALUE) {
+			page = 1;
+		}
+		
+		LoginSessionInfoDTO dto = dao.getLoginSessions(user.getId(), page, 20);
+		getRequest().setAttribute("loginSessions", dto);
+	}
+	
+	private void prepareUserLoginAttempts() {
+		long userId = RequestHandler.getLongParam(getRequest(), "id");
+		if(userId < 1 || userId > DatabaseHandler.MAX_VALUE_INT) {
+			return;
+		}
+		
+		UserDetailsDTO user = dao.getUser(userId);
+		if(user == null) {
+			return;
+		}
+		
+		getRequest().setAttribute("user", user);
+		
+		int page = RequestHandler.getIntParam(getRequest(), "page");
+		if(page < 1 || page > Integer.MAX_VALUE) {
+			page = 1;
+		}
+		
+		LoginAttemptInfoDTO dto = dao.getLoginAttempts(user.getUsername(), page, 20);
+		getRequest().setAttribute("loginAttempts", dto);
 	}
 	
 	private void prepareUserDetails() {
