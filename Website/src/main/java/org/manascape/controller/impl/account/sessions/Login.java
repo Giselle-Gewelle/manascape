@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.manascape.controller.Controller;
 import org.manascape.controller.ControllerConstants;
 import org.manascape.db.dao.account.LoginSessionDAO;
-import org.manascape.dto.LoginRequestDTO;
+import org.manascape.dto.PasswordRequestDTO;
 import org.manascape.http.HttpRequestType;
 import org.manascape.security.Hashing;
 import org.manascape.security.Password;
@@ -70,7 +70,7 @@ public final class Login extends Controller {
 		Calendar startCal = Calendar.getInstance();
 		startCal.setTimeInMillis(getRequestTime());
 		
-		LoginRequestDTO userInfo = dao.getUserInfo(username, startCal, getRequestIP());
+		PasswordRequestDTO userInfo = dao.getUserInfo(username, startCal, getRequestIP());
 		if(userInfo == null) {
 			return 1;
 		}

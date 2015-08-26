@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#passwordChangeForm {
+	padding-top: 1em;
+	display: block;
+	
+	.section {
+		margin-bottom: 1em;
+		
+		label, input {
+			width: 300px;
+		}
+		label {
+			display: block;
+			margin-bottom: 2px;
+			font-size: 14px;
+		}
+		input {
+			display: block;
+			font-weight: bold;
+			letter-spacing: 2px;
+		}
+	}
+	
+	.spacer {
+		height: 1em;
+	}
+	
+	button {
+		margin: 1em 0 0.5em;
+	}
+}

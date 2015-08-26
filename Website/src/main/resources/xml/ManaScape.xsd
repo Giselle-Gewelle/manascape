@@ -9,14 +9,6 @@
 	<!-- 
 	Login Sessions
 	-->
-			   
-	<xs:complexType name="LoginRequestDTO">
-		<xs:sequence>
-			<xs:element name="userId"		type="xs:long"		minOccurs="1" maxOccurs="1" />
-			<xs:element name="passwordHash"	type="xs:string"	minOccurs="1" maxOccurs="1" />
-			<xs:element name="passwordSalt"	type="xs:string"	minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
 	
 	<xs:complexType name="UserSessionDTO">
 		<xs:sequence>
@@ -42,6 +34,19 @@
 			<xs:element name="sessionId"	type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="secure"	 	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="endDate"		type="xs:string"	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- 
+	Account Management
+	-->
+			   
+	<xs:complexType name="PasswordRequestDTO">
+		<xs:sequence>
+			<xs:element name="userId"		type="xs:long"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="passwordHash"	type="xs:string"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="passwordSalt"	type="xs:string"	minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	

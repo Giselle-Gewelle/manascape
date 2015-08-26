@@ -11,7 +11,6 @@
 			<legend>${gameName}</legend>
 			
 			<ul>
-				<@nav mod="create" dest="index.ws" icon="create">Create a Free Account</@nav>
 				<@nav mod="news" dest="archive.ws" icon="news">Latest News</@nav>
 			</ul>
 		</fieldset>
@@ -20,6 +19,8 @@
 			<legend>Account Management</legend>
 			
 			<ul>
+				<@nav mod="create" dest="index.ws" icon="create">Create a Free Account</@nav>
+				<@nav mod="account" dest="manage.ws" icon="accman">Account Management</@nav>
 				<@nav mod="password" dest="changepass.ws" icon="changepass">Change Your Password</@nav>
 			</ul>
 		</fieldset>

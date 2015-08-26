@@ -63,6 +63,20 @@ CREATE TABLE `user_loginAttempts` (
 ) ENGINE=InnoDB;
 
 
+DROP TABLE IF EXISTS `user_passwordChanges`;
+CREATE TABLE `user_passwordChanges` (
+	`userId`		INT(10)			UNSIGNED NOT NULL, 
+	`ip`			VARCHAR(128)	NOT NULL, 
+	`date`			DATETIME		NOT NULL, 
+	`oldHash`		CHAR(128)		NOT NULL, 
+	`oldSalt`		CHAR(128)		NOT NULL,
+	`newHash`		CHAR(128)		NOT NULL, 
+	`newSalt`		CHAR(128)		NOT NULL, 
+	
+	PRIMARY KEY (`userId`, `date`)
+) ENGINE=InnoDB;
+
+
 DROP TABLE IF EXISTS `media_news`;
 CREATE TABLE `media_news` (
 	`id`			MEDIUMINT(8)	UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
@@ -116,6 +130,65 @@ BEGIN
 	END IF;
 	
 	SET `out_start` = (`out_realPage` * `in_limit`) - `in_limit`;
+END $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- Account Management
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `user_getPassword` $$
+CREATE PROCEDURE `user_getPassword` (
+	IN `in_userId`	INT(10)
+)
+BEGIN
+	SELECT `passwordHash`, `passwordSalt` 
+	FROM `user_accounts` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_changePassword` $$
+CREATE PROCEDURE `user_changePassword` (
+	IN `in_userId`			INT(10) UNSIGNED,
+	IN `in_ip`				VARCHAR(128),
+	IN `in_date`			DATETIME,
+	IN `in_newHash`			CHAR(128),
+	IN `in_newSalt`			CHAR(128),
+	OUT `out_successful`	BIT
+) 
+BEGIN 
+	DECLARE `var_oldHash` CHAR(128);
+	DECLARE `var_oldSalt` CHAR(128);
+	
+	SELECT `passwordHash`, `passwordSalt` 
+		INTO `var_oldHash`, `var_oldSalt` 
+	FROM `user_accounts` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+	
+	INSERT INTO `user_passwordChanges` (
+		`userId`, `ip`, `date`, `oldHash`, `oldSalt`, `newHash`, `newSalt`
+	) VALUES (
+		`in_userId`, `in_ip`, `in_date`, `var_oldHash`, `var_oldSalt`, `in_newHash`, `in_newSalt`
+	);
+	
+	UPDATE `user_accounts` 
+	SET `passwordHash` = `in_newHash`, 
+		`passwordSalt` = `in_newSalt` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+	
+	IF (ROW_COUNT() > 0) THEN
+		SET `out_successful` = 1;
+	ELSE
+		SET `out_successful` = 0;
+	END IF;
 END $$
 
 

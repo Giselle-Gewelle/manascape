@@ -16,7 +16,7 @@ import org.manascape.dto.UserListDTO;
 import org.manascape.http.RequestHandler;
 
 /**
- * Content controller all staff center "user list" pages; user list and user details.
+ * Content controller for all staff center "user list" pages; user list and user details.
  * @author DTB
  */
 public final class StaffUserList extends StaffPage {

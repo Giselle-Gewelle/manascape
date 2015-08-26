@@ -126,9 +126,10 @@
 					
 					<#--<li><a href="">Play</a></li>-->
 					
-					<li><a href="">Account</a>
+					<li><@a mod="account" dest="manage.ws">Account</@a>
 						<ul>
 							<li><@a mod="create" dest="index.ws">Create an Account</@a></li>
+							<li><@a mod="password" dest="changepass.ws">Change Your Password</@a></li>
 						</ul>
 					</li>
 					

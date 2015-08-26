@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.manascape.controller.impl.GenericPage;
 import org.manascape.controller.impl.account.CreateAccount;
+import org.manascape.controller.impl.account.management.ChangePassword;
 import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.controller.impl.account.sessions.Logout;
 import org.manascape.controller.impl.main.Title;
@@ -41,6 +43,9 @@ public final class ControllerConstants {
 			
 			put("account login.ws", Login.class);
 			put("account logout.ws", Logout.class);
+			put("account manage.ws", GenericPage.class);
+			
+			put("password changepass.ws", ChangePassword.class);
 			
 			put("news article.ws", News.class);
 			put("news archive.ws", News.class);

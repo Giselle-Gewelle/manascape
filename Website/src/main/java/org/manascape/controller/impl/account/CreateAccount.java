@@ -198,7 +198,7 @@ public final class CreateAccount extends Controller {
 		
 		Pattern pattern = Pattern.compile("^[a-zA-Z0-9]{5,20}$");
 		Matcher matcher = pattern.matcher(pass1);
-		if(!matcher.find()) {
+		if(!matcher.matches()) {
 			return false;
 		}
 		
@@ -244,7 +244,7 @@ public final class CreateAccount extends Controller {
 		
 		Pattern pattern = Pattern.compile("^[a-z0-9_]{1,12}$");
 		Matcher matcher = pattern.matcher(username);
-		if(!matcher.find()) {
+		if(!matcher.matches()) {
 			return 2;
 		}
 		

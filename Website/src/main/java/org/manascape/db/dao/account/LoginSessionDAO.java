@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.db.Call;
 import org.manascape.db.DatabaseHandler;
-import org.manascape.dto.LoginRequestDTO;
+import org.manascape.dto.PasswordRequestDTO;
 import org.manascape.dto.SessionCheckDTO;
 import org.manascape.dto.UserSessionDTO;
 import org.manascape.util.DateUtil;
@@ -115,7 +115,7 @@ public final class LoginSessionDAO {
 		}
 	}
 	
-	public LoginRequestDTO getUserInfo(String username, Calendar cal, String ip) {
+	public PasswordRequestDTO getUserInfo(String username, Calendar cal, String ip) {
 		try {
 			ResultSet result = db.prepareCall("user_getInfoForLogin", 3)
 				.setString("username", username)
@@ -127,7 +127,7 @@ public final class LoginSessionDAO {
 				return null;
 			}
 			
-			return new LoginRequestDTO(result.getLong("id"), result.getString("passwordHash"), result.getString("passwordSalt"));
+			return new PasswordRequestDTO(result.getLong("id"), result.getString("passwordHash"), result.getString("passwordSalt"));
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to fetch login information for the user [" + username + "] by the IP [" + ip + "].", e);
 			return null;
