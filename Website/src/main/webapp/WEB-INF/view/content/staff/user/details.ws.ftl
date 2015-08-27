@@ -99,8 +99,9 @@
 				</tbody>
 			</table>
 			
-			<h3>Recent Bans/Offenses</h3>
 			<#if banList??>
+				<div class="tableSpacer"></div>
+				
 				<table>
 					<thead>
 						<tr>
@@ -124,8 +125,6 @@
 						</#list>
 					</tbody>
 				</table>
-			<#else>
-				<p class="start">This user has not received any bans.</p>
 			</#if>
 			
 			<h3>Recent Login Attempts</h3>
