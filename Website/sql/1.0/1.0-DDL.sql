@@ -95,6 +95,37 @@ CREATE TABLE `user_bans` (
 ) ENGINE=InnoDB;
 
 
+DROP TABLE IF EXISTS `user_ticketThreads`;
+CREATE TABLE `user_ticketThreads` (
+	`id`				INT(10)			UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+	`title`				VARCHAR(50)		NOT NULL, 
+	`messageCount`		SMALLINT(5)		UNSIGNED NOT NULL DEFAULT 1,
+	`lastMessageId`		INT(10)			NULL,
+	
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+
+DROP TABLE IF EXISTS `user_ticketMessages`;
+CREATE TABLE `user_ticketMessages` (
+	`id`			INT(10)			UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+	`threadId`		INT(10)			UNSIGNED NOT NULL, 
+	`date`			DATETIME		NOT NULL, 
+	`author`		VARCHAR(12)		NULL, 
+	`authorStaff`	BIT				NOT NULL DEFAULT 0,
+	`authorId`		INT(10)			UNSIGNED NOT NULL,
+	`authorIP`		VARCHAR(128)	NOT NULL, 
+	`receiver`		VARCHAR(12)		NULL, 
+	`authorDel`		BIT				NOT NULL DEFAULT 0,
+	`receiverDel`	BIT				NOT NULL DEFAULT 0,
+	`message`		TEXT			NOT NULL, 
+	`readOn`		DATETIME		NULL,
+	
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`threadId`) REFERENCES `user_ticketThreads` (`id`)
+) ENGINE=InnoDB;
+
+
 DROP TABLE IF EXISTS `media_news`;
 CREATE TABLE `media_news` (
 	`id`			MEDIUMINT(8)	UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, 
@@ -494,6 +525,82 @@ BEGIN
 	WHERE `deleted` = 0 
 	ORDER BY `date` DESC 
 	LIMIT `in_limit`;
+END $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- Ticketing
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `user_ticketGetThread` $$
+CREATE PROCEDURE `user_ticketGetThread` (
+	IN `in_id`		INT(10) UNSIGNED,
+	OUT `out_title`	VARCHAR(50)
+) 
+BEGIN 
+	SELECT `title` INTO `out_title` 
+	FROM `user_ticketThreads` 
+	WHERE `id` = `in_id` 
+	LIMIT 1;
+	
+	SELECT `date`, `author`, `authorStaff`, `authorId`, `authorIP`, `receiver`, `message`, `readOn` 
+	FROM `user_ticketMessages` 
+	WHERE `threadId` = `in_id` 
+	ORDER BY `date` ASC;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketUnreadMessages` $$
+CREATE PROCEDURE `user_ticketUnreadMessages` (
+	IN `in_username` VARCHAR(12)
+) 
+BEGIN 
+	SELECT `t`.`id`, `t`.`title`, `t`.`messageCount`, 
+		`m`.`date` AS `lastMessageDate` 
+	FROM `user_ticketThreads` AS `t` 
+		JOIN `user_ticketMessages` AS `m` 
+			ON `t`.`lastMessageId` = `m`.`id` 
+	WHERE `m`.`readOn` IS NULL 
+		AND `m`.`receiver` = `in_username` 
+		AND `m`.`receiverDel` = 0 
+	ORDER BY `m`.`date` DESC;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketReadMessages` $$
+CREATE PROCEDURE `user_ticketReadMessages` (
+	IN `in_username` VARCHAR(12)
+) 
+BEGIN 
+	SELECT `t`.`id`, `t`.`title`, `t`.`messageCount`, 
+		`m`.`date` AS `lastMessageDate` 
+	FROM `user_ticketThreads` AS `t` 
+		JOIN `user_ticketMessages` AS `m` 
+			ON `t`.`lastMessageId` = `m`.`id` 
+	WHERE `m`.`readOn` IS NOT NULL 
+		AND `m`.`receiver` = `in_username` 
+		AND `m`.`receiverDel` = 0 
+	ORDER BY `m`.`date` DESC;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketSentMessages` $$
+CREATE PROCEDURE `user_ticketSentMessages` (
+	IN `in_username` VARCHAR(12)
+) 
+BEGIN 
+	SELECT `t`.`id`, `t`.`title`, `t`.`messageCount`, 
+		`m`.`date` AS `lastMessageDate` 
+	FROM `user_ticketThreads` AS `t` 
+		JOIN `user_ticketMessages` AS `m` 
+			ON `t`.`lastMessageId` = `m`.`id` 
+	WHERE `m`.`author` = `in_username` 
+		AND `m`.`authorDel` = 0 
+	ORDER BY `m`.`date` DESC;
 END $$
 
 

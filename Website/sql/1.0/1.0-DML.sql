@@ -102,3 +102,16 @@ INSERT INTO `media_news` (
 	1, 'Test Title 3', '2015-08-24 14:13:10', 'This is a third test description', 'And a third test article body!', 1
 );
 
+
+INSERT INTO `user_ticketThreads` (
+	`title`, `lastMessageId` 
+) VALUES (
+	'Test Support Message', 1
+);
+
+INSERT INTO `user_ticketMessages` (
+	`threadId`, `date`, `author`, `authorStaff`, `authorId`, `authorIP`, `receiver`, `message` 
+) VALUES (
+	1, '2015-08-27 11:30:00', 'ManaScape', 1, 1, '127.0.0.1', 'almighty', 'This is a test message from the staff ticketing system. :)'
+);
+

@@ -16,16 +16,6 @@
 		</fieldset>
 		
 		<fieldset>
-			<legend>Account Management</legend>
-			
-			<ul>
-				<@nav mod="create" dest="index.ws" icon="create">Create a Free Account</@nav>
-				<@nav mod="account" dest="manage.ws" icon="accman">Account Management</@nav>
-				<@nav mod="password" dest="changepass.ws" icon="changepass">Change Your Password</@nav>
-			</ul>
-		</fieldset>
-		
-		<fieldset>
 			<legend>Latest Poll</legend>
 			
 			<div>Random Poll?! YOU decide!</div>
@@ -33,6 +23,25 @@
 			<ul>
 				<@nav mod="poll" dest="latest.ws" icon="pollvote">Vote in this Poll</@nav>
 				<@nav mod="poll" dest="archive.ws" icon="pollarchive">Poll Archives</@nav>
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Customer Support</legend>
+			
+			<ul>
+				<@nav mod="ticketing" dest="query.ws" icon="query">Submit a Support Query</@nav>
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Account Management</legend>
+			
+			<ul>
+				<@nav mod="create" dest="index.ws" icon="create">Create a Free Account</@nav>
+				<@nav mod="account" dest="manage.ws" icon="accman">Account Management</@nav>
+				<@nav mod="password" dest="changepass.ws" icon="changepass">Change Your Password</@nav>
+				<@nav mod="ticketing" dest="inbox.ws" icon="ticketing">Read Messages from ${gameName}</@nav>
 			</ul>
 		</fieldset>
 		

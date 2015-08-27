@@ -8,6 +8,7 @@ import java.util.Map;
 import org.manascape.controller.impl.GenericPage;
 import org.manascape.controller.impl.account.CreateAccount;
 import org.manascape.controller.impl.account.management.ChangePassword;
+import org.manascape.controller.impl.account.management.Ticketing;
 import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.controller.impl.account.sessions.Logout;
 import org.manascape.controller.impl.main.Title;
@@ -28,6 +29,7 @@ public final class ControllerConstants {
 			add("password");
 			add("recovery");
 			add("offense");
+			add("ticketing");
 		}
 		
 	};
@@ -48,6 +50,12 @@ public final class ControllerConstants {
 			put("account manage.ws", GenericPage.class);
 			
 			put("password changepass.ws", ChangePassword.class);
+			
+			put("ticketing inbox.ws", Ticketing.class);
+			put("ticketing view.ws", Ticketing.class);
+			put("ticketing delete.ws", Ticketing.class);
+			put("ticketing reply.ws", Ticketing.class);
+			put("ticketing query.ws", Ticketing.class);
 			
 			put("news article.ws", News.class);
 			put("news archive.ws", News.class);
