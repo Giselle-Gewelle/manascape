@@ -14,6 +14,8 @@
 			<h2>Login Sessions for User: ${user.displayName} (${user.username})</h2>
 			
 			<#list loginSessions.entries>
+				<p>User's latest IP Address: <strong>${user.currentIP}</strong></p>
+				
 				<p>A total of ${loginSessions.pageInfo.fullEntryCount} login sessions have opened against this user.</p>
 				
 				<#assign link="${url('staff', 'userloginsessions.ws?id=${user.id}')}" />
@@ -71,26 +73,7 @@
 		<@a mod="staff" dest="userdetails.ws?id=${user.id}">User Details</@a> &gt; View Login Sessions
 	</@location>
 <#else>
-	<h1>User Not Found</h1>
-	
-	<@location>
-		<@a mod="staff" dest="center.ws">Staff Center</@a> &gt; <@a mod="staff" dest="userlist.ws">User List</@a> &gt; 
-		User Not Found
-	</@location>
-	
-	<div class="scroll">
-		<div id="userDetailList" class="content">
-			<h2>User Not Found</h2>
-			
-			<p>The user you were looking for was not found.</p>
-			<p><@a mod="staff" dest="userlist.ws">Click here to return to the user list.</@a></p>
-		</div>
-	</div>
-	
-	<@location>
-		<@a mod="staff" dest="center.ws">Staff Center</@a> &gt; <@a mod="staff" dest="userlist.ws">User List</@a> &gt; 
-		User Not Found
-	</@location>
+	<#include "userNotFound.ftl" />
 </#if>
 
 <#include "../../../inc/footer.ftl" />

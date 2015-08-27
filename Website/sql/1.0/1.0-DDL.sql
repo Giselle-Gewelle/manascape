@@ -136,68 +136,35 @@ END $$
 
 -- -------------------------------------------------------------------------------------------
 --
--- Account Management
---
--- -------------------------------------------------------------------------------------------
-
-
-DROP PROCEDURE IF EXISTS `user_getPassword` $$
-CREATE PROCEDURE `user_getPassword` (
-	IN `in_userId`	INT(10)
-)
-BEGIN
-	SELECT `passwordHash`, `passwordSalt` 
-	FROM `user_accounts` 
-	WHERE `id` = `in_userId` 
-	LIMIT 1;
-END $$
-
-
-DROP PROCEDURE IF EXISTS `user_changePassword` $$
-CREATE PROCEDURE `user_changePassword` (
-	IN `in_userId`			INT(10) UNSIGNED,
-	IN `in_ip`				VARCHAR(128),
-	IN `in_date`			DATETIME,
-	IN `in_newHash`			CHAR(128),
-	IN `in_newSalt`			CHAR(128),
-	OUT `out_successful`	BIT
-) 
-BEGIN 
-	DECLARE `var_oldHash` CHAR(128);
-	DECLARE `var_oldSalt` CHAR(128);
-	
-	SELECT `passwordHash`, `passwordSalt` 
-		INTO `var_oldHash`, `var_oldSalt` 
-	FROM `user_accounts` 
-	WHERE `id` = `in_userId` 
-	LIMIT 1;
-	
-	INSERT INTO `user_passwordChanges` (
-		`userId`, `ip`, `date`, `oldHash`, `oldSalt`, `newHash`, `newSalt`
-	) VALUES (
-		`in_userId`, `in_ip`, `in_date`, `var_oldHash`, `var_oldSalt`, `in_newHash`, `in_newSalt`
-	);
-	
-	UPDATE `user_accounts` 
-	SET `passwordHash` = `in_newHash`, 
-		`passwordSalt` = `in_newSalt` 
-	WHERE `id` = `in_userId` 
-	LIMIT 1;
-	
-	IF (ROW_COUNT() > 0) THEN
-		SET `out_successful` = 1;
-	ELSE
-		SET `out_successful` = 0;
-	END IF;
-END $$
-
-
-
--- -------------------------------------------------------------------------------------------
---
 -- Staff Center
 --
 -- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `staff_getUserPasswordChanges` $$
+CREATE PROCEDURE `staff_getUserPasswordChanges` (
+	IN `in_userId`		INT(10) UNSIGNED,
+	IN `in_page`	  	MEDIUMINT(8) UNSIGNED, 
+	IN `in_limit`	  	SMALLINT(5) UNSIGNED,
+	OUT `out_pageCount`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_realPage`	MEDIUMINT(8) UNSIGNED,
+	OUT `out_count`		BIGINT(20) UNSIGNED
+) 
+BEGIN 
+	DECLARE `start`	BIGINT(20);
+	
+	SELECT COUNT(`date`) INTO `out_count` 
+	FROM `user_passwordChanges` 
+	WHERE `userId` = `in_userId`;
+	
+	CALL `util_getPageInfo`(`out_count`, `in_page`, `in_limit`, `out_pageCount`, `out_realPage`, `start`);
+	
+	SELECT `ip`, `date` 
+	FROM `user_passwordChanges` 
+	WHERE `userId` = `in_userId` 
+	ORDER BY `date` DESC 
+	LIMIT `start`,`in_limit`;
+END $$
 
 
 DROP PROCEDURE IF EXISTS `staff_getUserLoginSessions` $$
@@ -376,6 +343,65 @@ BEGIN
 	WHERE `deleted` = 0 
 	ORDER BY `date` DESC 
 	LIMIT `in_limit`;
+END $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- Account Management
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `user_getPassword` $$
+CREATE PROCEDURE `user_getPassword` (
+	IN `in_userId`	INT(10)
+)
+BEGIN
+	SELECT `passwordHash`, `passwordSalt` 
+	FROM `user_accounts` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_changePassword` $$
+CREATE PROCEDURE `user_changePassword` (
+	IN `in_userId`			INT(10) UNSIGNED,
+	IN `in_ip`				VARCHAR(128),
+	IN `in_date`			DATETIME,
+	IN `in_newHash`			CHAR(128),
+	IN `in_newSalt`			CHAR(128),
+	OUT `out_successful`	BIT
+) 
+BEGIN 
+	DECLARE `var_oldHash` CHAR(128);
+	DECLARE `var_oldSalt` CHAR(128);
+	
+	SELECT `passwordHash`, `passwordSalt` 
+		INTO `var_oldHash`, `var_oldSalt` 
+	FROM `user_accounts` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+	
+	INSERT INTO `user_passwordChanges` (
+		`userId`, `ip`, `date`, `oldHash`, `oldSalt`, `newHash`, `newSalt`
+	) VALUES (
+		`in_userId`, `in_ip`, `in_date`, `var_oldHash`, `var_oldSalt`, `in_newHash`, `in_newSalt`
+	);
+	
+	UPDATE `user_accounts` 
+	SET `passwordHash` = `in_newHash`, 
+		`passwordSalt` = `in_newSalt` 
+	WHERE `id` = `in_userId` 
+	LIMIT 1;
+	
+	IF (ROW_COUNT() > 0) THEN
+		SET `out_successful` = 1;
+	ELSE
+		SET `out_successful` = 0;
+	END IF;
 END $$
 
 

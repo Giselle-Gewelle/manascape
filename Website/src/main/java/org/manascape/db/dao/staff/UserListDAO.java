@@ -16,6 +16,8 @@ import org.manascape.dto.LoginAttemptInfoDTO;
 import org.manascape.dto.LoginSessionEntryDTO;
 import org.manascape.dto.LoginSessionInfoDTO;
 import org.manascape.dto.PageInfoDTO;
+import org.manascape.dto.PasswordChangeEntryDTO;
+import org.manascape.dto.PasswordChangeInfoDTO;
 import org.manascape.dto.UserDetailsDTO;
 import org.manascape.util.CountryUtil;
 import org.manascape.util.DateUtil;
@@ -33,6 +35,42 @@ public final class UserListDAO {
 	
 	public UserListDAO(DatabaseHandler db) {
 		this.db = db;
+	}
+	
+	public PasswordChangeInfoDTO getPasswordChanges(long userId, int page, int limit) {
+		PasswordChangeInfoDTO dto = new PasswordChangeInfoDTO(new PageInfoDTO(1, 1, 0), new LinkedList<>());
+		
+		try {
+			Call dbCall = db.prepareCall("staff_getUserPasswordChanges", 6)
+				.setLong("userId", userId)
+				.setInt("page", page)
+				.setInt("limit", limit)
+				.registerOut("pageCount", Types.INTEGER)
+				.registerOut("realPage", Types.INTEGER)
+				.registerOut("count", Types.BIGINT)
+				.execute();
+			
+			int realPage = dbCall.getInt("realPage");
+			int pageCount = dbCall.getInt("pageCount");
+			long fullEntryCount = dbCall.getLong("count");
+			
+			dto.getPageInfo().setCurrentPage(realPage);
+			dto.getPageInfo().setPageCount(pageCount);
+			dto.getPageInfo().setFullEntryCount(fullEntryCount);
+			
+			ResultSet results = dbCall.getResults(false);
+			if(results == null) {
+				return dto;
+			}
+
+			while(results.next()) {
+				dto.getEntries().add(new PasswordChangeEntryDTO(results.getString("ip"), DateUtil.SHORT_DATETIME_FORMAT.format(results.getTimestamp("date"))));
+			}
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to fetch a list of password changes for the user [" + userId + "].", e);
+		}
+		
+		return dto;
 	}
 	
 	public LoginSessionInfoDTO getLoginSessions(long userId, int page, int limit) {

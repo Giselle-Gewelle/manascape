@@ -186,6 +186,20 @@
 		</xs:sequence>
 	</xs:complexType>
 	
+	<xs:complexType name="PasswordChangeInfoDTO">
+		<xs:sequence>
+			<xs:element name="pageInfo"	type="PageInfoDTO"				minOccurs="1" maxOccurs="1" />
+			<xs:element name="entries"	type="PasswordChangeEntryDTO"	minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PasswordChangeEntryDTO">
+		<xs:sequence>
+			<xs:element name="ip"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="date"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
 	
 	<!--
 	Misc.

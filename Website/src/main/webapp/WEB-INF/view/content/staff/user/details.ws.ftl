@@ -14,7 +14,7 @@
 			
 			<#if currentlyLoggedIn??>
 				<div class="alert">
-					User is currently logged in using the IP ${currentlyLoggedIn}
+					User has an active login session using the IP ${currentlyLoggedIn}
 				</div>
 			</#if>
 			
@@ -100,8 +100,8 @@
 			</table>
 			
 			<h3>Recent Login Attempts</h3>
-			<p class="start end">Showing the 5 most recent attempts, <@a mod="staff" dest="userloginattempts.ws?id=${user.id}">click here</@a> to view all login attempts made against this user.</p>
 			<#list loginAttempts>
+				<p class="start end">Showing the 5 most recent attempts, <@a mod="staff" dest="userloginattempts.ws?id=${user.id}">click here</@a> to view all login attempts made against this user.</p>
 				<table>
 					<thead>
 						<tr>
@@ -126,8 +126,8 @@
 			</#list>
 			
 			<h3>Recent Login Sessions</h3>
-			<p class="start end">Showing the 5 most recent sessions, <@a mod="staff" dest="userloginsessions.ws?id=${user.id}">click here</@a> to view all login sessions opened against this user.</p>
 			<#list loginSessions>
+				<p class="start end">Showing the 5 most recent sessions, <@a mod="staff" dest="userloginsessions.ws?id=${user.id}">click here</@a> to view all login sessions opened against this user.</p>
 				<table>
 					<thead>
 						<tr>
@@ -160,7 +160,28 @@
 			</#list>
 			
 			<h3>Recent Password Changes</h3>
-			<p class="start">This user has never changed their password.</p>
+			<#list passwordChanges>
+				<p class="start end">Showing the 5 most recent password changes, <@a mod="staff" dest="userpasswordchanges.ws?id=${user.id}">click here</@a> to view all password changes submitted against this user.</p>
+				<table>
+					<thead>
+						<tr>
+							<td>IP Address</td>
+							<td>Date</td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<#items as entry>
+							<tr>
+								<td>${entry.ip}</td>
+								<td>${entry.date}</td>
+							</tr>
+						</#items>
+					</tbody>
+				</table>
+			<#else>
+				<p class="start">This user's password has never been changed.</p>
+			</#list>
 		<#else>
 			<h2>User Not Found</h2>
 			

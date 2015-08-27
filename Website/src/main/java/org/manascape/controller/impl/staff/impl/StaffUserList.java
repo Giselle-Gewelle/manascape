@@ -11,6 +11,7 @@ import org.manascape.dto.LoginAttemptEntryDTO;
 import org.manascape.dto.LoginAttemptInfoDTO;
 import org.manascape.dto.LoginSessionEntryDTO;
 import org.manascape.dto.LoginSessionInfoDTO;
+import org.manascape.dto.PasswordChangeInfoDTO;
 import org.manascape.dto.UserDetailsDTO;
 import org.manascape.dto.UserListDTO;
 import org.manascape.http.RequestHandler;
@@ -46,51 +47,70 @@ public final class StaffUserList extends StaffPage {
 			case "userloginsessions.ws":
 				prepareUserLoginSessions();
 				break;
+			case "userpasswordchanges.ws":
+				prepareUserPasswordChanges();
+				break;
 		}
 	}
 	
-	private void prepareUserLoginSessions() {
-		long userId = RequestHandler.getLongParam(getRequest(), "id");
-		if(userId < 1 || userId > DatabaseHandler.MAX_VALUE_INT) {
-			return;
-		}
-		
-		UserDetailsDTO user = dao.getUser(userId);
+	private void prepareUserPasswordChanges() {
+		UserDetailsDTO user = getUser();
 		if(user == null) {
 			return;
 		}
 		
-		getRequest().setAttribute("user", user);
+		int page = getPage();
 		
-		int page = RequestHandler.getIntParam(getRequest(), "page");
-		if(page < 1 || page > Integer.MAX_VALUE) {
-			page = 1;
+		PasswordChangeInfoDTO dto = dao.getPasswordChanges(user.getId(), page, 20);
+		getRequest().setAttribute("passwordChanges", dto);
+	}
+	
+	private void prepareUserLoginSessions() {
+		UserDetailsDTO user = getUser();
+		if(user == null) {
+			return;
 		}
+		
+		int page = getPage();
 		
 		LoginSessionInfoDTO dto = dao.getLoginSessions(user.getId(), page, 20);
 		getRequest().setAttribute("loginSessions", dto);
 	}
 	
 	private void prepareUserLoginAttempts() {
-		long userId = RequestHandler.getLongParam(getRequest(), "id");
-		if(userId < 1 || userId > DatabaseHandler.MAX_VALUE_INT) {
-			return;
-		}
-		
-		UserDetailsDTO user = dao.getUser(userId);
+		UserDetailsDTO user = getUser();
 		if(user == null) {
 			return;
 		}
 		
-		getRequest().setAttribute("user", user);
-		
-		int page = RequestHandler.getIntParam(getRequest(), "page");
-		if(page < 1 || page > Integer.MAX_VALUE) {
-			page = 1;
-		}
+		int page = getPage();
 		
 		LoginAttemptInfoDTO dto = dao.getLoginAttempts(user.getUsername(), page, 20);
 		getRequest().setAttribute("loginAttempts", dto);
+	}
+	
+	private UserDetailsDTO getUser() {
+		long userId = RequestHandler.getLongParam(getRequest(), "id");
+		if(userId < 1 || userId > DatabaseHandler.MAX_VALUE_INT) {
+			return null;
+		}
+		
+		UserDetailsDTO user = dao.getUser(userId);
+		if(user == null) {
+			return null;
+		}
+		
+		getRequest().setAttribute("user", user);
+		return user;
+	}
+	
+	private int getPage() {
+		int page = RequestHandler.getIntParam(getRequest(), "page");
+		if(page < 1 || page > Integer.MAX_VALUE) {
+			return 1;
+		}
+		
+		return page;
 	}
 	
 	private void prepareUserDetails() {
@@ -125,6 +145,7 @@ public final class StaffUserList extends StaffPage {
 			getRequest().setAttribute("currentlyLoggedIn", currentlyLoggedIn);
 			getRequest().setAttribute("loginAttempts", loginAttempts);
 			getRequest().setAttribute("loginSessions", loginSessions);
+			getRequest().setAttribute("passwordChanges", dao.getPasswordChanges(user.getId(), 1, 5).getEntries());
 		}
 	}
 	
