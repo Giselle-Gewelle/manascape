@@ -12,8 +12,10 @@ import org.manascape.controller.impl.account.sessions.Login;
 import org.manascape.controller.impl.account.sessions.Logout;
 import org.manascape.controller.impl.main.Title;
 import org.manascape.controller.impl.media.News;
+import org.manascape.controller.impl.staff.StaffPage;
 import org.manascape.controller.impl.staff.impl.StaffNews;
-import org.manascape.controller.impl.staff.impl.StaffUserList;
+import org.manascape.controller.impl.staff.impl.users.StaffUserBans;
+import org.manascape.controller.impl.staff.impl.users.StaffUserList;
 
 public final class ControllerConstants {
 	
@@ -52,12 +54,15 @@ public final class ControllerConstants {
 			
 			put("staff newsarticle.ws", StaffNews.class);
 			put("staff newsdelete.ws", StaffNews.class);
-			
+
+			put("staff center.ws", StaffPage.class);
 			put("staff userlist.ws", StaffUserList.class);
 			put("staff userdetails.ws", StaffUserList.class);
 			put("staff userloginattempts.ws", StaffUserList.class);
 			put("staff userloginsessions.ws", StaffUserList.class);
 			put("staff userpasswordchanges.ws", StaffUserList.class);
+			put("staff userbansedit.ws", StaffUserBans.class);
+			put("staff userbansview.ws", StaffUserBans.class);
 		}
 		
 	};

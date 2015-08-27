@@ -27,7 +27,8 @@ CREATE TABLE `user_accounts` (
 	`lastLoginDate`		DATETIME		NULL, 
 	`currentIP`			VARCHAR(128)	NOT NULL, 
 	
-	`supportDisabled`	BIT			NOT NULL DEFAULT 0,
+	`supportDisabled`	BIT				NOT NULL DEFAULT 0,
+	`forumsDisabled`	BIT				NOT NULL DEFAULT 0,
 	
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
@@ -74,6 +75,23 @@ CREATE TABLE `user_passwordChanges` (
 	`newSalt`		CHAR(128)		NOT NULL, 
 	
 	PRIMARY KEY (`userId`, `date`)
+) ENGINE=InnoDB;
+
+
+DROP TABLE IF EXISTS `user_bans`;
+CREATE TABLE `user_bans` (
+	`id`			BIGINT(20)		UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+	`userId`		INT(10)			UNSIGNED NOT NULL, 
+	`date`			DATETIME		NOT NULL, 
+	`addedBy`		VARCHAR(12)		NOT NULL, 
+	`type`			VARCHAR(20)		NOT NULL, 
+	`reason`		TEXT			NOT NULL,
+	`active`		BIT				NOT NULL DEFAULT 0,
+	`liftDate`		DATETIME		NULL,
+	`liftor`		VARCHAR(12)		NULL, 
+	`liftReason`	TEXT			NULL,
+	
+	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 
@@ -139,6 +157,139 @@ END $$
 -- Staff Center
 --
 -- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `staff_getUserBanForType` $$
+CREATE PROCEDURE `staff_getUserBanForType` (
+	IN `in_userId`	INT(10) UNSIGNED,
+	IN `in_type` 	VARCHAR(20)
+) 
+BEGIN 
+	SELECT `id` 
+	FROM `user_bans` 
+	WHERE `userId` = `in_userId` 
+		AND `type` = `in_type` 
+		AND `active` = 1 
+	LIMIT 1;
+END $$ 
+
+
+DROP PROCEDURE IF EXISTS `staff_getUserBan` $$
+CREATE PROCEDURE `staff_getUserBan` (
+	IN `in_id`	BIGINT(20) UNSIGNED
+) 
+BEGIN 
+	SELECT `b`.`id`, `b`.`userId`, `b`.`date`, `b`.`addedBy`, `b`.`type`, `b`.`reason`, `b`.`active`, `b`.`liftDate`, `b`.`liftor`, `b`.`liftReason`, 
+		`a`.`username` 
+	FROM `user_bans` AS `b` 
+		JOIN `user_accounts` AS `a` 
+			ON `b`.`userId` = `a`.`id` 
+	WHERE `id` = `in_id` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `staff_getUserBans` $$
+CREATE PROCEDURE `staff_getUserBans` (
+	IN `in_userId`	INT(10) UNSIGNED
+) 
+BEGIN 
+	SELECT `id`, `date`, `addedBy`, `type`, `active`  
+	FROM `user_bans` 
+	WHERE `userId` = `in_userId` 
+	ORDER BY `date` DESC;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `staff_submitUserBan` $$
+CREATE PROCEDURE `staff_submitUserBan` (
+	IN `in_userId`	INT(10) UNSIGNED,
+	IN `in_date`	DATETIME, 
+	IN `in_addedBy`	VARCHAR(12), 
+	IN `in_type`	VARCHAR(20), 
+	IN `in_reason`	TEXT
+	
+) 
+BEGIN
+	INSERT INTO `user_bans` (
+		`userId`, `date`, `addedBy`, `type`, `reason`
+	) VALUES (
+		`in_userId`, `in_date`, `in_addedBy`, `in_type`, `in_reason` 
+	);
+END $$
+
+
+DROP PROCEDURE IF EXISTS `staff_liftUserBan` $$
+CREATE PROCEDURE `staff_liftUserBan` (
+	IN `in_banId`	BIGINT(20) UNSIGNED,
+	IN `in_date`	DATETIME, 
+	IN `in_liftor`	VARCHAR(12), 
+	IN `in_reason`	TEXT
+	
+) 
+BEGIN
+	UPDATE `user_bans` 
+	SET `active` = 0,
+		`liftDate` = `in_date`, 
+		`liftor` = `in_liftor`, 
+		`liftReason` = `in_reason` 
+	WHERE `id` = `in_banId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `staff_applyOrLiftForumBan` $$
+CREATE PROCEDURE `staff_applyOrLiftSupportBan` (
+	IN `in_userId`	INT(10) UNSIGNED,
+	IN `in_date`	DATETIME, 
+	IN `in_addedBy`	VARCHAR(12), 
+	IN `in_reason`	TEXT,
+	IN `in_banId`	BIGINT(20) UNSIGNED
+) 
+BEGIN 
+	IF (`in_banID` = 0) THEN 
+		CALL `staff_submitUserBan` (`in_userId`, `in_date`, `in_addedBy`, 'forums', `in_reason`);
+		
+		UPDATE `user_accounts` 
+		SET `forumsDisabled` = 1 
+		WHERE `id` = `in_userId` 
+		LIMIT 1;
+	ELSE
+		CALL `staff_liftUserBan`(`in_banId`, `in_date`, `in_addedBy`, `in_reason`);
+		
+		UPDATE `user_accounts` 
+		SET `forumsDisabled` = 0 
+		WHERE `id` = `in_userId` 
+		LIMIT 1;
+	END IF;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `staff_applyOrLiftSupportBan` $$
+CREATE PROCEDURE `staff_applyOrLiftSupportBan` (
+	IN `in_userId`	INT(10) UNSIGNED,
+	IN `in_date`	DATETIME, 
+	IN `in_addedBy`	VARCHAR(12), 
+	IN `in_reason`	TEXT,
+	IN `in_banId`	BIGINT(20) UNSIGNED
+) 
+BEGIN 
+	IF (`in_banID` = 0) THEN 
+		CALL `staff_submitUserBan` (`in_userId`, `in_date`, `in_addedBy`, 'support', `in_reason`);
+		
+		UPDATE `user_accounts` 
+		SET `supportDisabled` = 1 
+		WHERE `id` = `in_userId` 
+		LIMIT 1;
+	ELSE
+		CALL `staff_liftUserBan`(`in_banId`, `in_date`, `in_addedBy`, `in_reason`);
+		
+		UPDATE `user_accounts` 
+		SET `supportDisabled` = 0 
+		WHERE `id` = `in_userId` 
+		LIMIT 1;
+	END IF;
+END $$
 
 
 DROP PROCEDURE IF EXISTS `staff_getUserPasswordChanges` $$
@@ -232,7 +383,7 @@ CREATE PROCEDURE `staff_getUserDetails` (
 	IN `in_id`	INT(10) UNSIGNED
 ) 
 BEGIN 
-	SELECT `id`, `username`, `dob`, `countryCode`, `creationDate`, `creationIP`, `currentIP`, `staff`, `fmod`, `pmod`, `supportDisabled` 
+	SELECT `id`, `username`, `dob`, `countryCode`, `creationDate`, `creationIP`, `currentIP`, `staff`, `fmod`, `pmod`, `supportDisabled`, `forumsDisabled` 
 	FROM `user_accounts`
 	WHERE `id` = `in_id`
 	LIMIT 1;
@@ -449,7 +600,7 @@ BEGIN
 	WHERE `id` = `in_sessionId` 
 	LIMIT 1;
 	
-	SELECT `a`.`id`, `a`.`username`, `a`.`staff`, `a`.`fmod`, `a`.`pmod`, `a`.`currentIP`, `a`.`supportDisabled` 
+	SELECT `a`.`id`, `a`.`username`, `a`.`staff`, `a`.`fmod`, `a`.`pmod`, `a`.`currentIP`, `a`.`supportDisabled`, `a`.`forumsDisabled` 
 	FROM `user_sessions` AS `s` 
 		JOIN `user_accounts` AS `a` 
 			ON `s`.`userId` = `a`.`id` 

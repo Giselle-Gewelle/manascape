@@ -20,6 +20,7 @@
 			<xs:element name="pmod"		 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="currentIP"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="supportDisabled"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="forumsDisabled"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
 			
 			<xs:element name="sessionId"		type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="sessionHash"		type="xs:string"	minOccurs="1" maxOccurs="1" />
@@ -147,6 +148,7 @@
 			<xs:element name="fmod"		 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="pmod"		 		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="supportDisabled"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="forumsDisabled"	type="xs:boolean" 	minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	
@@ -197,6 +199,31 @@
 		<xs:sequence>
 			<xs:element name="ip"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
 			<xs:element name="date"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="BanListDTO">
+		<xs:sequence>
+			<xs:element name="id"		type="xs:long" 		minOccurs="1" maxOccurs="1" />
+			<xs:element name="date"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="addedBy"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="type"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="active"	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="BanDetailsDTO">
+		<xs:sequence>
+			<xs:element name="id"			type="xs:long" 		minOccurs="1" maxOccurs="1" />
+			<xs:element name="userId"		type="xs:long" 		minOccurs="1" maxOccurs="1" />
+			<xs:element name="date"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="addedBy"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="type"			type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="reason"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="active"		type="xs:boolean"	minOccurs="1" maxOccurs="1" />
+			<xs:element name="liftDate"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="liftor"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="liftReason"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	

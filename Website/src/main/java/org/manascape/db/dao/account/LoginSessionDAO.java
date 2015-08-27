@@ -58,7 +58,7 @@ public final class LoginSessionDAO {
 			
 			String username = result.getString("username");
 			return new UserSessionDTO(result.getLong("id"), username, StringUtil.formatUsername(username), result.getBoolean("staff"), result.getBoolean("fmod"), result.getBoolean("pmod"), 
-					result.getString("currentIP"), result.getBoolean("supportDisabled"), sessionId, newHash, secure, mod, dest);
+					result.getString("currentIP"), result.getBoolean("supportDisabled"), result.getBoolean("forumsDisabled"), sessionId, newHash, secure, mod, dest);
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to fetch the user login session [" + sessionId + "].", e);
 			return null;

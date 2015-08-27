@@ -1,4 +1,4 @@
-package org.manascape.controller.impl.staff.impl;
+package org.manascape.controller.impl.staff.impl.users;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.manascape.controller.impl.staff.StaffPage;
 import org.manascape.db.DatabaseHandler;
-import org.manascape.db.dao.staff.UserListDAO;
+import org.manascape.db.dao.staff.users.StaffUserListDAO;
 import org.manascape.dto.LoginAttemptEntryDTO;
 import org.manascape.dto.LoginAttemptInfoDTO;
 import org.manascape.dto.LoginSessionEntryDTO;
@@ -22,7 +22,7 @@ import org.manascape.http.RequestHandler;
  */
 public final class StaffUserList extends StaffPage {
 
-	private UserListDAO dao;
+	private StaffUserListDAO dao;
 	
 	@Override
 	public void init() {
@@ -32,7 +32,7 @@ public final class StaffUserList extends StaffPage {
 			return;
 		}
 		
-		dao = new UserListDAO(getDb());
+		dao = new StaffUserListDAO(getDb());
 		
 		switch(getDest()) {
 			case "userlist.ws":
@@ -146,6 +146,7 @@ public final class StaffUserList extends StaffPage {
 			getRequest().setAttribute("loginAttempts", loginAttempts);
 			getRequest().setAttribute("loginSessions", loginSessions);
 			getRequest().setAttribute("passwordChanges", dao.getPasswordChanges(user.getId(), 1, 5).getEntries());
+			getRequest().setAttribute("banList", dao.getBanList(user.getId()));
 		}
 	}
 	

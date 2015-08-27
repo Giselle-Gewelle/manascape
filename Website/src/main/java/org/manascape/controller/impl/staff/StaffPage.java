@@ -7,7 +7,7 @@ import org.manascape.util.UrlUtil;
  * Content controller for all staff center pages.
  * @author DTB
  */
-public abstract class StaffPage extends Controller {
+public class StaffPage extends Controller {
 	
 	private boolean authorized;
 	

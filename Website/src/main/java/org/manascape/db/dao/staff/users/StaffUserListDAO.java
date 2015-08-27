@@ -1,16 +1,18 @@
-package org.manascape.db.dao.staff;
+package org.manascape.db.dao.staff.users;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.manascape.db.Call;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.dto.UserListDTO;
 import org.manascape.dto.UserListUserDTO;
+import org.manascape.dto.BanListDTO;
 import org.manascape.dto.LoginAttemptEntryDTO;
 import org.manascape.dto.LoginAttemptInfoDTO;
 import org.manascape.dto.LoginSessionEntryDTO;
@@ -27,14 +29,41 @@ import org.manascape.util.StringUtil;
  * Date Access Object for the Staff Center user list pages.
  * @author DTB
  */
-public final class UserListDAO {
+public final class StaffUserListDAO {
 	
-	private static final Logger LOG = Logger.getLogger(UserListDAO.class);
+	private static final Logger LOG = Logger.getLogger(StaffUserListDAO.class);
 	
 	private final DatabaseHandler db;
 	
-	public UserListDAO(DatabaseHandler db) {
+	public StaffUserListDAO(DatabaseHandler db) {
 		this.db = db;
+	}
+	
+	public List<BanListDTO> getBanList(long userId) {
+		try {
+			ResultSet results = db.prepareCall("staff_getUserBans", 1)
+				.setLong("userId", userId)
+				.getResults();
+			
+			if(results == null) {
+				return null;
+			}
+			
+			List<BanListDTO> banList = new LinkedList<>();
+			while(results.next()) {
+				banList.add(new BanListDTO(results.getLong("id"), DateUtil.SHORT_DATETIME_FORMAT.format(results.getTimestamp("date")), StringUtil.formatUsername(results.getString("addedBy")), 
+						results.getString("type"), results.getBoolean("active")));
+			}
+			
+			if(banList.size() < 1) {
+				return null;
+			}
+			
+			return banList;
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to fetch a lift of bans for the user [" + userId + "].", e);
+			return null;
+		}
 	}
 	
 	public PasswordChangeInfoDTO getPasswordChanges(long userId, int page, int limit) {
@@ -179,6 +208,7 @@ public final class UserListDAO {
 			dto.setFmod(result.getBoolean("fmod"));
 			dto.setPmod(result.getBoolean("pmod"));
 			dto.setSupportDisabled(result.getBoolean("supportDisabled"));
+			dto.setForumsDisabled(result.getBoolean("forumsDisabled"));
 			
 			return dto;
 		} catch(SQLException e){

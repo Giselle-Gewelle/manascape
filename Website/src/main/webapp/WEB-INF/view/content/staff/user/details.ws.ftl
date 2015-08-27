@@ -86,18 +86,47 @@
 			<table>
 				<thead>
 					<tr>
-						<td title="Basic support includes: Bug reporting, feedback submission, etc... Account recovery and such will remain usable.">Basic Support Revoked?</td>
+						<td title="Basic support includes: Bug reporting, polls, feedback submission, etc... Account recovery and such will remain usable.">Basic Support Revoked?</td>
 						<td>Forums Revoked?</td>
 					</tr>
 				</thead>
 				
 				<tbody>
 					<tr>
-						<td>${user.supportDisabled?string("Yes", "No")}</td>
-						<td>No</td>
+						<td><@a mod="staff" dest="userbansedit.ws?id=${user.id}&amp;type=support">${user.supportDisabled?string("Yes", "No")}</@a></td>
+						<td><@a mod="staff" dest="userbansedit.ws?id=${user.id}&amp;type=forums">${user.forumsDisabled?string("Yes", "No")}</@a></td>
 					</tr>
 				</tbody>
 			</table>
+			
+			<h3>Recent Bans/Offenses</h3>
+			<#if banList??>
+				<table>
+					<thead>
+						<tr>
+							<td>Offense Date</td>
+							<td>Added By</td>
+							<td>Type</td>
+							<td>Active?</td>
+							<td>Actions</td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<#list banList as ban>
+							<tr>
+								<td>${ban.date}</td>
+								<td>${ban.addedBy}</td>
+								<td>${ban.type}</td>
+								<td>${ban.active?string("Yes", "No")}</td>
+								<td><@a mod="staff" dest="userbansview.ws?id=${ban.id}">Details</@a></td>
+							</tr>
+						</#list>
+					</tbody>
+				</table>
+			<#else>
+				<p class="start">This user has not received any bans.</p>
+			</#if>
 			
 			<h3>Recent Login Attempts</h3>
 			<#list loginAttempts>
