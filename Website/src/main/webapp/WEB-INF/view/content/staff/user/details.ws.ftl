@@ -93,8 +93,8 @@
 				
 				<tbody>
 					<tr>
-						<td><@a mod="staff" dest="userbansedit.ws?id=${user.id}&amp;type=support">${user.supportDisabled?string("Yes", "No")}</@a></td>
-						<td><@a mod="staff" dest="userbansedit.ws?id=${user.id}&amp;type=forums">${user.forumsDisabled?string("Yes", "No")}</@a></td>
+						<td><@a mod="staff" dest="userbansedit.ws?userId=${user.id}&amp;type=support">${user.supportDisabled?string("Yes", "No")}</@a></td>
+						<td><@a mod="staff" dest="userbansedit.ws?userId=${user.id}&amp;type=forums">${user.forumsDisabled?string("Yes", "No")}</@a></td>
 					</tr>
 				</tbody>
 			</table>

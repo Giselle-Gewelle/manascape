@@ -86,7 +86,7 @@ CREATE TABLE `user_bans` (
 	`addedBy`		VARCHAR(12)		NOT NULL, 
 	`type`			VARCHAR(20)		NOT NULL, 
 	`reason`		TEXT			NOT NULL,
-	`active`		BIT				NOT NULL DEFAULT 0,
+	`active`		BIT				NOT NULL DEFAULT 1,
 	`liftDate`		DATETIME		NULL,
 	`liftor`		VARCHAR(12)		NULL, 
 	`liftReason`	TEXT			NULL,
@@ -184,7 +184,7 @@ BEGIN
 	FROM `user_bans` AS `b` 
 		JOIN `user_accounts` AS `a` 
 			ON `b`.`userId` = `a`.`id` 
-	WHERE `id` = `in_id` 
+	WHERE `b`.`id` = `in_id` 
 	LIMIT 1;
 END $$
 
@@ -239,7 +239,7 @@ END $$
 
 
 DROP PROCEDURE IF EXISTS `staff_applyOrLiftForumBan` $$
-CREATE PROCEDURE `staff_applyOrLiftSupportBan` (
+CREATE PROCEDURE `staff_applyOrLiftForumBan` (
 	IN `in_userId`	INT(10) UNSIGNED,
 	IN `in_date`	DATETIME, 
 	IN `in_addedBy`	VARCHAR(12), 

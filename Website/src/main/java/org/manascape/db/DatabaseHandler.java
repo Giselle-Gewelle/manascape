@@ -6,7 +6,8 @@ import java.sql.SQLException;
 public final class DatabaseHandler {
 	
 	public static final int 
-		MAX_VALUE_MEDIUMINT = 16777215;
+		MAX_VALUE_MEDIUMINT = 16777215,
+		MAX_LENGTH_TEXT = 65535;
 	public static final long 
 		MAX_VALUE_INT = 4294967295L;
 	

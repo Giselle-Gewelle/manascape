@@ -224,6 +224,7 @@
 			<xs:element name="liftDate"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
 			<xs:element name="liftor"		type="xs:string" 	minOccurs="1" maxOccurs="1" />
 			<xs:element name="liftReason"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
+			<xs:element name="bannedUser"	type="xs:string" 	minOccurs="1" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	
