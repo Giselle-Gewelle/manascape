@@ -1,63 +1,65 @@
 @charset "UTF-8";
 
-.section {
-	border: 1px solid #8A744A;
-	margin: 0 auto 10px;
-	padding: 1px;
-	
-	.header {
-		width: 761px;
-		height: 38px;
-		display: block;
-	}
-	.noMessages {
-		margin-top: 1px;
-		padding: 7px 0;
-		background: #45372A;
-		text-align: center;
-		color: #888888;
-		font-style: italic;
-	}
-	.item {
-		margin-top: 1px;
-		display: -webkit-box;
-		display: -moz-box;
-		display: -ms-flexbox;
-		display: -webkit-flex;
-		display: flex;
-		font-size: 0px !important;
+#inbox {
+	.section {
+		border: 1px solid #8A744A;
+		margin: 0 auto 10px;
+		padding: 1px;
 		
-		span {
+		.header {
+			width: 761px;
+			height: 38px;
+			display: block;
+		}
+		.noMessages {
+			margin-top: 1px;
+			padding: 7px 0;
 			background: #45372A;
 			text-align: center;
-			display: inline-block;
-			align-items: stretch;
-			-webkit-align-items: stretch;
+			color: #888888;
+			font-style: italic;
 		}
-		
-		.title, .messages, .date {
-			margin-right: 1px;
-			font-size: 13px !important;
-			padding: 7px 0;
-		}
-		.title {
-			width: 326px;
+		.item {
+			margin-top: 1px;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			font-size: 0px !important;
 			
-			strong {
-				font-weight: normal !important;
+			span {
+				background: #45372A;
+				text-align: center;
+				display: inline-block;
+				align-items: stretch;
+				-webkit-align-items: stretch;
 			}
-		}
-		.messages {
-			width: 53px;
-		}
-		.date {
-			width: 220px;
-		}
-		.actions {
-			width: 159px;
 			
-			img {
-				margin: 2px 6px 0;
+			.title, .messages, .date {
+				margin-right: 1px;
+				font-size: 13px !important;
+				padding: 7px 0;
+			}
+			.title {
+				width: 326px;
+				
+				strong {
+					font-weight: normal !important;
+				}
+			}
+			.messages {
+				width: 53px;
+			}
+			.date {
+				width: 220px;
+			}
+			.actions {
+				width: 159px;
+				
+				img {
+					margin: 2px 6px 0;
+				}
 			}
 		}
 	}
@@ -119,5 +121,31 @@
 			display: block;
 			margin: 5px auto;
 		}
+	}
+}
+
+form {
+	.section {
+		margin-top: 1em;
+		
+		textarea {
+			display: block;
+			box-sizing: border-box;
+			width: 100%;
+			min-width: 100%;
+			max-width: 100%;
+			height: 100px;
+			min-height: 100px;
+			max-height: 200px;
+			margin: 2px 0;
+		}
+	}
+}
+
+#lastMessage {
+	margin-top: 1em;
+	
+	.text {
+		margin-bottom: 0.5em;
 	}
 }

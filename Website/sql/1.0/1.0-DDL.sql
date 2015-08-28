@@ -101,6 +101,9 @@ CREATE TABLE `user_ticketThreads` (
 	`title`				VARCHAR(50)		NOT NULL, 
 	`messageCount`		SMALLINT(5)		UNSIGNED NOT NULL DEFAULT 1,
 	`lastMessageId`		INT(10)			NULL,
+	`canReply`			BIT				NOT NULL DEFAULT 1,
+	`authorDel`			BIT				NOT NULL DEFAULT 0,
+	`receiverDel`		BIT				NOT NULL DEFAULT 0,
 	
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
@@ -116,8 +119,6 @@ CREATE TABLE `user_ticketMessages` (
 	`authorId`		INT(10)			UNSIGNED NOT NULL,
 	`authorIP`		VARCHAR(128)	NOT NULL, 
 	`receiver`		VARCHAR(12)		NULL, 
-	`authorDel`		BIT				NOT NULL DEFAULT 0,
-	`receiverDel`	BIT				NOT NULL DEFAULT 0,
 	`message`		TEXT			NOT NULL, 
 	`readOn`		DATETIME		NULL,
 	
@@ -536,18 +537,67 @@ END $$
 -- -------------------------------------------------------------------------------------------
 
 
-DROP PROCEDURE IF EXISTS `user_ticketGetThread` $$
-CREATE PROCEDURE `user_ticketGetThread` (
+DROP PROCEDURE IF EXISTS `user_ticketReply` $$
+CREATE PROCEDURE `user_ticketReply` (
+	IN `in_id`			INT(10) UNSIGNED,
+	IN `in_userId`		INT(10) UNSIGNED,
+	IN `in_username`	VARCHAR(12),
+	IN `in_userIP`		VARCHAR(128),
+	IN `in_userStaff`	BIT,
+	IN `in_receiver`	VARCHAR(12),
+	IN `in_date`		DATETIME,
+	IN `in_message`		TEXT,
+	IN `in_canReply`	BIT,
+	OUT `out_messageId`	BIGINT(20) UNSIGNED
+) 
+BEGIN
+	INSERT INTO `user_ticketMessages` (
+		`threadId`, `date`, `author`, `authorStaff`, `authorId`, `authorIP`, `receiver`, `message` 
+	) VALUES (
+		`in_id`, `in_date`, `in_username`, `in_userStaff`, `in_userId`, `in_userIP`, `in_receiver`, `in_message` 
+	);
+	
+	SET `out_messageId` = LAST_INSERT_ID();
+	
+	UPDATE `user_ticketThreads` 
+	SET `lastMessageId` = `out_messageId`, 
+		`canReply` = `in_canReply`, 
+		`authorDel` = 0, 
+		`receiverDel` = 0, 
+		`messageCount` = (`messageCount` + 1) 
+	WHERE `id` = `in_id` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketSetMessageRead` $$
+CREATE PROCEDURE `user_ticketSetMessageRead` (
 	IN `in_id`		INT(10) UNSIGNED,
-	OUT `out_title`	VARCHAR(50)
+	IN `in_date`	DATETIME
 ) 
 BEGIN 
-	SELECT `title` INTO `out_title` 
+	UPDATE `user_ticketMessages` 
+	SET `readOn` = `in_date` 
+	WHERE `id` = `in_id`;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketGetThread` $$
+CREATE PROCEDURE `user_ticketGetThread` (
+	IN `in_id`				INT(10) UNSIGNED,
+	OUT `out_title`			VARCHAR(50),
+	OUT `out_canReply`		BIT,
+	OUT `out_receiverDel`	BIT,
+	OUT `out_authorDel`		BIT
+) 
+BEGIN 
+	SELECT `title`, `canReply`, `receiverDel`, `authorDel` 
+		INTO `out_title`, `out_canReply`, `out_receiverDel`, `out_authorDel`
 	FROM `user_ticketThreads` 
 	WHERE `id` = `in_id` 
 	LIMIT 1;
 	
-	SELECT `date`, `author`, `authorStaff`, `authorId`, `authorIP`, `receiver`, `message`, `readOn` 
+	SELECT `id`, `date`, `author`, `authorStaff`, `authorId`, `authorIP`, `receiver`, `message`, `readOn`  
 	FROM `user_ticketMessages` 
 	WHERE `threadId` = `in_id` 
 	ORDER BY `date` ASC;
@@ -566,7 +616,7 @@ BEGIN
 			ON `t`.`lastMessageId` = `m`.`id` 
 	WHERE `m`.`readOn` IS NULL 
 		AND `m`.`receiver` = `in_username` 
-		AND `m`.`receiverDel` = 0 
+		AND `t`.`receiverDel` = 0 
 	ORDER BY `m`.`date` DESC;
 END $$
 
@@ -583,7 +633,7 @@ BEGIN
 			ON `t`.`lastMessageId` = `m`.`id` 
 	WHERE `m`.`readOn` IS NOT NULL 
 		AND `m`.`receiver` = `in_username` 
-		AND `m`.`receiverDel` = 0 
+		AND `t`.`receiverDel` = 0 
 	ORDER BY `m`.`date` DESC;
 END $$
 
@@ -599,7 +649,7 @@ BEGIN
 		JOIN `user_ticketMessages` AS `m` 
 			ON `t`.`lastMessageId` = `m`.`id` 
 	WHERE `m`.`author` = `in_username` 
-		AND `m`.`authorDel` = 0 
+		AND `t`.`authorDel` = 0 
 	ORDER BY `m`.`date` DESC;
 END $$
 

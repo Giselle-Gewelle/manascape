@@ -67,6 +67,7 @@
 	
 	<xs:complexType name="TicketMessageDTO">
 		<xs:sequence>
+			<xs:element name="messageId"	type="xs:long"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="date"			type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="author"		type="xs:string"	minOccurs="1" maxOccurs="1" />
 			<xs:element name="authorStaff"	type="xs:boolean"	minOccurs="1" maxOccurs="1" />
@@ -82,6 +83,7 @@
 		<xs:sequence>
 			<xs:element name="threadId"		type="xs:long"			minOccurs="1" maxOccurs="1" />
 			<xs:element name="title"		type="xs:string"		minOccurs="1" maxOccurs="1" />
+			<xs:element name="canReply"		type="xs:boolean"		minOccurs="1" maxOccurs="1" />
 			<xs:element name="messageList"	type="TicketMessageDTO"	minOccurs="1" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
