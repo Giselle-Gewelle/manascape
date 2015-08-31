@@ -154,6 +154,7 @@
 								<ul>
 									<li><@a mod="staff" dest="newsarticle.ws">Post News Article</@a></li>
 									<li><@a mod="staff" dest="userlist.ws">User List</@a></li>
+									<li><@a mod="staff" dest="ticketqueue.ws">Ticket Queue</@a></li>
 								</ul>
 							</li>
 						</#if>

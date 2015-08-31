@@ -15,6 +15,7 @@ import org.manascape.controller.impl.main.Title;
 import org.manascape.controller.impl.media.News;
 import org.manascape.controller.impl.staff.StaffPage;
 import org.manascape.controller.impl.staff.impl.StaffNews;
+import org.manascape.controller.impl.staff.impl.users.StaffTicketing;
 import org.manascape.controller.impl.staff.impl.users.StaffUserBans;
 import org.manascape.controller.impl.staff.impl.users.StaffUserList;
 
@@ -71,6 +72,7 @@ public final class ControllerConstants {
 			put("staff userpasswordchanges.ws", StaffUserList.class);
 			put("staff userbansedit.ws", StaffUserBans.class);
 			put("staff userbansview.ws", StaffUserBans.class);
+			put("staff ticketqueue.ws", StaffTicketing.class);
 		}
 		
 	};
