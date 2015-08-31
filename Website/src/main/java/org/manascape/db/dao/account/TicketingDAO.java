@@ -3,11 +3,13 @@ package org.manascape.db.dao.account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.manascape.Config;
 import org.manascape.db.Call;
 import org.manascape.db.DatabaseHandler;
 import org.manascape.dto.TicketInboxDTO;
@@ -27,6 +29,44 @@ public final class TicketingDAO {
 	public TicketingDAO(DatabaseHandler db, UserSessionDTO user) {
 		this.db = db;
 		this.user = user;
+	}
+	
+	public boolean flooding(Calendar cal, int max) {
+		try {
+			Call dbCall = db.prepareCall("user_ticketFloodCheck", 4)
+				.setString("ip", user.getCurrentIP())
+				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(cal.getTime()))
+				.setInt("max", max + 1)
+				.registerOut("count", Types.SMALLINT)
+				.execute();
+			
+			return dbCall.getInt("count") >= max;
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to check if the user [" + user.getUsername() + "] is attempting to flood the ticketing system.", e);
+			return true;
+		}
+	}
+	
+	public boolean submitNewThread(String authorName, String receiverName, String title, boolean canReply, String message) {
+		try {
+			Call dbCall = db.prepareCall("user_ticketNewThread", 10)
+				.setString("title", title)
+				.setBoolean("canReply", canReply)
+				.setString("date", DateUtil.SQL_DATETIME_FORMAT.format(new Date()))
+				.setString("author", authorName)
+				.setBoolean("authorStaff", user.isStaff())
+				.setLong("authorId", user.getId())
+				.setString("authorIP", user.getCurrentIP())
+				.setString("receiver", receiverName)
+				.setString("message", message)
+				.registerOut("success", Types.BOOLEAN)
+				.execute();
+			
+			return dbCall.getBoolean("success");
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to submit a new ticket thread, requested by [" + user.getUsername() + "].", e);
+			return false;
+		}
 	}
 	
 	public boolean receiverDelete(long threadId) {
@@ -112,10 +152,16 @@ public final class TicketingDAO {
 			while(results.next()) {
 				Date readOn = results.getTimestamp("readOn");
 				long authorId = results.getLong("authorId");
+				String receiver = results.getString("receiver");
+				if(receiver == null) {
+					receiver = Config.getCompanyName();
+				} else {
+					receiver = StringUtil.formatUsername(receiver);
+				}
 				
 				messageList.add(new TicketMessageDTO(
 					results.getLong("id"), DateUtil.SHORT_DATETIME_FORMAT.format(results.getTimestamp("date")), StringUtil.formatUsername(results.getString("author")), 
-					results.getBoolean("authorStaff"), authorId, results.getString("authorIP"), StringUtil.formatUsername(results.getString("receiver")), results.getString("message"), 
+					results.getBoolean("authorStaff"), authorId, results.getString("authorIP"), receiver, results.getString("message"), 
 					(readOn == null ? null : DateUtil.SHORT_DATETIME_FORMAT.format(readOn))
 				));
 			}

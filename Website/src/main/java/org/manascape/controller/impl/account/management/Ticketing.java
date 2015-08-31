@@ -1,5 +1,7 @@
 package org.manascape.controller.impl.account.management;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.manascape.controller.Controller;
@@ -10,10 +12,24 @@ import org.manascape.dto.TicketMessageDTO;
 import org.manascape.dto.TicketThreadDTO;
 import org.manascape.http.HttpRequestType;
 import org.manascape.http.RequestHandler;
+import org.manascape.util.StringUtil;
 import org.manascape.util.UrlUtil;
 
 public final class Ticketing extends Controller {
 
+	private static final List<String> QUERY_TYPES = new ArrayList<String>() {
+		
+		private static final long serialVersionUID = 7272964870205325366L;
+
+		{
+			add("privacy");
+			add("complaint");
+			add("feedback");
+			add("other");
+		}
+		
+	};
+	
 	private TicketingDAO dao;
 	
 	@Override
@@ -37,7 +53,78 @@ public final class Ticketing extends Controller {
 			case "delete.ws":
 				prepareDelete();
 				break;
+			case "query.ws":
+				prepareQuery();
+				break;
 		}
+	}
+	
+	private void prepareQuery() {
+		if(getLoginSession().getUser().isSupportDisabled()) {
+			getRequest().setAttribute("supportDisabled", true);
+			return;
+		}
+		
+		String preQueryType = getRequest().getParameter("type");
+		if(preQueryType != null) {
+			if(QUERY_TYPES.contains(preQueryType)) {
+				getRequest().setAttribute("queryType", preQueryType);
+			}
+		}
+		
+		if(getRequestType().equals(HttpRequestType.POST)) {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MINUTE, -15);
+			if(dao.flooding(cal, 1)) {
+				getRequest().setAttribute("flooding", true);
+				return;
+			}
+			
+			boolean success = true;
+			
+			String queryType = validateQueryType();
+			if(queryType == null) {
+				success = false;
+				getRequest().setAttribute("queryTypeError", true);
+			} else {
+				getRequest().setAttribute("queryType", queryType);
+			}
+			
+			String message = getRequest().getParameter("inputMessage");
+			if(message == null) {
+				success = false;
+				getRequest().setAttribute("messageError", 0);
+			} else {
+				message = message.trim();
+				if(message.length() < 1 || message.length() > 1024) {
+					success = false;
+					getRequest().setAttribute("messageError", 1);
+				} else {
+					getRequest().setAttribute("message", message);
+				}
+			}
+			
+			if(success) {
+				if(!dao.submitNewThread(getLoginSession().getUser().getUsername(), null, "Support Query: " + StringUtil.formatUsername(queryType), true, message)) {
+					getRequest().setAttribute("submissionError", true);
+				} else {
+					getRequest().setAttribute("successful", true);
+				}
+			}
+		}
+	}
+	
+	private String validateQueryType() {
+		String queryType = getRequest().getParameter("inputType");
+		if(queryType == null) {
+			return null;
+		}
+		
+		if(!QUERY_TYPES.contains(queryType)) {
+			return null;
+		}
+		
+		return queryType;
 	}
 	
 	private void prepareDelete() {
@@ -130,7 +217,6 @@ public final class Ticketing extends Controller {
 				}
 			}
 			
-			// TODO canReply
 			if(!dao.sendReply(thread.getThreadId(), lastMessage.getAuthor(), reply, canReply)) {
 				getRequest().setAttribute("errorCode", 2);
 			} else {

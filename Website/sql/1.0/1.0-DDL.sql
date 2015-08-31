@@ -430,6 +430,78 @@ END $$
 -- -------------------------------------------------------------------------------------------
 
 
+DROP PROCEDURE IF EXISTS `user_ticketFloodCheck` $$
+CREATE PROCEDURE `user_ticketFloodCheck` (
+	IN `in_ip`		VARCHAR(128),
+	IN `in_date`	DATETIME, 
+	IN `in_max`		SMALLINT(5) UNSIGNED,
+	OUT `out_count`	SMALLINT(5) UNSIGNED
+) 
+BEGIN 
+	SELECT COUNT(`date`) INTO `out_count` 
+	FROM `user_ticketMessages` 
+	WHERE `authorIP` = `in_ip` 
+		AND `date` >= `in_date` 
+	ORDER BY `date` DESC 
+	LIMIT `in_max`;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketNewThread` $$
+CREATE PROCEDURE `user_ticketNewThread` (
+	IN `in_title`		VARCHAR(50),
+	IN `in_canReply`	BIT,
+	IN `in_date`		DATETIME,
+	IN `in_author`		VARCHAR(12),
+	IN `in_authorStaff`	BIT,
+	IN `in_authorId`	INT(10) UNSIGNED,
+	IN `in_authorIP`	VARCHAR(128),
+	IN `in_receiver`	VARCHAR(12),
+	IN `in_message`		TEXT,
+	OUT `out_success`	BIT
+) 
+BEGIN 
+	DECLARE `var_threadId` INT(10) UNSIGNED;
+	DECLARE `var_messageId`	INT(10) UNSIGNED;
+	
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+    BEGIN
+          SET `out_success` = 0;
+          ROLLBACK;
+    END;
+
+    START TRANSACTION;
+    	INSERT INTO `user_ticketThreads` (
+    		`title`, `canReply`
+    	) VALUES (
+    		`in_title`, `in_canReply`
+    	);
+    	
+    	SET `var_threadId` = LAST_INSERT_ID();
+    	
+    	INSERT INTO `user_ticketMessages` (
+    		`threadId`, `date`, `author`, `authorStaff`, `authorId`, `authorIP`, `receiver`, `message`
+    	) VALUES (
+    		`var_threadId`, `in_date`, `in_author`, `in_authorStaff`, `in_authorId`, `in_authorIP`, `in_receiver`, `in_message` 
+    	);
+    	
+    	SET `var_messageId` = LAST_INSERT_ID();
+    	
+    	UPDATE `user_ticketThreads` 
+    	SET `lastMessageId` = `var_messageId` 
+    	WHERE `id` = `var_threadId` 
+    	ORDER BY `id` DESC 
+    	LIMIT 1;
+    
+    	IF (ROW_COUNT() > 0) THEN 
+   			SET `out_success` = 1;
+   		ELSE 
+   			SET `out_success` = 0;
+   		END IF;
+    COMMIT;
+END $$
+
+
 DROP PROCEDURE IF EXISTS `user_ticketReceiverDelete` $$
 CREATE PROCEDURE `user_ticketReceiverDelete` (
 	IN `in_id`			INT(10) UNSIGNED

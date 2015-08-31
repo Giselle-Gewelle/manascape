@@ -1,7 +1,7 @@
 <#assign cssImports = [ "account/ticketing" ] />
 <#include "../../inc/header.ftl" />
 
-<h1>Your Messages from ${gameName}</h1>
+<h1>Message Center</h1>
 
 <@location>
 	<@a mod="account" dest="manage.ws">Account Management</@a> &gt; Message Center
