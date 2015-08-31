@@ -47,11 +47,15 @@
 		</div>
 	</#list>
 	
-	<#if thread.canReply>
-		<div class="center">
-			<p><@a mod="ticketing" dest="reply.ws?id=${thread.threadId}">Reply to Message</@a></p>
-		</div>
-	</#if>
+	<div class="center">
+		<p>
+			<#if thread.canReply>
+				<@a mod="ticketing" dest="reply.ws?id=${thread.threadId}"><@img src="content/account/ticketing/navreply.png" /> Reply to Message</@a>&nbsp;&nbsp;&nbsp;
+			</#if>
+			
+			<@a mod="ticketing" dest="delete.ws?id=${thread.threadId}"><@img src="content/account/ticketing/navdelete.png" /> Delete Message</@a>
+		</p>
+	</div>
 	
 	<@location>
 		<@a mod="account" dest="manage.ws">Account Management</@a> &gt; <@a mod="ticketing" dest="inbox.ws">Message Center</@a> &gt; 

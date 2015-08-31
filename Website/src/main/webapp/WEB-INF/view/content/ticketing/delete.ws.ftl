@@ -51,17 +51,24 @@
 	
 	<div class="scroll">
 		<div class="content">
-			<h2>Please Confirm</h2>
-			
-			<form method="post" action="${url('ticketing', 'delete.ws')}">
-				<input type="hidden" name="id=" value="${thread.threadId}" />
+			<#if error??>
+				<h2>Error</h2>
 				
-				<p>Are you sure you wish to delete this message?</p>
-				<p><strong>Please be aware that this action can never be undone.</strong></p>
+				<p>An error has occurred.</p>
+				<p><@a mod="ticketing" dest="delete.ws?id=${thread.threadId}">Click here to go back and try again.</@a></p>
+			<#else>
+				<h2>Please Confirm</h2>
 				
-				<button id="inputSubmit" name="inputSubmit" value="submit">Delete</button>&nbsp;
-				<button id="inputCancel" name="inputCancel" value="cancel">Cancel</button>
-			</form>
+				<form method="post" action="${url('ticketing', 'delete.ws')}">
+					<input type="hidden" name="id" value="${thread.threadId}" />
+					
+					<p>Are you sure you wish to delete this message?</p>
+					<p><strong>Please be aware that this action can never be undone.</strong></p>
+					
+					<button id="inputSubmit" name="inputSubmit" value="submit">Delete</button>&nbsp;
+					<button id="inputCancel" name="inputCancel" value="cancel">Cancel</button>
+				</form>
+			</#if>
 		</div>
 	</div>
 

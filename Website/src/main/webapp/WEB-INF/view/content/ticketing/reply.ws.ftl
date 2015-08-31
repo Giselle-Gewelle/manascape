@@ -98,6 +98,12 @@
 							<div id="inputMessageCharlimiter" class="charlimiter"></div>
 						</div>
 						
+						<#if loginSession.user.staff>
+							<div class="section">
+								<label for="inputCanReply"><input type="checkbox" id="inputCanReply" name="inputCanReply" value="yes" checked="checked" /> User Can Reply</label>
+							</div>
+						</#if>
+						
 						<div class="section">
 							<button id="inputSubmit" name="inputSubmit" value="submit">Submit</button>&nbsp;
 							<button id="inputCancel" name="inputCancel" value="cancel">Cancel</button>

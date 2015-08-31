@@ -50,6 +50,33 @@ public final class Ticketing extends Controller {
 		
 		TicketMessageDTO lastMessage = thread.getMessageList().get(thread.getMessageList().size() - 1);
 		getRequest().setAttribute("lastMessage", lastMessage);
+		
+		if(getRequestType().equals(HttpRequestType.POST)) {
+			if(getRequest().getParameter("inputCancel") != null) {
+				setRedirecting(true);
+				UrlUtil.redirect(getResponse(), "ticketing", "view.ws?id=" + thread.getThreadId());
+				return;
+			}
+			
+			if(getRequest().getParameter("inputSubmit") == null) {
+				return;
+			}
+			
+			if(lastMessage.getAuthor().equals(getLoginSession().getUser().getDisplayName())) {
+				if(!dao.authorDelete(thread.getThreadId())) {
+					getRequest().setAttribute("error", true);
+					return;
+				}
+			} else if(lastMessage.getReceiver().equals(getLoginSession().getUser().getDisplayName())) {
+				if(!dao.receiverDelete(thread.getThreadId())) {
+					getRequest().setAttribute("error", true);
+					return;
+				}
+			}
+			
+			setRedirecting(true);
+			UrlUtil.redirect(getResponse(), "ticketing", "inbox.ws");
+		}
 	}
 	
 	private void prepareReply() {
@@ -91,8 +118,20 @@ public final class Ticketing extends Controller {
 				return;
 			}
 			
+			boolean canReply = true;
+			if(getLoginSession().getUser().isStaff()) {
+				String canReplyStr = getRequest().getParameter("inputCanReply");
+				if(canReplyStr == null) {
+					canReply = false;
+				} else {
+					if(canReplyStr.equals("yes")) {
+						canReply = true;
+					}
+				}
+			}
+			
 			// TODO canReply
-			if(!dao.sendReply(thread.getThreadId(), lastMessage.getAuthor(), reply, true)) {
+			if(!dao.sendReply(thread.getThreadId(), lastMessage.getAuthor(), reply, canReply)) {
 				getRequest().setAttribute("errorCode", 2);
 			} else {
 				getRequest().setAttribute("successful", true);

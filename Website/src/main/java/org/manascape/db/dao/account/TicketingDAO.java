@@ -29,6 +29,32 @@ public final class TicketingDAO {
 		this.user = user;
 	}
 	
+	public boolean receiverDelete(long threadId) {
+		try {
+			db.prepareCall("user_ticketReceiverDelete", 1)
+				.setLong("id", threadId)
+				.execute();
+			
+			return true;
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to delete a ticketing thread of the receiver [" + user.getUsername() + "].", e);
+			return false;
+		}
+	}
+	
+	public boolean authorDelete(long threadId) {
+		try {
+			db.prepareCall("user_ticketAuthorDelete", 1)
+				.setLong("id", threadId)
+				.execute();
+			
+			return true;
+		} catch(SQLException e) {
+			LOG.error("SQLException occurred while attempting to delete a ticketing thread of the author [" + user.getUsername() + "].", e);
+			return false;
+		}
+	}
+	
 	public boolean sendReply(long threadId, String receiverName, String message, boolean canReply) {
 		try {
 			Call dbCall = db.prepareCall("user_ticketReply", 10)
