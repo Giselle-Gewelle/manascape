@@ -82,12 +82,10 @@ public final class TicketingDAO {
 				return null;
 			}
 			
-			long lastAuthor = 0;
 			List<TicketMessageDTO> messageList = new LinkedList<>();
 			while(results.next()) {
 				Date readOn = results.getTimestamp("readOn");
 				long authorId = results.getLong("authorId");
-				lastAuthor = authorId;
 				
 				messageList.add(new TicketMessageDTO(
 					results.getLong("id"), DateUtil.SHORT_DATETIME_FORMAT.format(results.getTimestamp("date")), StringUtil.formatUsername(results.getString("author")), 
@@ -100,20 +98,7 @@ public final class TicketingDAO {
 				return null;
 			}
 			
-			// Making sure a user can't reply to their own reply, and that they can't see this message if it is marked as "deleted" for them.
-			if(lastAuthor == user.getId()) {
-				canReply = false;
-				
-				if(authorDel) {
-					return null;
-				}
-			} else {
-				if(receiverDel) {
-					return null;
-				}
-			}
-			
-			return new TicketThreadDTO(id, title, canReply, messageList);
+			return new TicketThreadDTO(id, title, canReply, authorDel, receiverDel, messageList);
 		} catch(SQLException e) {
 			LOG.error("SQLException occurred while attempting to fetch a support ticket thread with the id [" + id + "] for the user [" + user.getUsername() + "].", e);
 			return null;

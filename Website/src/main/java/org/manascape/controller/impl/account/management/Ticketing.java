@@ -34,7 +34,22 @@ public final class Ticketing extends Controller {
 			case "reply.ws":
 				prepareReply();
 				break;
+			case "delete.ws":
+				prepareDelete();
+				break;
 		}
+	}
+	
+	private void prepareDelete() {
+		TicketThreadDTO thread = getThread();
+		if(thread == null) {
+			return;
+		}
+		
+		getRequest().setAttribute("thread", thread);
+		
+		TicketMessageDTO lastMessage = thread.getMessageList().get(thread.getMessageList().size() - 1);
+		getRequest().setAttribute("lastMessage", lastMessage);
 	}
 	
 	private void prepareReply() {
@@ -77,7 +92,7 @@ public final class Ticketing extends Controller {
 			}
 			
 			// TODO canReply
-			if(!dao.sendReply(thread.getThreadId(), lastMessage.getReceiver(), reply, true)) {
+			if(!dao.sendReply(thread.getThreadId(), lastMessage.getAuthor(), reply, true)) {
 				getRequest().setAttribute("errorCode", 2);
 			} else {
 				getRequest().setAttribute("successful", true);
@@ -124,7 +139,29 @@ public final class Ticketing extends Controller {
 		}
 		
 		TicketMessageDTO lastMessage = thread.getMessageList().get(thread.getMessageList().size() - 1);
-		dao.setMessageRead(lastMessage.getMessageId());
+		
+		boolean authorDel = false;
+		boolean receiverDel = false;
+		boolean canReply = thread.isCanReply();
+		if(lastMessage.getAuthor().equals(getLoginSession().getUser().getDisplayName())) {
+			if(authorDel) {
+				return null;
+			}
+			
+			// User can not reply to their own message
+			canReply = false;
+		} else if(lastMessage.getReceiver().equals(getLoginSession().getUser().getDisplayName())) {
+			if(receiverDel) {
+				return null;
+			}
+			
+			// Set the message to read for the receiver
+			dao.setMessageRead(lastMessage.getMessageId());
+		} else {
+			return null;
+		}
+		
+		thread.setCanReply(canReply);
 		
 		return thread;
 	}

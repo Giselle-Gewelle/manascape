@@ -83,7 +83,7 @@
 						
 						<hr />
 						
-						<p>${errorMessages[errorCode]}</p>
+						<p><strong>${errorMessages[errorCode]}</strong></p>
 						
 						<hr />
 					</#if>

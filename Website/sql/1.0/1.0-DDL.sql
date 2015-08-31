@@ -425,116 +425,33 @@ END $$
 
 -- -------------------------------------------------------------------------------------------
 --
--- News Articles
---
--- -------------------------------------------------------------------------------------------
-
-
-DROP PROCEDURE IF EXISTS `media_deleteNewsArticle` $$
-CREATE PROCEDURE `media_deleteNewsArticle` (
-	IN `in_articleId`	MEDIUMINT(8) UNSIGNED,
-	IN `in_username`	VARCHAR(12),
-	IN `in_date`		DATETIME
-) 
-BEGIN
-	UPDATE `media_news` 
-	SET `deleted` = 1, 
-		`lastEditor` = `in_username`, 
-		`lastEditDate` = `in_date`
-	WHERE `id` = `in_articleId` 
-	LIMIT 1;
-END $$
-
-
-DROP PROCEDURE IF EXISTS `media_updateNewsArticle` $$
-CREATE PROCEDURE `media_updateNewsArticle` (
-	IN `in_articleId`	MEDIUMINT(8) UNSIGNED,
-	IN `in_username`	VARCHAR(12),
-	IN `in_date`		DATETIME, 
-	IN `in_title`		VARCHAR(50),
-	IN `in_category`	TINYINT(2) UNSIGNED,
-	IN `in_description`	VARCHAR(1024),
-	IN `in_body`		TEXT
-) 
-BEGIN 
-	UPDATE `media_news` 
-	SET `title` = `in_title`, 
-		`category` = `in_category`, 
-		`description` = `in_description`, 
-		`body` = `in_body`, 
-		`lastEditor` = `in_username`, 
-		`lastEditDate` = `in_date`
-	WHERE `id` = `in_articleId` 
-	LIMIT 1;
-END $$
-
-
-DROP PROCEDURE IF EXISTS `media_postNewsArticle` $$
-CREATE PROCEDURE `media_postNewsArticle` (
-	IN `in_authorId`	INT(10) UNSIGNED, 
-	IN `in_title`		VARCHAR(50),
-	IN `in_date`		DATETIME, 
-	IN `in_category`	TINYINT(2) UNSIGNED,
-	IN `in_description`	VARCHAR(1024),
-	IN `in_body`		TEXT,
-	OUT `out_articleId`	MEDIUMINT(8) UNSIGNED
-) 
-BEGIN 
-	INSERT INTO `media_news` (
-		`authorId`, `title`, `date`, `category`, `description`, `body`
-	) VALUES (
-		`in_authorId`, `in_title`, `in_date`, `in_category`, `in_description`, `in_body`
-	);
-	
-	SET `out_articleId` = LAST_INSERT_ID();
-END $$
-
-
-DROP PROCEDURE IF EXISTS `media_getNewsArchive` $$
-CREATE PROCEDURE `media_getNewsArchive` (
-	IN `in_category`	TINYINT(2)
-) 
-BEGIN 
-	SELECT `id`, `title`, `date`, `category` 
-	FROM `media_news` 
-	WHERE ((`in_category` = 0) OR (`in_category` = `category`)) 
-		AND `deleted` = 0 
-	ORDER BY `date` DESC;
-END $$
-
-
-DROP PROCEDURE IF EXISTS `media_getNewsArticle` $$
-CREATE PROCEDURE `media_getNewsArticle` (
-	IN `in_id`	MEDIUMINT(8) UNSIGNED
-) 
-BEGIN 
-	SELECT `id`, `title`, `date`, `category`, `description`, `body`, `lastEditor`, `lastEditDate` 
-	FROM `media_news` 
-	WHERE `id` = `in_id` 
-		AND `deleted` = 0 
-	LIMIT 1;
-END $$
-
-
-DROP PROCEDURE IF EXISTS `media_getNewsFeed` $$
-CREATE PROCEDURE `media_getNewsFeed` (
-	IN `in_limit`	TINYINT(2) UNSIGNED
-) 
-BEGIN
-	SELECT `id`, `title`, `date`, `description` 
-	FROM `media_news` 
-	WHERE `deleted` = 0 
-	ORDER BY `date` DESC 
-	LIMIT `in_limit`;
-END $$
-
-
-
--- -------------------------------------------------------------------------------------------
---
 -- Ticketing
 --
 -- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `user_ticketReceiverDelete` $$
+CREATE PROCEDURE `user_ticketReceiverDelete` (
+	IN `in_id`			INT(10) UNSIGNED
+) 
+BEGIN 
+	UPDATE `user_ticketThreads` 
+	SET `receiverDel` = 1 
+	WHERE `id` = `in_id` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `user_ticketAuthorDelete` $$
+CREATE PROCEDURE `user_ticketAuthorDelete` (
+	IN `in_id`			INT(10) UNSIGNED
+) 
+BEGIN 
+	UPDATE `user_ticketThreads` 
+	SET `authorDel` = 1 
+	WHERE `id` = `in_id` 
+	LIMIT 1;
+END $$
 
 
 DROP PROCEDURE IF EXISTS `user_ticketReply` $$
@@ -899,6 +816,113 @@ BEGIN
 	FROM `user_accounts` 
 	WHERE `username` = `in_username` 
 	LIMIT 1;
+END $$
+
+
+
+-- -------------------------------------------------------------------------------------------
+--
+-- News Articles
+--
+-- -------------------------------------------------------------------------------------------
+
+
+DROP PROCEDURE IF EXISTS `media_deleteNewsArticle` $$
+CREATE PROCEDURE `media_deleteNewsArticle` (
+	IN `in_articleId`	MEDIUMINT(8) UNSIGNED,
+	IN `in_username`	VARCHAR(12),
+	IN `in_date`		DATETIME
+) 
+BEGIN
+	UPDATE `media_news` 
+	SET `deleted` = 1, 
+		`lastEditor` = `in_username`, 
+		`lastEditDate` = `in_date`
+	WHERE `id` = `in_articleId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_updateNewsArticle` $$
+CREATE PROCEDURE `media_updateNewsArticle` (
+	IN `in_articleId`	MEDIUMINT(8) UNSIGNED,
+	IN `in_username`	VARCHAR(12),
+	IN `in_date`		DATETIME, 
+	IN `in_title`		VARCHAR(50),
+	IN `in_category`	TINYINT(2) UNSIGNED,
+	IN `in_description`	VARCHAR(1024),
+	IN `in_body`		TEXT
+) 
+BEGIN 
+	UPDATE `media_news` 
+	SET `title` = `in_title`, 
+		`category` = `in_category`, 
+		`description` = `in_description`, 
+		`body` = `in_body`, 
+		`lastEditor` = `in_username`, 
+		`lastEditDate` = `in_date`
+	WHERE `id` = `in_articleId` 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_postNewsArticle` $$
+CREATE PROCEDURE `media_postNewsArticle` (
+	IN `in_authorId`	INT(10) UNSIGNED, 
+	IN `in_title`		VARCHAR(50),
+	IN `in_date`		DATETIME, 
+	IN `in_category`	TINYINT(2) UNSIGNED,
+	IN `in_description`	VARCHAR(1024),
+	IN `in_body`		TEXT,
+	OUT `out_articleId`	MEDIUMINT(8) UNSIGNED
+) 
+BEGIN 
+	INSERT INTO `media_news` (
+		`authorId`, `title`, `date`, `category`, `description`, `body`
+	) VALUES (
+		`in_authorId`, `in_title`, `in_date`, `in_category`, `in_description`, `in_body`
+	);
+	
+	SET `out_articleId` = LAST_INSERT_ID();
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_getNewsArchive` $$
+CREATE PROCEDURE `media_getNewsArchive` (
+	IN `in_category`	TINYINT(2)
+) 
+BEGIN 
+	SELECT `id`, `title`, `date`, `category` 
+	FROM `media_news` 
+	WHERE ((`in_category` = 0) OR (`in_category` = `category`)) 
+		AND `deleted` = 0 
+	ORDER BY `date` DESC;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_getNewsArticle` $$
+CREATE PROCEDURE `media_getNewsArticle` (
+	IN `in_id`	MEDIUMINT(8) UNSIGNED
+) 
+BEGIN 
+	SELECT `id`, `title`, `date`, `category`, `description`, `body`, `lastEditor`, `lastEditDate` 
+	FROM `media_news` 
+	WHERE `id` = `in_id` 
+		AND `deleted` = 0 
+	LIMIT 1;
+END $$
+
+
+DROP PROCEDURE IF EXISTS `media_getNewsFeed` $$
+CREATE PROCEDURE `media_getNewsFeed` (
+	IN `in_limit`	TINYINT(2) UNSIGNED
+) 
+BEGIN
+	SELECT `id`, `title`, `date`, `description` 
+	FROM `media_news` 
+	WHERE `deleted` = 0 
+	ORDER BY `date` DESC 
+	LIMIT `in_limit`;
 END $$
 
 

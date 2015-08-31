@@ -17,7 +17,7 @@
 			<span class="date">${item.lastMessageDate}</span>
 			<span class="actions">
 				<@a mod="ticketing" dest="view.ws?id=${item.threadId}"><img src="${url('main', 'resources/img/content/account/ticketing/view.png')}" alt="View" title="View Ticket" /></@a>
-				<@a mod="ticketing" dest="view.ws?id=${item.threadId}"><img src="${url('main', 'resources/img/content/account/ticketing/delete.png')}" alt="Delete" title="Delete Ticket" /></@a>
+				<@a mod="ticketing" dest="delete.ws?id=${item.threadId}"><img src="${url('main', 'resources/img/content/account/ticketing/delete.png')}" alt="Delete" title="Delete Ticket" /></@a>
 			</span>
 		</div>
 	</#macro>
